@@ -1,6 +1,4 @@
-<?php
-ob_start();
-?>
+
 <form class="offset-3 col-6 mt-5 pt-5">
     <div class="form-group">
         <label for="name">Nom</label>
@@ -20,6 +18,3 @@ ob_start();
     </div>
     <button type="submit" class="btn btn-primary float-right">Envoyer</button>
 </form>
-<?=
-$content =  ob_get_contents();
-ob_end_clean();
