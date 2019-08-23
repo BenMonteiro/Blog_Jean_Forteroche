@@ -1,7 +1,7 @@
 <?php
 
-require_once './src/controllers/ViewController.php';
-$viewController = new ViewController();
+require_once './src/controllers/FrontController.php';
+$viewController = new FrontController();
 
 $page = $_GET['page'] ?? null;
 switch($page)
