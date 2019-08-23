@@ -6,10 +6,16 @@
 }
 .booktitle{
     text-align: center;
+    font-weight: bolder;
+    color:rgb(43, 5, 61);
 }
-.webSiteDescription{
+.webSiteDescription p{
     background-color: rgba(15, 15, 15, 0.5);
     text-align: center;
     color:white;
-    font-size: 1.3em;
+    font-size: 1.2em;
+}
+
+.webSiteDescription span{
+    color:rgb(13, 241, 245)
 }
