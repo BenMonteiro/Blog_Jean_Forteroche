@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8"/>
+        <meta charset="utf-8"/>
         <meta name="Descritpion" content="Blog de l'écrivain Jean Forteroche"/>
         <meta name="Author" content="Benjamin Monteiro Da Silva"/>
         <meta name="keywords" content="Voyages, livre, roman"/>
@@ -18,7 +18,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header >
+        <header>
             <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
                 <a class="navbar-brand mr-5" href='/?page=Accueil&method=display'>Jean Forteroche Blog</a>
                 <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -48,9 +48,8 @@
             </nav>
         </header>
 
-        <?php
-            echo $content;
-        ?>
+        <?php echo $content; ?>
+        
         <footer class = 'mt-4'>
             <ul class="nav justify-content-center">
                 <li class="nav-item">

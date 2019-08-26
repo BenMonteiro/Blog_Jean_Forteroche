@@ -2,19 +2,23 @@
 
 class DefaultController
 {
-    protected $content = '';
 
-    public function renderView($view, array $data = [], $template): void
+    public function getView($template, $view)
     {
         ob_start();
-        if (file_exists('src/views/'.$view.'.html')){
-            require_once 'src/views/'.$view.'.html';
+        if (file_exists('./src/views/'.$view.'.html')) {
+            require_once './src/views/'.$view.'.html';
         }
-        $this->content = ob_get_contents();
-        extract($data);
-        if (file_exists($template)){
-            include $template;
-        }
+        $content = ob_get_contents();
+        ob_end_clean();
+        $this->renderView($template, ['content' => $content]);
     }
 
+    public function renderView($template, array $data = []): void
+    {
+        extract($data);
+        if (file_exists($template)) {
+            require_once $template;
+        }
+    }
 }
