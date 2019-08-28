@@ -1,35 +1,33 @@
 <?php
 
-require_once 'core\DefaultController.php';
+require_once DIR.'Core\DefaultController.php';
 
 class FrontController extends DefaultController
 {
-    private static $_template = './src/views/template.php';
 
     public function displayHomePage()
     {
-        $this->getView(self::$_template, 'Accueil');
+        $this->renderView('Frontend/accueil.twig', ['article' => 7]);
     }
 
     public function displayChapter1Page()
     {
-        $this->getView(self::$_template, 'chapitre1');
-
+        $this->renderView('Frontend/chapitre1.twig', []);
     }
 
     public function displayChapter2Page()
     {
-        $this->getView(self::$_template, 'chapitre2');
+        $this->renderView('Frontend/chapitre2.twig', []);
     }
 
     public function displayAuthorPage()
     {
-        $this->getView(self::$_template, 'author');
+        $this->renderView('Frontend/author.twig', []);
     }
 
     public function displayContactPage()
     {
-        $this->getView(self::$_template, 'contact');
+        $this->renderView('Frontend/contact.twig', []);
     }
 }
 

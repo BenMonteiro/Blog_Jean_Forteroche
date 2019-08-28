@@ -3,22 +3,16 @@
 class DefaultController
 {
 
-    public function getView($template, $view)
+    public function __construct()
     {
-        ob_start();
-        if (file_exists('./src/views/'.$view.'.html')) {
-            require_once './src/views/'.$view.'.html';
-        }
-        $content = ob_get_contents();
-        ob_end_clean();
-        $this->renderView($template, ['content' => $content]);
+        global $twig;
+        $this->twig = $twig;
     }
 
-    public function renderView($template, array $data = []): void
+    public function renderView(string $view = '', array $data = []): void
     {
-        extract($data);
-        if (file_exists($template)) {
-            require_once $template;
+        if (file_exists($view)){
+        echo $this->twig->render($view, $data);
         }
     }
 }
