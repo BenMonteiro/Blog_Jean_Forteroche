@@ -1,31 +1,31 @@
 <?php
 
-require_once DIR.'Core\DefaultController.php';
+require_once DIR.'Core/DefaultController.php';
 
 class FrontController extends DefaultController
 {
 
-    public function displayHomePage()
+    public function HomePage()
     {
         $this->renderView('Frontend/accueil.twig', ['article' => 7]);
     }
 
-    public function displayChapter1Page()
+    public function Chapter1Page()
     {
         $this->renderView('Frontend/chapitre1.twig', []);
     }
 
-    public function displayChapter2Page()
+    public function Chapter2Page()
     {
         $this->renderView('Frontend/chapitre2.twig', []);
     }
 
-    public function displayAuthorPage()
+    public function AuthorPage()
     {
         $this->renderView('Frontend/author.twig', []);
     }
 
-    public function displayContactPage()
+    public function ContactPage()
     {
         $this->renderView('Frontend/contact.twig', []);
     }
