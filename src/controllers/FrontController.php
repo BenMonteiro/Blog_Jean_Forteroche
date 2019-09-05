@@ -1,33 +1,47 @@
 <?php
 
-require_once DIR.'Core/DefaultController.php';
+require_once ROOT_PATH.'/core/DefaultController.php';
 
 class FrontController extends DefaultController
 {
 
-    public function HomePage()
+    public function homePage()
     {
-        $this->renderView('Frontend/accueil.twig', ['article' => 7]);
+        $this->renderView('Frontend/accueil.twig', []);
     }
 
-    public function Chapter1Page()
+    public function chapter1Page()
     {
         $this->renderView('Frontend/chapitre1.twig', []);
     }
 
-    public function Chapter2Page()
+    public function chapter2Page()
     {
         $this->renderView('Frontend/chapitre2.twig', []);
     }
 
-    public function AuthorPage()
+    public function authorPage()
     {
         $this->renderView('Frontend/author.twig', []);
     }
 
-    public function ContactPage()
+    public function contactPage()
     {
         $this->renderView('Frontend/contact.twig', []);
+    }
+
+    public function error404()
+    {
+        $this->renderView('Frontend/error404.html', []);
+    }
+
+    public function postContact()
+    {
+        require_once ROOT_PATH.'/src/Models/PostContact.php';
+        $formResponse = new PostContact();
+        $formResponse->send();
+        
+        $this->renderView('Frontend/contactSuccess.twig',[]);
     }
 }
 

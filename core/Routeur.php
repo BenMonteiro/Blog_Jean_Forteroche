@@ -2,87 +2,72 @@
 
 class Routeur
 {
-    protected $path;
+    protected $request;
     protected $controllerName;
-    protected $actionName;
-    protected $params = [];
+    protected $controller;
+    protected $action;
 
-    public function defaultPath()
+    public function __construct()
     {
-        require_once DIR.'src/Controllers/FrontController.php';
-        $controller = new FrontController();
-        $controller->HomePage();
+        require_once ROOT_PATH.'/core/Request.php';
+        $request = Request::getRequest();
+        $this->controllerName = $request->getControllerName();
+        $this->action = $request->getActionName();
     }
 
-    public function setPath()
+    protected function setException($exception, $message)
     {
-        $uri = $_SERVER["REQUEST_URI"];
-        
-        $path = (parse_url($uri, PHP_URL_PATH));
-        $path = trim($path, "/");
-        if ($path != null){
-            $this->path = $path;
-            $this->setControllerName();
-        } else {
-            $this->defaultPath();
+        require_once ROOT_PATH . '/core/Exception/' . $exception . '.php';
+        throw new $exception($message);
+    }
+
+    protected function setControllerPath()
+    {
+        $controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';
+        return $controllerPath;
+    }
+
+    protected function existController()
+    {
+        if (!file_exists($this->setControllerPath()) && $this->controllerName!='') {
+            $this->setException(RouteurException, header("Location: /FrontController/error404"));
         }
+
+        return $this;
     }
 
-    public function getPath()
+    protected function setController()
     {
-        return $this->path;
+        require_once $this->setControllerPath();
+        $this->controller = new $this->controllerName;
+        return $this;
     }
 
-    public function setControllerName()
+    protected function existAction()
     {
-        $controllerName = substr(strstr($this->path, '/'), 1);
-        $controllerName = substr(strstr($controllerName,'/', true), 0);
-        if ($controllerName != null){
-            $this->controllerName = $controllerName;
+        if (!method_exists($this->controller, $this->action)) {
+            $this->setException(RouteurException, header("Location: /FrontController/error404"));
         }
+
+        return $this;
     }
 
-    public function getController()
+    protected function callControllerAction()
     {
-        if (isset($this->controllerName)){
-            $controller = $this->controllerName;
-            require_once DIR.'src/Controllers/'.$controller.'.php';
-            $controller = new $controller();
-            $this->controllerName = $controller;
-            $this->setActionName();
-        }
-    }
-
-    public function setActionName()
-    {
-        $actionName = substr(strrchr($this->path,'/'), 1);
-        if ($actionName != null){
-            $this->actionName = $actionName;
-        }
-    }
-
-    public function getAction()
-    {
-        if (isset($this->actionName)){
-            $controller = $this->controllerName;
-            $action = $this->actionName;
-            return $controller->$action();
-        }
-    }
-
-    public function getParams()
-    {
-        $params = $_GET['article'];
-        if ($params != null){
-            $this->params = $params;
-        }
+        call_user_func(array($this->controller, $this->action));
     }
 
     public function dispatch()
     {
-        $this->setPath();
-        $this->getController();
-        $this->getAction();
+        try
+        {
+            $this->existController()
+                ->setController()
+                ->existAction()
+                ->callControllerAction();
+        }
+        catch (Exception $e)
+        {
+        }
     }
-
 }

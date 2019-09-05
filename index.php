@@ -1,15 +1,17 @@
 <?php
 
-define('DIR', 'C:/wamp64/www/Blog_P4/');
+define('ROOT_PATH', dirname(__FILE__));
+session_start();
 
-require_once DIR.'Vendor/autoload.php';
-$loader = new Twig_Loader_Filesystem(DIR.'src/Views/');
+require_once ROOT_PATH.'/vendor/autoload.php';
+$loader = new Twig_Loader_Filesystem(ROOT_PATH.'/src/Views');
 $twig = new Twig_Environment($loader);
 
 
-require_once DIR.'Core/Routeur.php';
+require_once ROOT_PATH.'/core/Routeur.php';
 $routeur = new Routeur();
 $routeur->dispatch();
+
 
 
 

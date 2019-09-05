@@ -8,3 +8,14 @@ form label{
     color:white;
     font-weight: 700;
 }
+
+#contactSuccessPage{
+    background-image: url('https://c.wallhere.com/photos/93/3e/nature_landscape_river_snow_winter_mountains_forest_pine_trees-83352.jpg!d');
+    background-size: 100% 100%;
+    padding: 200px 0 200px 0;
+}
+
+.alert-success{
+    text-align: center;
+    margin-top:150px;
+}
