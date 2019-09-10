@@ -1,62 +1,98 @@
 <?php
 
+require_once ROOT_PATH.'/core/Exception/RouteurException.php';
+require_once ROOT_PATH.'/core/Request.php';
+/**
+ * Routeur class call the good controller and the good function to execute 
+ */
 class Routeur
 {
     protected $request;
     protected $controllerName;
+    protected $controllerPath;
     protected $controller;
     protected $action;
 
+    /** 
+     * Construct call a Request object and set the variable $controllerName and $actionName
+     */
     public function __construct()
     {
-        require_once ROOT_PATH.'/core/Request.php';
-        $request = Request::getRequest();
-        $this->controllerName = $request->getControllerName();
-        $this->action = $request->getActionName();
+        $this->request = Request::getRequest();
+        $this->controllerName = $this->request->getControllerName();
+        $this->action = $this->request->getActionName();
+        $this->redirect();
+        $this->controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';
     }
 
-    protected function setException($exception, $message)
+    /**
+     * If Url path is an empty string, the routeur redirect to the homepage of the website
+     */
+    protected function redirect()
     {
-        require_once ROOT_PATH . '/core/Exception/' . $exception . '.php';
-        throw new $exception($message);
+        if (null === $this->controllerName || '' === $this->controllerName){
+
+            header('Location: /FrontController/home');
+
+        }
     }
 
-    protected function setControllerPath()
+    /**
+     * If the controller file does not exist and controllerName is not an empty string, the routeur redirect to the error404 page
+     * 
+     * @return $this        [return the current object]
+     */
+    protected function existController(): Routeur
     {
-        $controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';
-        return $controllerPath;
-    }
+        if (!file_exists($this->controllerPath) && $this->controllerName != '') {
 
-    protected function existController()
-    {
-        if (!file_exists($this->setControllerPath()) && $this->controllerName!='') {
-            $this->setException(RouteurException, header("Location: /FrontController/error404"));
+            throw new RouteurException() ;
         }
 
         return $this;
     }
 
-    protected function setController()
+    /**
+     * Call a new controller object
+     * 
+     * @return $this        [return the current object]
+     */
+    protected function setController(): Routeur
     {
-        require_once $this->setControllerPath();
+        require_once $this->controllerPath;
         $this->controller = new $this->controllerName;
+
         return $this;
     }
 
-    protected function existAction()
+    /**
+     * If the method (action) does not exist in the controller object previously called, the routeur redirect to the error404 page
+     * 
+     * @return $this        [return the current object]
+     */
+    protected function existAction(): Routeur
     {
         if (!method_exists($this->controller, $this->action)) {
-            $this->setException(RouteurException, header("Location: /FrontController/error404"));
+
+           throw new RouteurException() ;
         }
 
         return $this;
     }
 
-    protected function callControllerAction()
+    /**
+     * Call the method in the previous controller
+     * 
+     * @return void
+     */
+    protected function callControllerAction(): void
     {
         call_user_func(array($this->controller, $this->action));
     }
 
+    /**
+     * Call all the steps to call the good method in the good controller
+     */
     public function dispatch()
     {
         try
@@ -66,7 +102,7 @@ class Routeur
                 ->existAction()
                 ->callControllerAction();
         }
-        catch (Exception $e)
+        catch (RouteurException $e)
         {
         }
     }

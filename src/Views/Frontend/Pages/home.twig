@@ -1,8 +1,9 @@
-{% extends "Frontend/template.twig" %}
+{% extends "Frontend/Templates/template.twig" %}
 
 {% block head_title %}
     Accueil
 {% endblock %}
+
 {% block content %}
     <div class="webSitePresentation container-fluid">
         <div class="row ">
@@ -17,11 +18,11 @@
             </p>
         </div>
     </div>
-
-    {{ article }}
-
     <section class="postsContainer container-fluid">
         <div class="offset-2 col-8 border border-dark mt-3 py-5">
+
+            {{ article }}
+
         </div>
     </section>
 {% endblock %}
