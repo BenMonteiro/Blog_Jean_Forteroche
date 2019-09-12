@@ -8,9 +8,10 @@ require_once ROOT_PATH.'/core/DefaultController.php';
 class FrontController extends DefaultController
 {
 
+
     public function home()
     {
-        $this->renderView('home.twig', []);
+        $this->renderView('home.twig',[]);
     }
 
     public function chapter1()

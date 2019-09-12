@@ -58,8 +58,29 @@ class Request
     }
 
     /**
+     * @param string $key    [The key of the data we want ]
+     * @return      [return the function to call. If there is no $key in the url ($_GET), return getPostParams()]
+     */
+    public function getParams(string $key): string
+    {
+        return null === $_GET[$key] ? $this->getPostParams($key) : getGetParams($key);
+    }
+
+    /**
+     * @param string $key    [The key of the getdata we want to return ]
+     * @return      [return the value of the key in parameter]
+     */
+    public function getGetParams(string $key): string
+    {
+        if (isset($key)) {
+
+            return htmlspecialchars($_GET[$key]);
+        }
+    }
+
+    /**
      * @param string $key      [The key of the postData we want to return]
-     * @return string       [return ]
+     * @return string       [return the value of the key in parameter]
      */
     public function getPostParams(string $key): string
     {

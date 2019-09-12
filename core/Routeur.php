@@ -30,10 +30,9 @@ class Routeur
      */
     protected function redirect()
     {
-        if (null === $this->controllerName || '' === $this->controllerName){
+        if (null === $this->controllerName || '' === $this->controllerName) {
 
             header('Location: /FrontController/home');
-
         }
     }
 
@@ -104,6 +103,7 @@ class Routeur
         }
         catch (RouteurException $e)
         {
+            header('Location: /FrontController/error404');
         }
     }
 }
