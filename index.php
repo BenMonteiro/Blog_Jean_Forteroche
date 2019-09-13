@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //file path constant
 define('ROOT_PATH', dirname(__FILE__));
 

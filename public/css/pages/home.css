@@ -19,3 +19,7 @@
 .webSiteDescription span{
     color:rgb(13, 241, 245)
 }
+
+.card-img-top{
+    height: 400px;
+}

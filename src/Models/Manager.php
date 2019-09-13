@@ -33,9 +33,9 @@ class Manager
     /**
      * Find all the informations of the table where id is equal to the id find by the getParams method
      */
-    public function findOne()
+    public function findOneById()
     {
-        $req = $this->bdd->prepare('SELECT * FROM ' . static::TABLE_NAME . 'WHERE id = :id');
+        return $req = $this->bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE id = :id');
         return $req->execute(array(
             'id' => $this->request->getParams('id')
         ));

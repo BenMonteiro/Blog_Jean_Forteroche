@@ -21,7 +21,6 @@ class Routeur
         $this->request = Request::getRequest();
         $this->controllerName = $this->request->getControllerName();
         $this->action = $this->request->getActionName();
-        $this->redirect();
         $this->controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';
     }
 
@@ -30,9 +29,17 @@ class Routeur
      */
     protected function redirect()
     {
-        if (null === $this->controllerName || '' === $this->controllerName) {
+        if (!isset($this->controllerName) || '' === $this->controllerName) {
 
             header('Location: /FrontController/home');
+
+        } else if ('admin' === $this->controllerName) {
+
+            header('Location: /LoginController/login');
+
+        } else {
+
+            throw new RouteurException() ;
         }
     }
 
@@ -43,9 +50,9 @@ class Routeur
      */
     protected function existController(): Routeur
     {
-        if (!file_exists($this->controllerPath) && $this->controllerName != '') {
+        if (!file_exists($this->controllerPath)) {
 
-            throw new RouteurException() ;
+            $this->redirect();
         }
 
         return $this;
@@ -103,7 +110,7 @@ class Routeur
         }
         catch (RouteurException $e)
         {
-            header('Location: /FrontController/error404');
+            header("Location: /FrontController/error404");
         }
     }
 }

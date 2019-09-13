@@ -1,6 +1,7 @@
 <?php
 
 require_once ROOT_PATH.'/core/DefaultController.php';
+require_once ROOT_PATH.'/src/Models/ArticleManager.php';
  
 /**
 * Controll the page to display 
@@ -8,21 +9,15 @@ require_once ROOT_PATH.'/core/DefaultController.php';
 class FrontController extends DefaultController
 {
 
-
     public function home()
     {
-        $this->renderView('home.twig',[]);
+        $articles = new ArticleManager();
+        $articles = $articles->findAll();
+        $data = $articles->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->renderView('home.twig', ['data' => $data]);
     }
 
-    public function chapter1()
-    {
-        $this->renderView('chapter1.twig', []);
-    }
-
-    public function chapter2()
-    {
-        $this->renderView('chapter2.twig', []);
-    }
 
     public function author()
     {

@@ -14,15 +14,26 @@
             <br>Au sein de ce blog, vous trouverez l'avancé de mon nouveau livre intitulé: <strong>Billet simple pour l'Alaska</strong>
             Un nouveau roman d'aventure et de voyages au coeur de l'Alaska, de ses lacs azurs, de ses forets et ses montagnes enneigées.<br>
             A intervales réguliers, je publierai les chapitres sur ce site afin de procéder sous forme épisodique. Je publierai aussi de temps en temps des articles à propos de mon ressenti sur l'écriture du roman et je vous expliquerai le cheminement de mes idées. 
-            Enfin, je compte aussi demander l'avis de mes lecteurs ( eh oui je vais vous faire travailler! ) sur certains points de développement de l'histoire. Ainsi ce roman sera un peu le votre.<br>
+            Enfin, je compte aussi demander l'avis de mes lecteurs (eh oui je vais vous faire travailler !) sur certains points de développement de l'histoire. Ainsi ce roman sera un peu le votre.<br>
             </p>
         </div>
     </div>
     <section class="postsContainer container-fluid">
-        <div class="offset-2 col-8 border border-dark mt-3 py-5">
-
-            {{ article }}
-
+        <div class="offset-2 col-8 mt-3 py-5">
+            
+            {% for article in data %}
+            <div class="card mb-3">
+                    <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.alt_image }}">
+                    <div class="card-body">
+                      <h3 class="card-title"> {{ article.title }}</h3>
+                      <p class="card-text">{{ article.description }}</p>
+                      <p class="card-text"><small class="text-muted">Publié le : {{ article.creation_date|date("d-m-Y", "Europe/Paris") }}</small></p>
+                      <a href="/FrontController/article?id={{ article.id }}" class="btn btn-info">Lire le chapitre</a>
+                    </div>
+ 
+                </div>
+                {% endfor %}
         </div>
     </section>
 {% endblock %}
+

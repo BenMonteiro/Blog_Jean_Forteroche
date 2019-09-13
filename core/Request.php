@@ -2,8 +2,6 @@
 /**
  * This class take the URL infos and assign it to variables
  */
-session_start();
-
 class Request 
 {
     protected $path;
@@ -58,19 +56,10 @@ class Request
     }
 
     /**
-     * @param string $key    [The key of the data we want ]
-     * @return      [return the function to call. If there is no $key in the url ($_GET), return getPostParams()]
-     */
-    public function getParams(string $key): string
-    {
-        return null === $_GET[$key] ? $this->getPostParams($key) : getGetParams($key);
-    }
-
-    /**
      * @param string $key    [The key of the getdata we want to return ]
      * @return      [return the value of the key in parameter]
      */
-    public function getGetParams(string $key): string
+    public function getGetParams(string $key)
     {
         if (isset($key)) {
 
@@ -80,9 +69,9 @@ class Request
 
     /**
      * @param string $key      [The key of the postData we want to return]
-     * @return string       [return the value of the key in parameter]
+     * @return       [return the value of the key in parameter]
      */
-    public function getPostParams(string $key): string
+    public function getPostParams(string $key)
     {
         if (isset($key)) {
 
