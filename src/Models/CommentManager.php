@@ -18,18 +18,17 @@ class CommentManager extends Manager
     /**
      * Add a comment to the database
      */
-    public static function add($article_id, $comment, $author,$creation_date)
+    public static function add($article_id, $comment, $author)
     {
-        return $req = static::$bdd ->prepare(
+        $req = static::$bdd ->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
-             Values(:article_id, :author, :content, :creation_date)'
+             Values(?, ?, ?, NOW())'
         );
 
         return $req->execute(array(
-            'title' => $article_id,
-            'content' => $comment,
-            'author' => $author,
-            'creation_date' => $creation_date
+            $article_id,
+            $author,
+            $comment
         ));
 
     }

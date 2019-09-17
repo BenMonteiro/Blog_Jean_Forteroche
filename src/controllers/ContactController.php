@@ -12,11 +12,11 @@ class ContactController extends DefaultController
     {
         $this->contact();
     }
+
     public function contact()
     {
         $this->renderView('contact.twig');
     }
-
     /**
      * Require the ContactFormManager class and the send method with $datas for parameters. 
      * $datas are the informations obtained via the contact form.
