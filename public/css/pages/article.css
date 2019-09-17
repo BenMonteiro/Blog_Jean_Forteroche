@@ -1,0 +1,7 @@
+.previous, .next {
+    width: 150px;
+}
+
+#add_comment label {
+    color: black;
+}

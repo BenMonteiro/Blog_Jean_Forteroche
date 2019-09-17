@@ -2,39 +2,47 @@
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
+
 class LoginController extends DefaultController
 {
 
-    public function login()
+    const DEFAULT_TEMPLATE = 'Backend';
+
+    public function index()
     {
-        $this->renderView('login.twig');
+        $this->renderView('login.twig', [], static::DEFAULT_TEMPLATE);
     }
 
     public function loginRedirection()
     {
-        $user = new UserManager();
-        $user = $user->findAll();
-        $data = $user->fetch();
+        $data = UserManager::findAll();
 
-        if ($data['login'] == $this->request->getPostParams('pseudo') && $data['password'] == $this->request->getPostParams('password')) {
-            
-            $_SESSION['admin'] = $data['name'];
-            header("Location: /AdminController/home");
+        foreach ($data as $user) {
 
-        } else {
+            if ($user['login'] == $this->request->getParam('pseudo') && $user['password'] == $this->request->getParam('password')) {
+                
+                $_SESSION['auth'] = true;
+                $_SESSION['admin'] = $user['name'];
 
-            header("Location: /LoginController/errorLog");
+                header("Location: /admin/home");
+
+            } else {
+
+                $this->errorLog();
+            }
         }
     }
 
     public function errorLog()
     {
-        $this->renderView('login.twig', ['error' => 'L\'identifiant et/ou le mot de passe sont incorrect !']);
+        $this->renderView('login.twig', ['error' => 'L\'identifiant et/ou le mot de passe sont incorrect !'], static::DEFAULT_TEMPLATE);
     }
 
     public function disconnect()
     {
-        $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration']);
+        $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration'], static::DEFAULT_TEMPLATE);
+        $_SESSION['auth'] = false;
+
     }
 
 }

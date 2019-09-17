@@ -1,10 +1,16 @@
 <?php
+require_once ROOT_PATH.'/src/Models/Manager.php';
+
+
+
 /**
  * All controllers have to extend this class
  */
 class DefaultController
 {
     protected $request;
+    protected $article;
+    protected $user;
 
     public function __construct()
     {
@@ -16,6 +22,7 @@ class DefaultController
         global $twig;
         $this->twig = $twig;
         $this->request = Request::getRequest();
+        $managers = new Manager();
     }
 
     /**
@@ -25,14 +32,14 @@ class DefaultController
      * @param array $data      [parameters given to the view]
      * @return [void]       [if the file of the view exist, it load the block embeding the view in the template]
      */
-    public function renderView(string $view = '', array $data = [], $DefaultPath = ROOT_PATH.'/src/Views/Frontend/Pages/' ): void
+    public function renderView(string $view = '', array $data = [], $viewFolder = null ): void
     {
-        if (file_exists($DefaultPath.$view)) {
+        $viewFolder = $viewFolder ?? 'Frontend';
+        $defaultPath = ROOT_PATH.'/src/Views/'.$viewFolder.'/Pages/';
 
-            echo $this->twig->render('Frontend/Pages/'.$view, $data);
-        } else {
+        if (file_exists($defaultPath.$view)) {
 
-            echo $this->twig->render('Backend/Pages/'.$view, $data);
+            echo $this->twig->render($viewFolder.'/Pages/'.$view, $data);
         }
     }
 }

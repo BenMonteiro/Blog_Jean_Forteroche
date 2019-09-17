@@ -12,13 +12,13 @@ class Mail
      * @param array $datas      [datas to implement in the email]
      * @return void
      */
-    public function send(array $data = []): void
+    public function send($subject, $message, $headers): void
     {
         mail(
             'benjamin.monteirodasilva@gmail.com', 
-            $data['subject'], 
-            $data['message'], 
-            $data['headers'] = []
+            $subject,
+            $message,
+            $headers
         );
     }
 }

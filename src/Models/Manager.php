@@ -7,9 +7,7 @@ require_once ROOT_PATH.'/core/PDOConnection.php';
  */
 class Manager
 {
-    protected $bdd;
-    protected $request;
-
+    protected static $bdd;
     // default constant of the database table name
     const TABLE_NAME ='';
 
@@ -18,37 +16,35 @@ class Manager
      */
     public function __construct()
     {
-        $this->bdd = PDOConnection::getMySqlConnection();
-        $this->request = Request::getRequest();
+        static::$bdd = PDOConnection::getMySqlConnection();
     }
-    
+
     /**
      * This function find all the informations contained in the table 
      */
-    public function findAll()
+    public static function findAll()
     {
-        return $this->bdd->query('SELECT * FROM `' . static::TABLE_NAME . '`ORDER BY id DESC');
+        $req = static::$bdd->query('SELECT * FROM `' . static::TABLE_NAME . '`ORDER BY id DESC');
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
      * Find all the informations of the table where id is equal to the id find by the getParams method
      */
-    public function findOneById()
+    public static function findOneById(int $id)
     {
-        return $req = $this->bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE id = :id');
-        return $req->execute(array(
-            'id' => $this->request->getParams('id')
-        ));
+        $req = static::$bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE id = ?');
+        $req->execute(array($id));
+        return $req->fetch(PDO::FETCH_ASSOC);
+
     }
 
     /**
      * Delete the entry with the id find by the getParams method
      */
-    public function delete()
+    public static function deleteById(int $id)
     {
-        $req = $this->bdd->prepare('DELETE FROM' . static::TABLE_NAME . 'WHERE id = :id');
-        return $req->execute(array(
-            'id' => $this->request->getParams('id')
-        ));
+       return $req = static::$bdd->prepare('DELETE FROM`' . static::TABLE_NAME . '`WHERE id = ?');
+       return $req->execute(array($id));
     }
 }

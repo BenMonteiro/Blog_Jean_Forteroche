@@ -1,21 +1,22 @@
-#contactPage{
-    margin:0;
+#contactPage {
+    margin: 0;
     background-image: url('/public/images/paysage.jpg');
     background-size: 100% 100%;
 }
 
-form label{
-    color:white;
+
+form label  {
+    color: white;
     font-weight: 700;
 }
 
-#contactSuccessPage{
+#contactSuccessPage {
     background-image: url('/public/images/paysage.jpg');
     background-size: 100% 100%;
     padding: 200px 0 200px 0;
 }
 
-.alert-success{
+.alert-success {
     text-align: center;
-    margin-top:150px;
+    margin-top: 150px;
 }

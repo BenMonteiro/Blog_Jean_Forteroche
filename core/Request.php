@@ -18,11 +18,11 @@ class Request
      */
     public function __construct()
     {
-        $uri = $_SERVER["REQUEST_URI"];
-        $path = trim(parse_url($uri, PHP_URL_PATH),"/");
-        $urlComponent = explode('/', $path);
-        $this->controllerName = isset($urlComponent[0]) ? $urlComponent[0] : null;
-        $this->actionName = isset($urlComponent[1]) ? $urlComponent[1] : null;
+
+
+        $this->controllerName = !empty($this->getURLComponents()[0]) ? ucfirst($this->getURLComponents()[0].'Controller') : null;
+        $this->actionName = $this->getURLComponents()[1] ?? null;
+
     }
 
     /**
@@ -31,12 +31,15 @@ class Request
      */
     public static function getRequest()
     {
-        if (null === static::$request) {
+        return static::$request ?? new Request();
+    }
 
-            static::$request = new Request();
-        }
-
-        return static::$request;
+    public function getURLComponents()
+    {
+        $uri = $_SERVER["REQUEST_URI"];
+        $path = trim(parse_url($uri, PHP_URL_PATH),"/");
+        $urlComponent = explode('/', $path);
+        return $urlComponent;
     }
 
     /**
@@ -55,27 +58,32 @@ class Request
         return $this->actionName;
     }
 
+    public function getParam($key, $defaultValue = null)
+    {
+        return $this->getGetParam($key) ??
+            $this->getPostParam($key) ??
+            $defaultValue;
+    }
+
     /**
      * @param string $key    [The key of the getdata we want to return ]
      * @return      [return the value of the key in parameter]
      */
-    public function getGetParams(string $key)
+    public function getGetParam(string $key, $defaultValue = null)
     {
-        if (isset($key)) {
-
-            return htmlspecialchars($_GET[$key]);
-        }
+        return isset($_GET[$key]) ? 
+            htmlspecialchars($_GET[$key]) : 
+            $defaultValue;
     }
 
     /**
      * @param string $key      [The key of the postData we want to return]
      * @return       [return the value of the key in parameter]
      */
-    public function getPostParams(string $key)
+    public function getPostParam(string $key, $defaultValue = null)
     {
-        if (isset($key)) {
-
-        return htmlspecialchars($_POST[$key]);
-        }
+        return isset($_POST[$key]) && '' !== $_POST[$key] ? 
+            htmlspecialchars($_POST[$key]) :
+            $defaultValue;
     }
 }

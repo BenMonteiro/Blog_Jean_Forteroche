@@ -6,15 +6,20 @@
  */
 class PDOConnection
 {
-    const PDO_ERROR = 'Une erreur s\'est produite en tentant d\'accéder à la base de donnée';
-    
+
+    private static $host = 'localhost';
+    private static $dbName = 'blog_p4';
+    private static $login = 'root';
+    private static $password = '';
     private static $dbConnection = null;
 
     public static function getMySqlConnection()
     {
-            if (null === static::$dbConnection){
-                static::$dbConnection = new PDO('mysql:host=localhost;dbname=blog_p4', 'root', '');
-            } 
-            return static::$dbConnection;
+        if (null === static::$dbConnection){
+
+            static::$dbConnection = new PDO('mysql:host='.static::$host.';dbname='.static::$dbName.'', static::$login, static::$password);
+        } 
+
+        return static::$dbConnection;
     }
 }

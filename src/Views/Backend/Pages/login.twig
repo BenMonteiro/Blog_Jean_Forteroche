@@ -18,8 +18,11 @@
         <header class="my-5 ml-3">
             <h1>Administration Blog Jean Forteroche</h1>
         </header>
-        <div id="loginForm">
-            <form action='/LoginController/loginRedirection' method="POST" class="offset-4 col-4 justify-content-center">
+        <div>
+            <p class="text-center">Pour accéder à l'espace d'administration, veuillez vous connecté avec un compte administrateur valide</p>
+        </div>
+        <div id="loginForm" class="my-5">
+            <form action='/login/loginRedirection' method="POST" class="offset-4 col-4 justify-content-center">
                 <div class="form-group mb-2">
                     <label for="login" class="mr-2">Identifiant*</label>
                     <input type="text" class="form-control" id="login" name="pseudo" required>
