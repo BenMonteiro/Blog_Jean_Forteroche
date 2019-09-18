@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <article class="pt-5 my-5">
-        <h1 class="ml-3 mb-5 text-center">Chapitre {{ id }} : {{ title }}</h1>
+    <article class="pt-5 bg-light my-5">
+        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ id }} : {{ title }}</h1>
+        <h5 class="text-center text-info mb-3">Ecrit par {{ author }}</h5>
         <img src="{{ image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ alt_image }}"/>
-        <div id="text" class="offset-1 col-10 text-justify pt-5">{{ content|nl2br }}</div>
+        <div id="text" class="offset-1 col-10 text-justify py-5">{{ content|nl2br }}</div>
     </article>
     <div class="text-center mb-5">
         <a class="previous btn btn-info btn-lg mr-3" href="/blog/article?id={% if id == 1 %}{{ nbArticles }}
@@ -25,7 +26,6 @@
                 Suivant
         </a>
     </div>
-    <p>Votre commentaire à bien été ajouté.</p>
     <h3 class="offset-1 pl-3 mt-5 mb-4">Laisser un commentaire</h3>
     <form id="add_comment" action='/comment/addComment?id={{ id }}' method="POST" class="offset-1 col-5">
         <div class="form-group contactName">
@@ -36,20 +36,20 @@
             <label for="message">Commentaire*</label>
             <textarea class="form-control contactMessage" id="message" name="message" rows="5"required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mb-5">Laisser un commentaire</button>
+        <button type="submit" class="btn btn-info mb-5">Laisser un commentaire</button>
     </form>
     <h2 class="ml-3 text-center">Derniers commentaires</h2>
     <ul class="list-unstyled mt-2 ml-3">
-            {% for comment in commentList %}
-            <li class="media">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-2">{{ comment.author }}</h5>
-                    <p>{{ comment.comment|nl2br }}</p>
-                    <p class="mb-0 mt-0"><small class="text-muted">Le : {{ comment.creation_date|date("d-m-Y H:i:s") }}</small></p>
-                </div>
-            </li>
-            <hr class="mb-3 col-10">
-            {% endfor %}
+        {% for comment in commentList %}
+        <li class="media">
+            <div class="media-body">
+                <h5 class="mt-0 mb-2">{{ comment.author }}</h5>
+                <p class="bg-light ml-3 col-11 py-3">{{ comment.comment|nl2br }}</p>
+                <p class="mb-0 mt-0"><small class="text-muted">Le : {{ comment.creation_date|date("d-m-Y H:i:s") }}</small></p>
+            </div>
+        </li>
+        <hr class="mb-3 col-10">
+        {% endfor %}
     </ul>
 
 
