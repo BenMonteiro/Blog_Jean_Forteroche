@@ -14,7 +14,7 @@ class AdminController extends DefaultController
  
     public function index()
     {
-        $this->renderView('login.twig', [], static::DEFAULT_TEMPLATE);
+        header("Location: /login/login");
     }
 
     public function isAuthentified()
@@ -27,7 +27,7 @@ class AdminController extends DefaultController
 
     public function home()
     {
-        $this->renderView('adminHome.twig', ['admin' => $_SESSION['auth']], static::DEFAULT_TEMPLATE);
+        $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin']], static::DEFAULT_TEMPLATE);
     }
 
     public function add()

@@ -1,12 +1,21 @@
 <?php
 
 require_once ROOT_PATH.'/core/DefaultController.php';
+require_once ROOT_PATH.'/src/Models/ArticleManager.php';
+
  
 /**
 * Controll the page to display 
 */
 class ContactController extends DefaultController
 {
+    protected $articleList;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        return $this->articleList = ArticleManager::findAll();
+    }
 
     public function index()
     {
@@ -15,7 +24,7 @@ class ContactController extends DefaultController
 
     public function contact()
     {
-        $this->renderView('contact.twig');
+        $this->renderView('contact.twig',['articleList' => $this->articleList]);
     }
     /**
      * Require the ContactFormManager class and the send method with $datas for parameters. 
@@ -35,6 +44,6 @@ class ContactController extends DefaultController
         $contactForm = new Mail();
         $contactForm->send($subject, $message, $headers);
 
-        $this->renderView('contactSuccess.twig');
+        $this->renderView('contactSuccess.twig',['articleList' => $this->articleList]);
     }
 }

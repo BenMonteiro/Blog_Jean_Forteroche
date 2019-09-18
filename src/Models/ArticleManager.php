@@ -1,5 +1,5 @@
 <?php
-
+header( 'content-type: text/html; charset=utf-8' );
 require_once ROOT_PATH.'/src/Models/Manager.php';
 
 class ArticleManager extends Manager

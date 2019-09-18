@@ -18,21 +18,21 @@
             </p>
         </div>
     </div>
-    <section class="postsContainer container-fluid">
-        <div class="offset-2 col-8 mt-3 py-5">
-            
+    <h1 class="text-center my-5">Derniers chapitres parus</h1>
+    <section class=" mt-5 postsContainer container-fluid">
             {% for article in articleList %}
+            <div class=" offset-2 col-8 mt-3 pb-3">
                 <article class="card mb-3">
                     <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.alt_image }}">
                     <div class="card-body">
-                        <h3 class="card-title"> {{ article.title }}</h3>
+                        <h3 class="card-title">Chapitre {{article.id}} : {{ article.title }}</h3>
                         <p class="card-text">{{ article.description }}</p>
                         <p class="card-text"><small class="text-muted">Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}</small></p>
                         <a href="/blog/article?id={{ article.id }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
+            </div>
             {% endfor %}
-        </div>
     </section>
 {% endblock %}
 

@@ -19,18 +19,16 @@ class LoginController extends DefaultController
 
         foreach ($data as $user) {
 
-            if ($user['login'] == $this->request->getParam('pseudo') && $user['password'] == $this->request->getParam('password')) {
-                
+            if ($user['login'] == $this->request->getParam('pseudo') && $user['password'] == md5($this->request->getParam('password'))) {
+
                 $_SESSION['auth'] = true;
                 $_SESSION['admin'] = $user['name'];
 
                 header("Location: /admin/home");
-
-            } else {
-
-                $this->errorLog();
-            }
+            } 
         }
+
+        $this->errorLog();
     }
 
     public function errorLog()
