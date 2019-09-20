@@ -51,11 +51,18 @@ class AdminController extends DefaultController
         $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin'], 'addSuccess' => 'Votre article a bien été ajouté'], static::DEFAULT_TEMPLATE);
     }
 
-    public function manageArticle()
+    public function manageArticle($deleteSuccess = null)
     {
-        $this->renderView('manageArticle.twig', [], static::DEFAULT_TEMPLATE);
+        $articleList = ArticleManager::findAll();
+        $this->renderView('manageArticle.twig', ['articleList' => $articleList, 'deleteSuccess' => $deleteSuccess], static::DEFAULT_TEMPLATE);
     }
 
+    public function deleteArticle()
+    {
+        $id = $this->request->getParam('id');
+        ArticleManager::deleteById($id);
+        $this->manageArticle($deleteSuccess = 'L\'article a été supprimé avec succès');
+    }
 
     public function commentsModeration()
     {

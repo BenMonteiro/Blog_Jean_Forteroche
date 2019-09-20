@@ -1,1 +1,31 @@
 {% extends "Backend/Templates/template.twig" %}
+
+{% block head_title %}
+    gestion des articles
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mt-5 pt-5">Gestionnaire d'articles</h1>
+    <h5 class="text-success text-center text-lg mt-5">{{ deleteSuccess }}</h5>
+    <div class=" offset-2 col-8 mt-3">
+        {% for article in articleList %}
+            <div class="card my-5">
+                <div class="row no-gutters pr-3">
+                    <div class="col-md-4">
+                        <img src="{{article.image_url}}" class="card-img" alt="{{article.alt_image}}">
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card-body">
+                        <h5 class="card-title">Chapitre {{ article.id}} : {{ article.title}}</h5>
+                        <p class="card-text">{{ article.chapter_description }}</p>
+                        </div>
+                    </div>
+                    <div class="buttons offset-1 col-md-2 mt-5">
+                        <a class="btn btn-primary btn-lg btn-block my-2" href="#" role="button">Mettre à jour</a>
+                        <a class="btn btn-danger btn-lg btn-block" href="/admin/deleteArticle?id={{ article.id }}" role="button">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
