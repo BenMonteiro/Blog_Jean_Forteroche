@@ -28,7 +28,10 @@
                 <div class="card-body">
                     <h3 class="card-title text-dark">Chapitre {{article.id}} : {{ article.title }}</h3>
                     <p class="card-text ">{{ article.chapter_description }}</p>
-                    <p class="card-text"><small class="text-muted">Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}</small></p>
+                    <p class="card-text"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+                        {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
+                        {% endif %}
+                    </small></p>
                     <p class="card-text float-right text-muted mb-0">Auteur : {{ author }}</p>
                     <a href="/blog/article?id={{ article.id }}" class="btn btn-info">Lire le chapitre</a>
                 </div>
