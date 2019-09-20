@@ -1,16 +1,11 @@
 <?php
 require_once ROOT_PATH.'/src/Models/Manager.php';
-
-
-
 /**
  * All controllers have to extend this class
  */
 class DefaultController
 {
     protected $request;
-    protected $article;
-    protected $user;
 
     public function __construct()
     {

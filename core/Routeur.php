@@ -34,8 +34,8 @@ class Routeur
         if (empty($this->controllerName)) {
 
             header('Location: /blog/home');
-
         } else {
+
             throw new RouteurException('La page que vous recherchez n\'existe pas');
         }
     }
@@ -109,7 +109,7 @@ class Routeur
 
             require_once ROOT_PATH.'/core/Error404Controller.php';
             $error404 = new Error404Controller();
-            $error404->renderView('error404.twig',['message' => $e->getMessage()]);
+            $error404->error($e);
         }
     }
 }

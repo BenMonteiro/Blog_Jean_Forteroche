@@ -1,6 +1,6 @@
 <?php
-
 require_once ROOT_PATH.'/core/PDOConnection.php';
+
 /**
  * This class make the sql request common tot the different Entitymanagers.
  * All of the EntityManagers have to extend this class
@@ -36,7 +36,6 @@ class Manager
         $req = static::$bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE id = ?');
         $req->execute(array($id));
         return $req->fetch(PDO::FETCH_ASSOC);
-
     }
 
     /**
@@ -44,7 +43,7 @@ class Manager
      */
     public static function deleteById(int $id)
     {
-       return $req = static::$bdd->prepare('DELETE FROM`' . static::TABLE_NAME . '`WHERE id = ?');
+       $req = static::$bdd->prepare('DELETE FROM`' . static::TABLE_NAME . '`WHERE id = ?');
        return $req->execute(array($id));
     }
 }

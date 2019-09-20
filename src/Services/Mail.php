@@ -5,7 +5,6 @@
  */
 class Mail
 {
-
     /**
      * Send an email to the admin with the message send by the user
      * 

@@ -1,6 +1,8 @@
 <?php
-
 require_once ROOT_PATH.'/core/DefaultController.php';
+require_once ROOT_PATH.'/src/Models/ArticleManager.php';
+require_once ROOT_PATH.'/src/Models/UserManager.php';
+
 
 class AdminController extends DefaultController
 {
@@ -19,7 +21,7 @@ class AdminController extends DefaultController
 
     public function isAuthentified()
     {
-        if (false === $_SESSION['auth']) {
+        if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
 
             header("location: /login/errorLog");
         }
@@ -30,19 +32,33 @@ class AdminController extends DefaultController
         $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin']], static::DEFAULT_TEMPLATE);
     }
 
-    public function add()
+    public function addArticleForm()
     {
-        $this->renderView('add.twig', [], static::DEFAULT_TEMPLATE);
+        $authorList = UserManager::findAll();
+        $this->renderView('addArticleForm.twig', ['authorList' => $authorList], static::DEFAULT_TEMPLATE);
     }
 
-    public function manage()
+    public function addArticle()
     {
-        $this->renderView('manage.twig', [], static::DEFAULT_TEMPLATE);
+        $title = $this->request->getParam('title');
+        $imageURL = $this->request->getParam('imageURL');
+        $imageDescription = $this->request->getParam('imageDescription');
+        $chapterDescription = $this->request->getParam('chapterDescription');
+        $content = $this->request->getParam('chapterText');
+        $user_id = $this->request->getParam('author');
+
+        ArticleManager::add( $imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id);
+        $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin'], 'addSuccess' => 'Votre article a bien été ajouté'], static::DEFAULT_TEMPLATE);
+    }
+
+    public function manageArticle()
+    {
+        $this->renderView('manageArticle.twig', [], static::DEFAULT_TEMPLATE);
     }
 
 
-    public function comments()
+    public function commentsModeration()
     {
-        $this->renderView('comments.twig', [], static::DEFAULT_TEMPLATE);
+        $this->renderView('commentsModeration.twig', [], static::DEFAULT_TEMPLATE);
     }
 }

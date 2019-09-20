@@ -2,10 +2,8 @@
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
-
 class LoginController extends DefaultController
 {
-
     const DEFAULT_TEMPLATE = 'Backend';
 
     public function index()
@@ -38,9 +36,7 @@ class LoginController extends DefaultController
 
     public function disconnect()
     {
-        $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration'], static::DEFAULT_TEMPLATE);
         $_SESSION['auth'] = false;
-
+        $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration'], static::DEFAULT_TEMPLATE);
     }
-
 }

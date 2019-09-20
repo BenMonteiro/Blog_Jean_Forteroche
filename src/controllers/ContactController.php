@@ -1,16 +1,14 @@
 <?php
-
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 
- 
 /**
 * Controll the page to display 
 */
 class ContactController extends DefaultController
 {
     protected $articleList;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -26,6 +24,7 @@ class ContactController extends DefaultController
     {
         $this->renderView('contact.twig',['articleList' => $this->articleList]);
     }
+
     /**
      * Require the ContactFormManager class and the send method with $datas for parameters. 
      * $datas are the informations obtained via the contact form.

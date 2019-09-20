@@ -18,8 +18,6 @@ class Request
      */
     public function __construct()
     {
-
-
         $this->controllerName = !empty($this->getURLComponents()[0]) ? ucfirst($this->getURLComponents()[0].'Controller') : null;
         $this->actionName = $this->getURLComponents()[1] ?? null;
 
@@ -39,6 +37,7 @@ class Request
         $uri = $_SERVER["REQUEST_URI"];
         $path = trim(parse_url($uri, PHP_URL_PATH),"/");
         $urlComponent = explode('/', $path);
+
         return $urlComponent;
     }
 
@@ -58,7 +57,7 @@ class Request
         return $this->actionName;
     }
 
-    public function getParam($key, $defaultValue = null)
+    public function getParam(string $key, $defaultValue = null)
     {
         return $this->getGetParam($key) ??
             $this->getPostParam($key) ??

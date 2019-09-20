@@ -1,5 +1,4 @@
 <?php
-header( 'content-type: text/html; charset=utf-8' );
 require_once ROOT_PATH.'/src/Models/Manager.php';
 
 class ArticleManager extends Manager
@@ -9,20 +8,21 @@ class ArticleManager extends Manager
     /**
      * Add a new article to the database
      */
-    public static function add($title, $content, $user_id, $creation_date)
+    public static function add($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id)
     {
-        return $req = static::$bdd->prepare(
-            'INSERT INTO article(title, content, user_id, creation_date) 
-            Values(:title, :content, :user_id, :creation_date)'
+        $req = static::$bdd->prepare(
+            'INSERT INTO article( image_url, alt_image, title, content, chapter_description, user_id, creation_date) 
+            Values(?,?,?,?,?,?,NOW())'
         );
 
         return $req->execute(array(
-            'title' => $title,
-            'content' => $content,
-            'user_id' => $user_id,
-            'creation_date' => $creation_date
+            $imageURL, 
+            $imageDescription, 
+            $title, 
+            $content, 
+            $chapterDescription, 
+            $user_id
         ));
-
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleManager extends Manager
      */
     public static function update($newTitle, $newContent, $newUser_id, $newDate, $id)
     {
-        return $req = static::$bdd ->prepare(
+        $req = static::$bdd ->prepare(
             'UPDATE article 
             SET title = :newTitle, 
             content = newContent, 

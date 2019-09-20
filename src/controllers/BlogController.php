@@ -4,13 +4,11 @@ require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
- 
 /**
 * Controll the page to display 
 */
 class BlogController extends DefaultController
 {
-
     protected $articleList;
 
     public function __construct()
@@ -59,14 +57,9 @@ class BlogController extends DefaultController
                 'author' => $author['name']
             ]);
     }
-    
+
     public function author()
     {
         $this->renderView('author.twig',['articleList' => $this->articleList]);
     }
-
-
-
-
-   
 }

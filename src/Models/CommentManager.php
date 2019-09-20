@@ -1,5 +1,4 @@
 <?php
-
 require_once ROOT_PATH.'/src/Models/Manager.php';
 
 class CommentManager extends Manager
@@ -30,6 +29,5 @@ class CommentManager extends Manager
             $author,
             $comment
         ));
-
     }
 }
