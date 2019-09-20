@@ -20,11 +20,15 @@
                         <div class="card-body">
                         <h5 class="card-title">Chapitre {{ article.id}} : {{ article.title}}</h5>
                         <p class="card-text">{{ article.chapter_description }}</p>
+                        <p><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+                                {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
+                                {% endif %}
+                            </small></p>
                         </div>
                     </div>
                     <div class="buttons offset-1 col-md-2 mt-5">
-                        <a class="btn btn-primary btn-lg btn-block my-2" href="/admin/updateArticleForm?id={{ article.id }}" role="button">Mettre à jour</a>
-                        <a class="btn btn-danger btn-lg btn-block" href="/admin/deleteArticle?id={{ article.id }}" role="button">Supprimer</a>
+                        <a class="btn btn-primary btn-lg btn-block my-2" href="/ArticleAdmin/updateArticleForm?id={{ article.id }}" role="button">Mettre à jour</a>
+                        <a class="btn btn-danger btn-lg btn-block" href="/ArticleAdmin/deleteArticle?id={{ article.id }}" role="button">Supprimer</a>
                     </div>
                 </div>
             </div>

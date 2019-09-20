@@ -5,22 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <article class="pt-5 bg-light my-5">
+    <article class="py-5 bg-light my-5">
         <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ id }} : {{ title }}</h1>
         <h5 class="text-center text-info mb-3">Ecrit par {{ author }}</h5>
         <img src="{{ image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ alt_image }}"/>
-        <div id="text" class="offset-1 col-10 text-justify py-5">{{ content|nl2br }}</div>
+        <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ content|nl2br }}</div>
+        <p><small class="text-muted float-right mr-5">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+                {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
+                {% endif %}
+            </small></p>
     </article>
 
     <div class="text-center mb-5">
-        <a class="previous btn btn-info btn-lg mr-3" href="/blog/article?id={% if id == 1 %}{{ nbArticles }}
+        <a class="previous btn btn-info btn-lg mr-3" href="/article/article?id={% if id == 1 %}{{ nbArticles }}
             {% else %}{{ id - 1 }}
             {% endif %}"
             role="button">
                 Précédent
         </a>
         <a class="next btn btn-info btn-lg ml-3" 
-            href="/blog/article?id={% if id == nbArticles %}{{ 1 }} 
+            href="/article/article?id={% if id == nbArticles %}{{ 1 }} 
             {% else %}{{ id + 1 }}
             {% endif %}" 
             role="button">

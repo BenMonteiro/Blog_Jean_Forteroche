@@ -14,6 +14,6 @@ class CommentController extends DefaultController
         $author = $this->request->getParam('name');
 
         CommentManager::add($article_id, $comment, $author);
-        header("Location: /blog/article?id=".$article_id);
+        header("Location: /article/article?id=".$article_id);
     }
 }

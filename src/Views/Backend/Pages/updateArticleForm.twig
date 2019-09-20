@@ -7,7 +7,7 @@
 {% block content %}
     <div id='updateArticleForm' class='bg-light mt-5 pt-5 pb-3'>
         <h1 class="text-center">Mettre à jour un article</h1>
-        <form action='/admin/updateArticle?id={{ id }}' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
+        <form action='/ArticleAdmin/updateArticle?id={{ id }}' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
             <div class="form-group">
                 <label for="title">Titre du chapitre*</label>
                 <input type="text" class="form-control" value="{{ title }}" id="title" name="title" required>

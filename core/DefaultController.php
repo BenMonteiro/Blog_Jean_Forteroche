@@ -29,12 +29,16 @@ class DefaultController
      */
     public function renderView(string $view = '', array $data = [], $viewFolder = null ): void
     {
+        $output = '';
+
         $viewFolder = $viewFolder ?? 'Frontend';
         $defaultPath = ROOT_PATH.'/src/Views/'.$viewFolder.'/Pages/';
 
         if (file_exists($defaultPath.$view)) {
 
-            echo $this->twig->render($viewFolder.'/Pages/'.$view, $data);
+            $output = $this->twig->render($viewFolder.'/Pages/'.$view, $data);
+
+            echo $output;
         }
     }
 }
