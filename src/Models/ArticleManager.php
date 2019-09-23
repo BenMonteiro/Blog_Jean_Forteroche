@@ -5,6 +5,11 @@ class ArticleManager extends Manager
 {
     const TABLE_NAME = 'article';
 
+    public static function findLastUpdates()
+    {
+        $req = static::$bdd->query('SELECT * FROM article WHERE date_of_update IS NOT NULL ORDER BY date_of_update DESC LIMIT 0, 3');
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
     /**
      * Add a new article to the database
      */
