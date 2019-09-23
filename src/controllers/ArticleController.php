@@ -9,9 +9,10 @@ require_once ROOT_PATH.'/src/Models/UserManager.php';
 */
 class ArticleController extends BlogController
 {
-    public function article()
+    public function article($id = null, $reportSuccess = null)
     {
-        $id = $this->request->getParam('id');
+        $id = (null === $id) ? $this->request->getParam('id') : $id;
+
         $article = ArticleManager::findOneById($id);
         $author_id = $article['user_id'];
         $author = UserManager::findOneById($author_id);
@@ -29,7 +30,11 @@ class ArticleController extends BlogController
                 'alt_image' => $article['alt_image'], 
                 'content' => $article['content'],
                 'commentList' => $commentList,
-                'author' => $author['name']
-            ]);
+                'author' => $author['name'],
+                'reportSuccess' => $reportSuccess
+            ]
+        );
     }
+
+
 }

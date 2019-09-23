@@ -5,3 +5,7 @@
 #add_comment label {
     color: black;
 }
+
+.fa-exclamation-circle {
+    color:red;
+}

@@ -8,10 +8,10 @@ class ArticleAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
 
-    public function addArticleForm()
+    public function addArticleForm($addSuccess = null)
     {
         $authorList = UserManager::findAll();
-        $this->renderView('addArticleForm.twig', ['authorList' => $authorList], static::DEFAULT_TEMPLATE);
+        $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addSuccess' => $addSuccess], static::DEFAULT_TEMPLATE);
     }
 
     public function addArticle()
@@ -24,8 +24,7 @@ class ArticleAdminController extends AdminController
         $user_id = $this->request->getParam('author');
 
         ArticleManager::add( $imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id);
-
-        $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin'], 'addSuccess' => 'Votre article a bien été ajouté'], static::DEFAULT_TEMPLATE);
+        $this->addArticleForm($addSuccess = 'Votre article a bien été ajouté');
     }
 
     public function manageArticle($deleteSuccess = null, $updateSuccess = null)

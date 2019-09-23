@@ -1,6 +1,7 @@
 <?php
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
+require_once ROOT_PATH.'/src/Models/CommentManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
 
@@ -29,11 +30,19 @@ class AdminController extends DefaultController
 
     public function home()
     {
-        $this->renderView('adminHome.twig', ['admin' => $_SESSION['admin']], static::DEFAULT_TEMPLATE);
-    }
+        $reportedCommentList = CommentManager::findReportedComments();
+        $commentsToModerate = count($reportedCommentList);
+        $lastArticle = ArticleManager::findLast();
 
-    public function commentsModeration()
-    {
-        $this->renderView('commentsModeration.twig', [], static::DEFAULT_TEMPLATE);
+        $this->renderView('adminHome.twig', 
+            [
+                'admin' => $_SESSION['admin'], 
+                'commentsToModerate' => $commentsToModerate,
+                'article_id' => $lastArticle['id'], 
+                'articleTitle' => $lastArticle['title'], 
+                'articleCreation' => $lastArticle['creation_date'],
+                'articleUpdate' => $lastArticle['date_of_update']
+            ], static::DEFAULT_TEMPLATE
+        );
     }
 }

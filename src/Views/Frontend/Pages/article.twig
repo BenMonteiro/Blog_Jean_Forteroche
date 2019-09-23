@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <article class="py-5 bg-light my-5">
+    <article class="bg-light my-5 py-5">
+        <a class="btn btn-outline-dark offset-9" href="#commentForm" role="button">Se rendre à l'espace commentaire</a>
         <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ id }} : {{ title }}</h1>
         <h5 class="text-center text-info mb-3">Ecrit par {{ author }}</h5>
         <img src="{{ image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ alt_image }}"/>
@@ -31,8 +32,9 @@
                 Suivant
         </a>
     </div>
-    <div id="commentForm">
-        <h3 class="offset-1 pl-3 mt-5 mb-4">Laisser un commentaire</h3>
+
+    <div id="commentForm" class="pt-5 mt-5">
+        <h3 class="offset-1 pl-3 mb-4">Laisser un commentaire</h3>
         <form id="add_comment" action='/comment/addComment?id={{ id }}' method="POST" class="offset-1 col-5">
             <div class="form-group contactName">
                 <label for="name">Nom*</label>
@@ -45,14 +47,23 @@
             <button type="submit" class="btn btn-info mb-5">Laisser un commentaire</button>
         </form>
     </div>
+
     <div id="commentList">
+        <p class='text-success text-center'>{{ reportSuccess }}</p>
         <h2 class="ml-3 text-center">Derniers commentaires</h2>
         <ul class="list-unstyled mt-2 ml-3">
             {% for comment in commentList %}
             <li class="media">
                 <div class="media-body">
                     <h5 class="mt-0 mb-2">{{ comment.author }}</h5>
-                    <p class="bg-light ml-3 col-11 py-3">{{ comment.comment|nl2br }}</p>
+                    <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
+                        <p class="col-8">{{ comment.comment|nl2br }}</p>
+                        {% if comment.reported == false and comment.moderate == false %}
+                        <a href="/comment/reportComment?id={{ comment.id }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
+                            <i class="fas fa-3x fa-exclamation-circle"></i>
+                        </a>
+                        {% endif %}
+                    </div>
                     <p class="mb-0 mt-0"><small class="text-muted">Le : {{ comment.creation_date|date("d-m-Y H:i:s") }}</small></p>
                 </div>
             </li>

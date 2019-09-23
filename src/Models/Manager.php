@@ -38,6 +38,12 @@ class Manager
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function findLast()
+    {
+        $req = static::$bdd->query('SELECT* FROM`' . static::TABLE_NAME . '` ORDER BY id DESC');
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Delete the entry with the id find by the getParams method
      */
