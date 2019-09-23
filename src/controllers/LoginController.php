@@ -37,6 +37,7 @@ class LoginController extends DefaultController
     public function disconnect()
     {
         $_SESSION['auth'] = false;
+
         $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration'], static::DEFAULT_TEMPLATE);
     }
 }

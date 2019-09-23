@@ -1,6 +1,8 @@
 <?php
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
+require_once ROOT_PATH.'/src/Services/Mail.php';
+
 
 /**
 * Controll the page to display 
@@ -39,7 +41,6 @@ class ContactController extends DefaultController
             'Reply-To' => $this->request->getParam('email')
         ];
 
-        require_once ROOT_PATH.'/src/Services/Mail.php';
         $contactForm = new Mail();
         $contactForm->send($subject, $message, $headers);
 

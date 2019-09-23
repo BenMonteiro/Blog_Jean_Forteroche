@@ -6,11 +6,21 @@ class CommentAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
 
+    public function index()
+    {
+        $this->moderation();
+    }
+
     public function moderation()
     {
         $reportedCommentList = CommentManager::findReportedComments();
         $commentsToModerate = count($reportedCommentList);
-        $this->renderView('commentsModeration.twig', ['reportedCommentList' => $reportedCommentList, 'commentsToModerate' => $commentsToModerate], static::DEFAULT_TEMPLATE);
+        $this->renderView('commentsModeration.twig', 
+            [
+                'reportedCommentList' => $reportedCommentList, 
+                'commentsToModerate' => $commentsToModerate
+            ], static::DEFAULT_TEMPLATE
+        );
     }
 
     public function validate()

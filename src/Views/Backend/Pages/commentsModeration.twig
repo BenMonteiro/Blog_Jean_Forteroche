@@ -8,22 +8,23 @@
     <div id="reportedCommentList">
         <h1 class="text-center mt-5 pt-5">Commentaires en attente de modération</h1>
         <h4 class="text-center mt-3">Vous avez <span class="text-danger">{{ commentsToModerate }}</span> commentaires à modérer</h4>
+
         <ul class="list-unstyled mt-2 ml-3">
             {% for reportedComment in reportedCommentList %}
-            <li class="media">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-2">{{ reportedComment.author }}</h5>
-                    <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
-                        <p class="col-8">{{ reportedComment.comment|nl2br }}</p>
-                        <div class="buttons offset-1 col-md-2">
-                            <a class="btn btn-primary btn-block my-2" href="/commentAdmin/validate?id={{ reportedComment.id }}" role="button">Valider le commentaire</a>
-                            <a class="btn btn-danger btn-block" href="/commentAdmin/delete?id={{ reportedComment.id }}" role="button">Supprimer</a>
+                <li class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-2">{{ reportedComment.author }}</h5>
+                        <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
+                            <p class="col-8">{{ reportedComment.comment|nl2br }}</p>
+                            <div class="buttons offset-1 col-md-2">
+                                <a class="btn btn-primary btn-block my-2" href="/commentAdmin/validate?id={{ reportedComment.id }}" role="button">Valider le commentaire</a>
+                                <a class="btn btn-danger btn-block" href="/commentAdmin/delete?id={{ reportedComment.id }}" role="button">Supprimer</a>
+                            </div>
                         </div>
+                        <p class="mb-0 mt-0"><small class="text-muted">Le : {{ reportedComment.creation_date|date("d-m-Y H:i:s") }}</small></p>
                     </div>
-                    <p class="mb-0 mt-0"><small class="text-muted">Le : {{ reportedComment.creation_date|date("d-m-Y H:i:s") }}</small></p>
-                </div>
-            </li>
-            <hr class="mb-3 col-10">
+                </li>
+                <hr class="mb-3 col-10">
             {% endfor %}
         </ul>
     </div>

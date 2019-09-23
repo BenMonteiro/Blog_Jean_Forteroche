@@ -5,28 +5,34 @@
 {% endblock %}
 
 {% block content %}
-    <div id='contactPage' class='pb-5'>
-        <form action='/contact/contactSuccess' method="POST" class="offset-lg-3 col-lg-6 offset-1 col-10 mt-5 pt-5">
+    <div id='contactPage' class='mt-5 py-5'>
+        <h1 class="text-center text-light">Formulaire de contact</h1>
+        <form action='/contact/contactSuccess' method="POST" class="offset-lg-3 col-lg-6 offset-1 col-10">
             <div class="form-group contactName">
                 <label for="name">Nom*</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Bond" required>
             </div>
+
             <div class="form-group">
                 <label for="firstname">Prénom*</label>
                 <input type="text" class="form-control contactFirstname" id="firstname" name="firstname" placeholder="James" required>
             </div>
+
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control contactEmail" id="email"name="email" placeholder="jamesbond007@exemple.com" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
             </div>
+
             <div class="form-group">
                 <label for="subject">Objet</label>
                 <input type="subject" class="form-control " id="subject" name="subject" placeholder="Top secret">
             </div>
+
             <div class="form-group">
                 <label for="message">Message*</label>
                 <textarea class="form-control contactMessage" id="message" name="message" rows="7" placeholder="My name is Bond, James Bond!" required></textarea>
             </div>
+
             <button type="submit" class="btn btn-primary float-right">Envoyer</button>
         </form>
     </div>

@@ -2,8 +2,6 @@
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
-require_once ROOT_PATH.'/src/Models/UserManager.php';
-
 
 class AdminController extends DefaultController
 {
@@ -17,7 +15,7 @@ class AdminController extends DefaultController
  
     public function index()
     {
-        header("Location: /login/login");
+        $this->home();
     }
 
     public function isAuthentified()
