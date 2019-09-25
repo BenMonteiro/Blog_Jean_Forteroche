@@ -9,7 +9,7 @@ class CommentManager extends Manager
  */
     public static function findArticleComments($id)
     {
-        $req = static::$bdd->prepare('SELECT * FROM comment WHERE article_id = ? AND reported = moderate ORDER BY creation_date DESC LIMIT 0,50');
+        $req = static::$bdd->prepare('SELECT * FROM comment WHERE article_id = ? AND (reported = false OR moderate = true)  ORDER BY creation_date DESC LIMIT 0,50');
         $req->execute(array($id));
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }

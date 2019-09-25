@@ -14,22 +14,23 @@ class ArticleController extends BlogController
         $this->home();
     }
 
-    public function article($id = null, $addCommentMesssage = null)
+    public function article($chapter = null , $addCommentMesssage = null)
     {
-        $id = (null === $id) ? $this->request->getParam('id') : $id;
+        $chapter = ($chapter === null) ? $this->request->getParam('chapter') : $chapter;
+        $article = ArticleManager::findByChapterNumber($chapter);
 
-        $article = ArticleManager::findOneById($id);
         $author_id = $article['user_id'];
         $author = UserManager::findOneById($author_id);
+
         $nbArticles = count($this->articleList);
-        $commentList = CommentManager::findArticleComments($id);
+        $commentList = CommentManager::findArticleComments($article['id']);
 
         $this->renderView(
             'article.twig',
             [
                 'articleList' => $this->articleList,
                 'article' => $article,
-                'id' => $article['id'],
+                'chapter' => $chapter,
                 'nbArticles' => $nbArticles,
                 'commentList' => $commentList,
                 'author' => $author['name'],

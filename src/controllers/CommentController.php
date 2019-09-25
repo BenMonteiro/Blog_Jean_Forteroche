@@ -28,14 +28,19 @@ class CommentController extends DefaultController
 
     public function add()
     {
-        $article_id = $this->request->getParam('id');
+        $chapter = $this->request->getParam('chapter');
+        $article = ArticleManager::findByChapterNumber($chapter);
+
+
+        $article_id = $article['id'];
         $comment = $this->request->getParam('comment');
+        $chapter = $article['chapter_number'];
 
         $add = CommentManager::add($article_id, $comment);
 
         $addCommentMessage = ($add == true) ? static::ADD_COMMENT_SUCCESS : static::FAIL;
 
-        $this->article->article($id = $article_id, $addCommentMessage);
+        $this->article->article($chapter, $addCommentMessage);
 
     }
 
@@ -47,8 +52,10 @@ class CommentController extends DefaultController
         $reportedComment = CommentManager::findOneById($comment_id);
         $article_id = $reportedComment['article_id'];
 
-        ArticleManager::findOneById($article_id);
-        $this->article->article($id = $article_id);
+        $article = ArticleManager::findOneById($article_id);
+        $chapter = $article['chapter_number'];
+
+        $this->article->article($chapter);
     }
 
 }

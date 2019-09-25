@@ -26,11 +26,11 @@
                 <article class="card shadow bg-light mb-3">
                     <img src="{{ update.image_url }}" class="card-img-top" alt="{{ update.alt_image }}">
                     <div class="card-body">
-                        <h3 class="card-title text-dark">Chapitre {{update.id}} : {{ update.title }}</h3>
+                        <h3 class="card-title text-dark">Chapitre {{update.chapter_number}} : {{ update.title }}</h3>
                         <p class="card-text ">{{ update.chapter_description }}</p>
                         <p class="card-text"><small class="text-muted">Mis à jour le : {{ update.date_of_update|date("d-m-Y H:i:s")}}</small></p>
                         <p class="card-text float-right text-muted mb-0">Auteur : {{ author }}</p>
-                        <a href="/article/article?id={{ update.id }}" class="btn btn-info">Lire le chapitre</a>
+                        <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
             </div>
@@ -44,14 +44,14 @@
                 <article class="card shadow bg-light mb-3">
                     <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.alt_image }}">
                     <div class="card-body">
-                        <h3 class="card-title text-dark">Chapitre {{article.id}} : {{ article.title }}</h3>
+                        <h3 class="card-title text-dark">Chapitre {{article.chapter_number}} : {{ article.title }}</h3>
                         <p class="card-text ">{{ article.chapter_description }}</p>
                         <p class="card-text"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                             {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
                             {% endif %}
                         </small></p>
                         <p class="card-text float-right text-muted mb-0">Auteur : {{ author }}</p>
-                        <a href="/article/article?id={{ article.id }}" class="btn btn-info">Lire le chapitre</a>
+                        <a href="/article/article?chapter={{ article.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
             </div>

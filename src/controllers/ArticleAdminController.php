@@ -12,23 +12,6 @@ class ArticleAdminController extends AdminController
     const DELETE_SUCCESS = 'L\'article a été supprimé avec succès';
     const FAIL = 'Un problème est survenu, veuillez rééssayé ultérieurement';
 
-    public function addForm($addMessage = null)
-    {
-        $authorList = UserManager::findAll();
-        $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addMessage' => $addMessage], static::DEFAULT_TEMPLATE);
-    }
-
-    public function add()
-    {
-        $newArticle = $this->request->getParam('article');
-
-        $add = ArticleManager::add( $newArticle);
-
-        $addMessage = ($add == true) ? static::ADD_SUCCESS : static::FAIL;
-
-        $this->addForm($addMessage);
-    }
-
     public function index($deleteMessage = null, $updateMessage = null)
     {
 
@@ -67,6 +50,23 @@ class ArticleAdminController extends AdminController
         $updateMessage = ($update == true) ? static::UPDATE_SUCCESS : static::FAIL;
 
         $this->index($updateMessage);
+    }
+
+    public function addForm($addMessage = null)
+    {
+        $authorList = UserManager::findAll();
+        $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addMessage' => $addMessage], static::DEFAULT_TEMPLATE);
+    }
+
+    public function add()
+    {
+        $newArticle = $this->request->getParam('article');
+
+        $add = ArticleManager::add( $newArticle);
+
+        $addMessage = ($add == true) ? static::ADD_SUCCESS : static::FAIL;
+
+        $this->addForm($addMessage);
     }
 
     public function delete()

@@ -10,17 +10,25 @@ class ArticleManager extends Manager
         $req = static::$bdd->query('SELECT * FROM article WHERE date_of_update IS NOT NULL ORDER BY date_of_update DESC LIMIT 0, 3');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function findByChapterNumber(int $chapter)
+    {
+        $req = static::$bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE chapter_number = ?');
+        $req->execute(array($chapter));
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
     /**
      * Add a new article to the database
      */
-    public static function add(array $newArticle = ['title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
+    public static function add(array $newArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
     {
         $req = static::$bdd->prepare(
-            'INSERT INTO article( title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
+            'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
             VALUES(?,?,?,?,?,?,NOW())'
         );
 
         return $req->execute(array(
+            $newArticle['chapter_number'],
             $newArticle['title'],
             $newArticle['imageURL'],
             $newArticle['imageDescription'],
@@ -33,10 +41,11 @@ class ArticleManager extends Manager
     /**
      * Update an existing article of the database
      */
-    public static function update(array $updateArticle = ['title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'], $id)
+    public static function update(array $updateArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'], $id)
     {
         $req = static::$bdd->prepare(
             'UPDATE article SET
+                chapter_number = ?,
                 title = ?, 
                 image_url = ?,
                 alt_image = ?,
@@ -48,6 +57,7 @@ class ArticleManager extends Manager
         );
 
         return $req->execute(array(
+            $updateArticle['chapter_number'],
             $updateArticle['title'],
             $updateArticle['imageURL'],
             $updateArticle['imageDescription'],

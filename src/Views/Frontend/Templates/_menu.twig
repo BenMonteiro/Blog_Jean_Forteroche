@@ -16,7 +16,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     {% for article in articleList %}
-                        <a class="dropdown-item" href="/article/article?id={{ article.id }}">Chapitre {{ article.id }}</a>
+                        <a class="dropdown-item" href="/article/article?chapter={{ article.chapter_number }}">Chapitre {{ article.chapter_number }}</a>
                     {% endfor %}
                 </div>
               </li>

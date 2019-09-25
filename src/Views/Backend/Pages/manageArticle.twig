@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="card-body">
-                        <h5 class="card-title">Chapitre {{ article.id}} : {{ article.title}}</h5>
+                        <h5 class="card-title">Chapitre {{ article.chapter_number}} : {{ article.title}}</h5>
                         <p class="card-text">{{ article.chapter_description }}</p>
                         <p><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                                 {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}

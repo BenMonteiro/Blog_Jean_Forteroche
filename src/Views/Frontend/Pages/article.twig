@@ -7,10 +7,10 @@
 {% block content %}
     <article class="bg-light my-5 py-5">
         <a class="btn btn-outline-dark offset-9" href="#buttons" role="button">Se rendre à l'espace commentaire</a>
-        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.id }} : {{ article.title }}</h1>
-        <h5 class="text-center text-info mb-3">Ecrit par {{ author }}</h5>
-        <img src="{{ article.image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image }}"/>
-        <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ article.content|nl2br }}</div>
+        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.chapter_number|striptags|nl2br }} : {{ article.title|striptags|nl2br }}</h1>
+        <h5 class="text-center text-info mb-3">Ecrit par {{ author|striptags|nl2br }}</h5>
+        <img src="{{ article.image_url|striptags|nl2br }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image|striptags|nl2br }}"/>
+        <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ article.content|striptags|nl2br }}</div>
         <p><small class="text-muted float-right mr-5">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                 {% else %}Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s") }}
                 {% endif %}
@@ -18,15 +18,15 @@
     </article>
 
     <div id="buttons" class="text-center mb-5">
-        <a class="previous btn btn-info btn-lg mr-3" href="/article/article?id={% if id == 1 %}{{ nbArticles }}
-            {% else %}{{ id - 1 }}
+        <a class="previous btn btn-info btn-lg mr-3" href="/article/article?chapter={% if chapter == 1 %}{{ nbArticles|striptags|nl2br }}
+            {% else %}{{ chapter - 1|striptags|nl2br }}
             {% endif %}"
             role="button">
                 Précédent
         </a>
         <a class="next btn btn-info btn-lg ml-3" 
-            href="/article/article?id={% if id == nbArticles %}{{ 1 }} 
-            {% else %}{{ id + 1 }}
+            href="/article/article?chapter={% if chapter == nbArticles %}{{ 1 }} 
+            {% else %}{{ chapter + 1|striptags|nl2br }}
             {% endif %}" 
             role="button">
                 Suivant
@@ -36,7 +36,7 @@
     <div id="commentForm" class="pt-5 mt-5">
         <h3 class="offset-1 pl-3 mb-4">Laisser un commentaire</h3>
 
-        <form id="add_comment" action='/comment/add?id={{ id }}' method="POST" class="offset-1 col-5">
+        <form id="add_comment" action='/comment/add?chapter={{ article.chapter_number|striptags|nl2br }}' method="POST" class="offset-1 col-5">
             <div class="form-group contactName">
                 <label for="name">Nom*</label>
                 <input type="text" class="form-control" id="name" name="comment[name]" required>
@@ -59,11 +59,11 @@
             {% for comment in commentList %}
                 <li class="media">
                     <div class="media-body">
-                        <h5 class="mt-0 mb-2">{{ comment.author }}</h5>
+                        <h5 class="mt-0 mb-2">{{ comment.author|striptags|nl2br }}</h5>
                         <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
-                            <p class="col-8">{{ comment.comment|nl2br }}</p>
+                            <p class="col-8">{{ comment.comment|striptags|nl2br}}</p>
                             {% if comment.reported == false and comment.moderate == false %}
-                            <a href="/comment/reportComment?id={{ comment.id }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
+                            <a href="/comment/reportComment?id={{ comment.id|striptags|nl2br }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
                                 <i class="fas fa-3x fa-exclamation-circle"></i>
                             </a>
                             {% endif %}
