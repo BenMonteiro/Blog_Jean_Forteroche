@@ -6,30 +6,13 @@ require_once ROOT_PATH.'/src/Models/UserManager.php';
 
 class ArticleAdminController extends AdminController
 {
-    protected $nbArticles;
-    protected $newNbArticles;
-
     const DEFAULT_TEMPLATE = 'Backend';
     const ADD_SUCCESS = 'Votre article a bien été ajouté';
     const UPDATE_SUCCESS = 'Votre article a bien été mis à jour';
     const DELETE_SUCCESS = 'L\'article a été supprimé avec succès';
     const FAIL = 'Un problème est survenu, veuillez rééssayé ultérieurement';
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $articleList = ArticleManager::findAll();
-        $nbArticles = count($articleList);
-        $_SESSION['nbArticles'] = $nbArticles;
-    }
-
-    public function index()
-    {
-        $this->home();
-    }
-
-    public function addArticleForm($addMessage = null)
+    public function addForm($addMessage = null)
     {
         $authorList = UserManager::findAll();
         $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addMessage' => $addMessage], static::DEFAULT_TEMPLATE);
@@ -44,16 +27,14 @@ class ArticleAdminController extends AdminController
         $content = $this->request->getParam('chapterText');
         $user_id = $this->request->getParam('author');
 
-        ArticleManager::add( $imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id);
+        $add = ArticleManager::add( $imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id);
 
-        $newArticleList = ArticleManager::findAll();
-        $this->newNbArticles = count($newArticleList);
-        $addMessage = ($this->newNbArticles === $_SESSION['nbArticles'] + 1) ? static::ADD_SUCCESS : static::FAIL;
+        $addMessage = ($add == true) ? static::ADD_SUCCESS : static::FAIL;
 
-        $this->addArticleForm($addMessage);
+        $this->addForm($addMessage);
     }
 
-    public function manageArticle($deleteMessage = null, $updateMessage = null)
+    public function index($deleteMessage = null, $updateMessage = null)
     {
         $articleList = ArticleManager::findAll();
 
@@ -66,7 +47,7 @@ class ArticleAdminController extends AdminController
         );
     }
 
-    public function updateArticleForm()
+    public function updateForm()
     {
         $id = $this->request->getParam('id');
         $article = ArticleManager::findOneById($id);
@@ -74,18 +55,13 @@ class ArticleAdminController extends AdminController
 
         $this->renderView('updateArticleForm.twig', 
             [
-                'id' => $article['id'],
-                'title' => $article['title'],
-                'image_url' => $article['image_url'], 
-                'alt_image' => $article['alt_image'], 
-                'content' => $article['content'],
-                'description' => $article['chapter_description'],
+                'article' => $article,
                 'authorList' => $authorList
             ], static::DEFAULT_TEMPLATE
         );
     }
 
-    public function updateArticle()
+    public function update()
     {
         $id = $this->request->getParam('id');
         $title = $this->request->getParam('title');
@@ -93,25 +69,23 @@ class ArticleAdminController extends AdminController
         $imageDescription = $this->request->getParam('imageDescription');
         $chapterDescription = $this->request->getParam('chapterDescription');
         $content = $this->request->getParam('chapterText');
-        $user_id = $this->request->getParam('author');
+        $author_id = $this->request->getParam('author');
+        $user_id = $author_id;
 
-        ArticleManager::update($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id, $id);
+        $update = ArticleManager::update($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id, $id);
 
-        $article = ArticleManager::findOneById($id);
-        $updateMessage = ($article['date_of_update'] !== null) ? static::UPDATE_SUCCESS : static::FAIL;
+        $updateMessage = ($update == true) ? static::UPDATE_SUCCESS : static::FAIL;
 
-        $this->manageArticle($updateMessage);
+        $this->index($updateMessage);
     }
 
-    public function deleteArticle()
+    public function delete()
     {
         $id = $this->request->getParam('id');
-        ArticleManager::deleteById($id);
+        $delete = ArticleManager::deleteById($id);
 
-        $newArticleList = ArticleManager::findAll();
-        $this->newNbArticles = count($newArticleList);
-        $deleteMessage = ($this->newNbArticles === $_SESSION['nbArticles'] - 1) ? static::DELETE_SUCCESS : static::FAIL;
+        $deleteMessage = ($delete == true) ? static::DELETE_SUCCESS : static::FAIL;
         
-        $this->manageArticle($deleteMessage);
+        $this->index($deleteMessage);
     }
 }

@@ -40,7 +40,7 @@ class Manager
 
     public static function findLast()
     {
-        $req = static::$bdd->query('SELECT* FROM`' . static::TABLE_NAME . '` ORDER BY id DESC');
+        $req = static::$bdd->query('SELECT* FROM`' . static::TABLE_NAME . '` ORDER BY id DESC LIMIT 0, 1');
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
