@@ -26,21 +26,14 @@ class CommentController extends DefaultController
         $this->home();
     }
 
-    public function addComment()
+    public function add()
     {
         $article_id = $this->request->getParam('id');
-        $comment = $this->request->getParam('message');
-        $author = $this->request->getParam('name');
+        $comment = $this->request->getParam('comment');
 
-        $commentList = CommentManager::findArticleComments($article_id);
-        $nbComment = count($commentList);
-        $_SESSION['nbComment'] = $nbComment;
+        $add = CommentManager::add($article_id, $comment);
 
-        CommentManager::add($article_id, $comment, $author);
-
-        $newCommentList = CommentManager::findArticleComments($article_id);
-        $newNbComments = count($newCommentList);
-        $addCommentMessage = ($newNbComments === $_SESSION['nbComment'] + 1) ? static::ADD_COMMENT_SUCCESS : static::FAIL;
+        $addCommentMessage = ($add == true) ? static::ADD_COMMENT_SUCCESS : static::FAIL;
 
         $this->article->article($id = $article_id, $addCommentMessage);
 

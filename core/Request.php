@@ -57,7 +57,7 @@ class Request
         return $this->actionName;
     }
 
-    public function getParam(string $key, $defaultValue = null)
+    public function getParam( $key, $defaultValue = null)
     {
         return $this->getGetParam($key) ??
             $this->getPostParam($key) ??
@@ -68,10 +68,10 @@ class Request
      * @param string $key    [The key of the getdata we want to return ]
      * @return      [return the value of the key in parameter]
      */
-    public function getGetParam(string $key, $defaultValue = null)
+    public function getGetParam( $key, $defaultValue = null)
     {
         return isset($_GET[$key]) ? 
-            htmlspecialchars($_GET[$key]) : 
+            ($_GET[$key]) : 
             $defaultValue;
     }
 
@@ -79,10 +79,10 @@ class Request
      * @param string $key      [The key of the postData we want to return]
      * @return       [return the value of the key in parameter]
      */
-    public function getPostParam(string $key, $defaultValue = null)
+    public function getPostParam( $key, $defaultValue = null)
     {
         return isset($_POST[$key]) && '' !== $_POST[$key] ? 
-            htmlspecialchars($_POST[$key]) :
+            ($_POST[$key]) :
             $defaultValue;
     }
 }

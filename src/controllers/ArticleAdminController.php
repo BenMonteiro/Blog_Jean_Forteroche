@@ -18,16 +18,11 @@ class ArticleAdminController extends AdminController
         $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addMessage' => $addMessage], static::DEFAULT_TEMPLATE);
     }
 
-    public function addArticle()
+    public function add()
     {
-        $title = $this->request->getParam('title');
-        $imageURL = $this->request->getParam('imageURL');
-        $imageDescription = $this->request->getParam('imageDescription');
-        $chapterDescription = $this->request->getParam('chapterDescription');
-        $content = $this->request->getParam('chapterText');
-        $user_id = $this->request->getParam('author');
+        $newArticle = $this->request->getParam('article');
 
-        $add = ArticleManager::add( $imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id);
+        $add = ArticleManager::add( $newArticle);
 
         $addMessage = ($add == true) ? static::ADD_SUCCESS : static::FAIL;
 
@@ -36,6 +31,7 @@ class ArticleAdminController extends AdminController
 
     public function index($deleteMessage = null, $updateMessage = null)
     {
+
         $articleList = ArticleManager::findAll();
 
         $this->renderView('manageArticle.twig', 
@@ -64,15 +60,9 @@ class ArticleAdminController extends AdminController
     public function update()
     {
         $id = $this->request->getParam('id');
-        $title = $this->request->getParam('title');
-        $imageURL = $this->request->getParam('imageURL');
-        $imageDescription = $this->request->getParam('imageDescription');
-        $chapterDescription = $this->request->getParam('chapterDescription');
-        $content = $this->request->getParam('chapterText');
-        $author_id = $this->request->getParam('author');
-        $user_id = $author_id;
+        $updateArticle = $this->request->getParam('article');
 
-        $update = ArticleManager::update($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id, $id);
+        $update = ArticleManager::update($updateArticle, $id);
 
         $updateMessage = ($update == true) ? static::UPDATE_SUCCESS : static::FAIL;
 

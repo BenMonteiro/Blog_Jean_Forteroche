@@ -24,13 +24,20 @@ class BlogController extends DefaultController
     public function home()
     {
         $lastUpdates = ArticleManager::findLastUpdates();
+
         foreach ($this->articleList as $article) {
 
             $author_id = $article['user_id'];
             $author = UserManager::findOneById($author_id);
         }
 
-        $this->renderView('home.twig', ['articleList' => $this->articleList, 'lastUpdates' => $lastUpdates, 'author' => $author['name']]);
+        $this->renderView('home.twig',
+            [
+                'articleList' => $this->articleList,
+                'lastUpdates' => $lastUpdates, 
+                'author' => $author['name']
+            ]
+        );
     }
 
     public function author()

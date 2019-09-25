@@ -28,7 +28,7 @@ class AdminController extends DefaultController
 
     public function home()
     {
-        $reportedCommentList = CommentManager::findReportedComments();
+        $reportedCommentList = CommentManager::findReported();
         $commentsToModerate = count($reportedCommentList);
         $lastArticle = ArticleManager::findLast();
 
@@ -36,10 +36,7 @@ class AdminController extends DefaultController
             [
                 'admin' => $_SESSION['admin'], 
                 'commentsToModerate' => $commentsToModerate,
-                'article_id' => $lastArticle['id'], 
-                'articleTitle' => $lastArticle['title'], 
-                'articleCreation' => $lastArticle['creation_date'],
-                'articleUpdate' => $lastArticle['date_of_update']
+                'lastArticle' => $lastArticle
             ], static::DEFAULT_TEMPLATE
         );
     }

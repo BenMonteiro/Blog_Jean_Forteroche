@@ -18,7 +18,7 @@
 
         <div>
             <h3 class="ml-3 mt-5 text-info"><u>Un point sur les articles</u></h3>
-            <h4 class="ml-5 mt-3">Dernier article ajouté le {{ articleCreation|date("d-M-Y") }} ( Chapitre {{ article_id }} : {{ articleTitle }} )</h4>
+            <h4 class="ml-5 mt-3">Dernier article ajouté le {{ lastArticle.creation_date|date("d-M-Y") }} ( Chapitre {{ lastArticle.id }} : {{ lastArticle.title }} )</h4>
             <a href="/articleAdmin/addForm" class="btn btn-primary offset-2 mt-3">Ajouter un article</a>
         </div>
     </div>

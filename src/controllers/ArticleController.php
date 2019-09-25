@@ -28,14 +28,9 @@ class ArticleController extends BlogController
             'article.twig',
             [
                 'articleList' => $this->articleList,
+                'article' => $article,
                 'id' => $article['id'],
                 'nbArticles' => $nbArticles,
-                'title' => $article['title'],
-                'image_url' => $article['image_url'], 
-                'alt_image' => $article['alt_image'], 
-                'content' => $article['content'],
-                'creation_date' => $article['creation_date'],
-                'date_of_update' => $article['date_of_update'],
                 'commentList' => $commentList,
                 'author' => $author['name'],
                 'addCommentMessage' => $addCommentMesssage

@@ -7,12 +7,12 @@
 {% block content %}
     <article class="bg-light my-5 py-5">
         <a class="btn btn-outline-dark offset-9" href="#buttons" role="button">Se rendre à l'espace commentaire</a>
-        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ id }} : {{ title }}</h1>
+        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.id }} : {{ article.title }}</h1>
         <h5 class="text-center text-info mb-3">Ecrit par {{ author }}</h5>
-        <img src="{{ image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ alt_image }}"/>
-        <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ content|nl2br }}</div>
-        <p><small class="text-muted float-right mr-5">{% if date_of_update == null %}Publié le : {{ creation_date|date("d-m-Y H:i:s") }}
-                {% else %}Mis à jour le : {{ date_of_update|date("d-m-Y H:i:s") }}
+        <img src="{{ article.image_url }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image }}"/>
+        <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ article.content|nl2br }}</div>
+        <p><small class="text-muted float-right mr-5">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+                {% else %}Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s") }}
                 {% endif %}
         </small></p>
     </article>
@@ -36,15 +36,15 @@
     <div id="commentForm" class="pt-5 mt-5">
         <h3 class="offset-1 pl-3 mb-4">Laisser un commentaire</h3>
 
-        <form id="add_comment" action='/comment/addComment?id={{ id }}' method="POST" class="offset-1 col-5">
+        <form id="add_comment" action='/comment/add?id={{ id }}' method="POST" class="offset-1 col-5">
             <div class="form-group contactName">
                 <label for="name">Nom*</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="comment[name]" required>
             </div>
 
             <div class="form-group">
                 <label for="message">Commentaire*</label>
-                <textarea class="form-control contactMessage" id="message" name="message" rows="5"required></textarea>
+                <textarea class="form-control contactMessage" id="message" name="comment[message]" rows="5" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-info mb-5">Laisser un commentaire</button>

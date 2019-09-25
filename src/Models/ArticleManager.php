@@ -13,47 +13,47 @@ class ArticleManager extends Manager
     /**
      * Add a new article to the database
      */
-    public static function add($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id)
+    public static function add(array $newArticle = ['title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
     {
         $req = static::$bdd->prepare(
-            'INSERT INTO article( image_url, alt_image, title, content, chapter_description, user_id, creation_date) 
-            Values(?,?,?,?,?,?,NOW())'
+            'INSERT INTO article( title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
+            VALUES(?,?,?,?,?,?,NOW())'
         );
 
         return $req->execute(array(
-            $imageURL, 
-            $imageDescription, 
-            $title, 
-            $content, 
-            $chapterDescription, 
-            $user_id
+            $newArticle['title'],
+            $newArticle['imageURL'],
+            $newArticle['imageDescription'],
+            $newArticle['author'],
+            $newArticle['chapterDescription'],
+            $newArticle['chapterText'],
         ));
     }
 
     /**
      * Update an existing article of the database
      */
-    public static function update($imageURL, $imageDescription, $title, $content, $chapterDescription, $user_id, $id)
+    public static function update(array $updateArticle = ['title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'], $id)
     {
         $req = static::$bdd->prepare(
-            'UPDATE article SET 
+            'UPDATE article SET
+                title = ?, 
                 image_url = ?,
                 alt_image = ?,
-                title = ?,
-                content = ?,
-                chapter_description = ?,
                 user_id = ?,
+                chapter_description = ?,
+                content = ?,
                 date_of_update = NOW()
             WHERE id = ?'
         );
 
         return $req->execute(array(
-            $imageURL,
-            $imageDescription,
-            $title,
-            $content,
-            $chapterDescription,
-            $user_id,
+            $updateArticle['title'],
+            $updateArticle['imageURL'],
+            $updateArticle['imageDescription'],
+            $updateArticle['author'],
+            $updateArticle['chapterDescription'],
+            $updateArticle['chapterText'],
             $id
         ));
     }

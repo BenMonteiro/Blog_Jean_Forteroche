@@ -14,7 +14,7 @@ class CommentManager extends Manager
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function findReportedComments()
+    public static function findReported()
     {
         $req = static::$bdd->query('SELECT * FROM comment WHERE reported = true AND moderate = false');
         return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -23,17 +23,17 @@ class CommentManager extends Manager
     /**
      * Add a comment to the database
      */
-    public static function add($article_id, $comment, $author)
+    public static function add($article_id, array $comment = ['name', 'message'])
     {
         $req = static::$bdd->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
-             Values(?, ?, ?, NOW())'
+             VALUES(?, ?, ?, NOW())'
         );
 
         return $req->execute(array(
             $article_id,
-            $author,
-            $comment
+            $comment['name'],
+            $comment['message']
         ));
     }
 
@@ -46,9 +46,9 @@ class CommentManager extends Manager
         return $req->execute(array($id));
     }
 
-    public static function validateComment($id)
+    public static function validate($id)
     {
-        $req = static::$bdd->prepare('UPDATE comment SET moderate = true WHERE id=?');
+        $req = static::$bdd->prepare('UPDATE comment SET moderate = true WHERE id = ?');
 
         return $req->execute(array($id));
     }

@@ -13,7 +13,7 @@ class CommentAdminController extends AdminController
 
     public function moderation()
     {
-        $reportedCommentList = CommentManager::findReportedComments();
+        $reportedCommentList = CommentManager::findReported();
         $commentsToModerate = count($reportedCommentList);
         $this->renderView('commentsModeration.twig', 
             [
@@ -26,7 +26,7 @@ class CommentAdminController extends AdminController
     public function validate()
     {
         $id = $this->request->getParam('id');
-        CommentManager::validateComment($id);
+        CommentManager::validate($id);
         $this->moderation();
     }
 

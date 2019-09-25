@@ -9,39 +9,39 @@
         <h1 class="text-center">Ajouter un article</h1>
         <p class="text-center mt-3 ">{{ addMessage }}</p>
 
-        <form action='/articleAdmin/addArticle' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
+        <form action='/articleAdmin/add' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
             <div class="form-group">
                 <label for="title">Titre du chapitre*</label>
-                <input type="text" class="form-control" id="title" name="title" required>
+                <input type="text" class="form-control" id="title" name="article[title]" required>
             </div>
 
             <div class="form-group">
                 <label for="imageURL">URL de l'image d'illustration*</label>
-                <input type="url" class="form-control" id="imageURL" name="imageURL" required>
+                <input type="url" class="form-control" id="imageURL" name="article[imageURL]" required>
             </div>
 
             <div class="form-group">
                 <label for="imageDescription">Description de l'image d'illustration*</label>
-                <input type="text" class="form-control" id="imageDescription"name="imageDescription" required>
+                <input type="text" class="form-control" id="imageDescription" name="article[imageDescription]" required>
             </div>
 
             <div class="form-group">
                 <label for="author">Auteur*</label>
-                <select class="form-control" id="author" name="author">
+                <select class="form-control" id="author" name="article[author]">
                     {% for author in authorList %}
-                        <option value="{{ author.id }}">{{ author.name }}</option>
+                        <option value="{{ author.id }}" {% if author.name == 'Jean Forteroche' %} selected {% endif %}>{{ author.name }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="chapterDescription">Description du chapitre*</label>
-                <input type="text" class="form-control" id="chapterDescription" name="chapterDescription" required>
+                <input type="text" class="form-control" id="chapterDescription" name="article[chapterDescription]" required>
             </div>
 
             <div class="form-group">
                 <label for="chapterText">Corps du texte*</label>
-                <textarea class="form-control" id="chapterText" name="chapterText" rows="15" ></textarea>
+                <textarea class="form-control" id="chapterText" name="article[chapterText]" rows="15" ></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary float-right">Ajouter l'article</button>
