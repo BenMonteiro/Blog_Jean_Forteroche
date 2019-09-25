@@ -10,15 +10,18 @@ class CommentAdminController extends AdminController
     {
         $this->moderation();
     }
-
+    
     public function moderation()
     {
-        $reportedCommentList = CommentManager::findReported();
-        $commentsToModerate = count($reportedCommentList);
+        $toModerateList = CommentManager::toModerate();
+        $toModerate = count($toModerateList);
+        $reported = count(CommentManager::findReported());
+
         $this->renderView('commentsModeration.twig', 
             [
-                'reportedCommentList' => $reportedCommentList, 
-                'commentsToModerate' => $commentsToModerate
+                'toModerateList' => $toModerateList,
+                'toModerate' => $toModerate,
+                'reported' => $reported
             ], static::DEFAULT_TEMPLATE
         );
     }

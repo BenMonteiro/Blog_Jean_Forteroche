@@ -10,9 +10,15 @@
 
         <div>
             <h3 class="ml-3 mt-5 text-info"><u>Un point sur les commentaires</u></h3>
-            <h4 class="ml-5 mt-3">Vous avez <span class="text-danger">{{ commentsToModerate }}</span> commentaires en attente de modération</h4>
-            {% if commentsToModerate != 0 %}
+            {% if toModerate != 0 %}
+                <h4 class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerate }}</span> commentaires en attente de modération 
+                    {% if reported >= 1 %} dont <span class="text-danger">{{ reported }}</span> commentaires qui ont été reportés
+                    {% endif %}
+                </h4>
             <a href="/commentAdmin/moderation" class="btn btn-primary offset-2 mt-3">Se rendre à l'espace de modération de commentaires</a>
+
+            {% else %}
+                <h4 class="ml-5 mt-3">Vous n'avez aucun commentaire en attente de modération</h4>
             {% endif %}
         </div>
 

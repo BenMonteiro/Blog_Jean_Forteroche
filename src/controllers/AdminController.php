@@ -28,14 +28,17 @@ class AdminController extends DefaultController
 
     public function home()
     {
-        $reportedCommentList = CommentManager::findReported();
-        $commentsToModerate = count($reportedCommentList);
+        $toModerateList = CommentManager::toModerate();
+        $toModerate = count($toModerateList);
+        $reported = count(CommentManager::findReported());
+
         $lastArticle = ArticleManager::findLast();
 
         $this->renderView('adminHome.twig', 
             [
                 'admin' => $_SESSION['admin'], 
-                'commentsToModerate' => $commentsToModerate,
+                'toModerate' => $toModerate,
+                'reported' => $reported,
                 'lastArticle' => $lastArticle
             ], static::DEFAULT_TEMPLATE
         );

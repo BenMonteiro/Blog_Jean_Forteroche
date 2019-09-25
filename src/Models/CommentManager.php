@@ -14,6 +14,12 @@ class CommentManager extends Manager
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function toModerate()
+    {
+        $req = static::$bdd->query('SELECT * FROM comment WHERE moderate = false ORDER BY reported DESC');
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public static function findReported()
     {
         $req = static::$bdd->query('SELECT * FROM comment WHERE reported = true AND moderate = false');
