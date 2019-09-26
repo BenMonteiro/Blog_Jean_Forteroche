@@ -7,7 +7,7 @@
 {% block content %}
     <div id='addArticleForm' class='bg-light mt-5 pt-5 pb-3'>
         <h1 class="text-center">Ajouter un article</h1>
-        <p class="text-center mt-3 ">{{ addMessage }}</p>
+        {{ include('Frontend/Templates/_notification.twig') }}
 
         <form action='/articleAdmin/add' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
             <div class="form-group">

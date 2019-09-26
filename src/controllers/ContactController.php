@@ -11,20 +11,23 @@ class ContactController extends DefaultController
 {
     protected $articleList;
 
-    public function __construct()
-    {
-        parent::__construct();
-        return $this->articleList = ArticleManager::findAll();
-    }
+    const MAIL_SUCCESS = 'Merci de nous avoir contacté !';
+    const FAIL = 'Un problème est survenu, veuillez rééssayer ultérieurement';
 
     public function index()
     {
-        $this->contact();
+        $this->contactForm();
     }
 
-    public function contact()
+    public function contactForm($alert = null, $message = null)
     {
-        $this->renderView('contact.twig',['articleList' => $this->articleList]);
+        $this->articleList = ArticleManager::findAll();
+        $this->renderView('contact.twig',
+            [
+                'articleList' => $this->articleList,
+                'alert' => $alert,
+                'message' => $message
+            ]);
     }
 
     /**
@@ -32,18 +35,28 @@ class ContactController extends DefaultController
      * $datas are the informations obtained via the contact form.
      * Then load the contactSuccess page
     */
-    public function contactSuccess()
+    public function contact()
     {
         $subject = $this->request->getParam('subject');
-        $message = $this->request->getParam('message');
+        $mailMessage = $this->request->getParam('message');
         $headers = [
             'FROM' => $this->request->getParam('firstname'). ' ' . $this->request->getParam('name'), 
             'Reply-To' => $this->request->getParam('email')
         ];
 
         $contactForm = new Mail();
-        $contactForm->send($subject, $message, $headers);
+        $contact = $contactForm->send($subject, $mailMessage, $headers);
 
-        $this->renderView('contactSuccess.twig',['articleList' => $this->articleList]);
+        if ($contact == true){
+
+            $alert = 'success';
+            $message = static::MAIL_SUCCESS;
+        } else {
+
+            $alert = 'danger';
+            $message = static::FAIL;
+        }
+
+        $this->contactForm($alert, $message);
     }
 }

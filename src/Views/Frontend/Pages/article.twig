@@ -6,7 +6,8 @@
 
 {% block content %}
     <article class="bg-light my-5 py-5">
-        <a class="btn btn-outline-dark offset-9" href="#buttons" role="button">Se rendre à l'espace commentaire</a>
+        <a class="btn btn-outline-dark offset-9 mr-3" href="#buttons" role="button">Se rendre à l'espace commentaire</a>
+        {{ include('Frontend/Templates/_notification.twig') }}
         <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.chapter_number|striptags|nl2br }} : {{ article.title|striptags|nl2br }}</h1>
         <h5 class="text-center text-info mb-3">Ecrit par {{ author|striptags|nl2br }}</h5>
         <img src="{{ article.image_url|striptags|nl2br }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image|striptags|nl2br }}"/>

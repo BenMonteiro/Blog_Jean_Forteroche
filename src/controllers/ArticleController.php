@@ -14,7 +14,7 @@ class ArticleController extends BlogController
         $this->home();
     }
 
-    public function article($chapter = null , $addCommentMesssage = null)
+    public function article($chapter = null , $alert = null, $message = null)
     {
         $chapter = ($chapter === null) ? $this->request->getParam('chapter') : $chapter;
         $article = ArticleManager::findByChapterNumber($chapter);
@@ -34,7 +34,8 @@ class ArticleController extends BlogController
                 'nbArticles' => $nbArticles,
                 'commentList' => $commentList,
                 'author' => $author['name'],
-                'addCommentMessage' => $addCommentMesssage
+                'alert' => $alert,
+                'message' => $message
             ]
         );
     }

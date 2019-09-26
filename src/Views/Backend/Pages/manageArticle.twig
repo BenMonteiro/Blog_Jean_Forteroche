@@ -7,8 +7,7 @@
 {% block content %}
 <div class="bg-light container-fluid">
     <h1 class="text-center mt-5 pt-5">Gestionnaire d'articles</h1>
-    <h5 class="text-center text-lg mt-5">{{ deleteMessage }}</h5>
-    <h5 class= "text-center text-lg mt-5">{{ updateMessage }}</h5>
+   {{ include('Frontend/Templates/_notification.twig') }}
     <div class="offset-2 col-8 mt-3">
         {% for article in articleList %}
             <div class="card my-5">

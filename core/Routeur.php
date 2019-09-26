@@ -33,7 +33,7 @@ class Routeur
     {
         if (empty($this->controllerName)) {
 
-            header('Location: /blog/home');
+            header('Location: /blog');
         } else {
 
             throw new RouteurException('La page que vous recherchez n\'existe pas');

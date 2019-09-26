@@ -6,27 +6,28 @@ require_once ROOT_PATH.'/src/Models/CommentManager.php';
 class AdminController extends DefaultController
 {
     const DEFAULT_TEMPLATE = 'Backend';
+    const NOT_AUTHENTIFIED = 'Veuillez vous identifier pour accéder à l\'espace administrateur';
 
     public function __construct()
     {
         parent::__construct();
         return $this->isAuthentified();
     }
- 
-    public function index()
-    {
-        $this->home();
-    }
 
     public function isAuthentified()
     {
         if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
 
-            header("location: /login/errorLog");
+            $this->renderView('login.twig', 
+                [
+                    'alert' =>'danger', 
+                    'message' => static::NOT_AUTHENTIFIED
+                ], static::DEFAULT_TEMPLATE
+            );
         }
     }
 
-    public function home()
+    public function index()
     {
         $toModerateList = CommentManager::toModerate();
         $toModerate = count($toModerateList);
@@ -42,5 +43,13 @@ class AdminController extends DefaultController
                 'lastArticle' => $lastArticle
             ], static::DEFAULT_TEMPLATE
         );
+    }
+
+    public function alertMessage($method, $condition, $success)
+    {
+        $alert = ($condition == true) ? 'success' : 'danger';
+        $message = ($condition == true) ? $success : static::FAIL;
+
+        $this->$method($alert , $message);
     }
 }

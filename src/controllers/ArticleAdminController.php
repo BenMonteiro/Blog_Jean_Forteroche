@@ -8,11 +8,11 @@ class ArticleAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
     const ADD_SUCCESS = 'Votre article a bien été ajouté';
-    const UPDATE_SUCCESS = 'Votre article a bien été mis à jour';
+    const UPDATE_SUCCESS = 'L\'article a été mis à jour avec succés';
     const DELETE_SUCCESS = 'L\'article a été supprimé avec succès';
     const FAIL = 'Un problème est survenu, veuillez rééssayé ultérieurement';
 
-    public function index($deleteMessage = null, $updateMessage = null)
+    public function index($alert = null , $message = null)
     {
 
         $articleList = ArticleManager::findAll();
@@ -20,8 +20,8 @@ class ArticleAdminController extends AdminController
         $this->renderView('manageArticle.twig', 
             [
                 'articleList' => $articleList, 
-                'deleteMessage' => $deleteMessage,
-                'updateMessage' => $updateMessage
+                'alert' => $alert,
+                'message' => $message
             ], static::DEFAULT_TEMPLATE
         );
     }
@@ -45,28 +45,28 @@ class ArticleAdminController extends AdminController
         $id = $this->request->getParam('id');
         $updateArticle = $this->request->getParam('article');
 
-        $update = ArticleManager::update($updateArticle, $id);
+        ArticleManager::update($updateArticle, $id);
 
-        $updateMessage = ($update == true) ? static::UPDATE_SUCCESS : static::FAIL;
-
-        $this->index($updateMessage);
+        $this->index('success', static::UPDATE_SUCCESS);
     }
 
-    public function addForm($addMessage = null)
+    public function addForm($alert = null, $message = null)
     {
         $authorList = UserManager::findAll();
-        $this->renderView('addArticleForm.twig', ['authorList' => $authorList, 'addMessage' => $addMessage], static::DEFAULT_TEMPLATE);
+        $this->renderView('addArticleForm.twig', 
+            [
+                'authorList' => $authorList,
+                'alert' => $alert,
+                'message' => $message
+            ], static::DEFAULT_TEMPLATE);
     }
 
     public function add()
     {
         $newArticle = $this->request->getParam('article');
-
         $add = ArticleManager::add( $newArticle);
 
-        $addMessage = ($add == true) ? static::ADD_SUCCESS : static::FAIL;
-
-        $this->addForm($addMessage);
+        $this->alertMessage('addForm', $add, static::ADD_SUCCESS);
     }
 
     public function delete()
@@ -74,8 +74,6 @@ class ArticleAdminController extends AdminController
         $id = $this->request->getParam('id');
         $delete = ArticleManager::deleteById($id);
 
-        $deleteMessage = ($delete == true) ? static::DELETE_SUCCESS : static::FAIL;
-        
-        $this->index($deleteMessage);
+        $this->alertMessage('index', $delete, static::DELETE_SUCCESS);
     }
 }

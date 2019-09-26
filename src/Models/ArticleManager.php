@@ -17,6 +17,7 @@ class ArticleManager extends Manager
         $req->execute(array($chapter));
         return $req->fetch(PDO::FETCH_ASSOC);
     }
+    
     /**
      * Add a new article to the database
      */
@@ -24,7 +25,7 @@ class ArticleManager extends Manager
     {
         $req = static::$bdd->prepare(
             'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
-            VALUES(?,?,?,?,?,?,NOW())'
+            VALUES(?,?,?,?,?,?,?,NOW())'
         );
 
         return $req->execute(array(

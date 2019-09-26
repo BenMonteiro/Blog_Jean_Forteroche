@@ -5,13 +5,11 @@ require_once ROOT_PATH.'/src/Models/CommentManager.php';
 class CommentAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
+    const VALID = 'Le commentaire à été notifié comme conforme';
+    const DELETE = 'Le commentaire a été supprimé avec succés';
+    const FAIL = 'Une erreur est survenue, le commentaire n\'a pas pu être modéré';
 
-    public function index()
-    {
-        $this->moderation();
-    }
-    
-    public function moderation()
+    public function index($alert = null, $message = null)
     {
         $toModerateList = CommentManager::toModerate();
         $toModerate = count($toModerateList);
@@ -21,7 +19,9 @@ class CommentAdminController extends AdminController
             [
                 'toModerateList' => $toModerateList,
                 'toModerate' => $toModerate,
-                'reported' => $reported
+                'reported' => $reported,
+                'alert' => $alert,
+                'message' => $message
             ], static::DEFAULT_TEMPLATE
         );
     }
@@ -30,13 +30,19 @@ class CommentAdminController extends AdminController
     {
         $id = $this->request->getParam('id');
         CommentManager::validate($id);
-        $this->moderation();
+        $valid = CommentManager::findOneById($id);
+
+        $this->alertMessage('index', $valid['moderate'], static::VALID);
+
     }
 
     public function delete()
     {
         $id = $this->request->getParam('id');
-        CommentManager::deleteById($id);
-        $this->moderation();
+        $delete = CommentManager::deleteById($id);
+
+        $this->alertMessage('index', $delete, static::DELETE);
     }
 }
+
+

@@ -18,11 +18,6 @@ class BlogController extends DefaultController
 
     public function index()
     {
-        $this->home();
-    }
-
-    public function home()
-    {
         $lastUpdates = ArticleManager::findLastUpdates();
 
         foreach ($this->articleList as $article) {

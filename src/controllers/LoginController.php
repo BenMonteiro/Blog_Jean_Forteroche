@@ -7,6 +7,8 @@ require_once ROOT_PATH.'/core/Exception/LoginException.php';
 class LoginController extends DefaultController
 {
     const DEFAULT_TEMPLATE = 'Backend';
+    const DISCONNECT = 'Vous avez bien été déconnecté de l\'espace administration';
+    const ERROR = 'L\'identifiant et/ou le mot de passe sont incorrect !';
 
     public function index()
     {
@@ -24,10 +26,10 @@ class LoginController extends DefaultController
             $_SESSION['auth'] = true;
             $_SESSION['admin'] = $user['name'];
 
-            header("Location: /admin/home");
+            header("Location: /admin");
 
         } else {
-            throw new LoginException('L\'identifiant et/ou le mot de passe sont incorrect !');
+            throw new LoginException(static::ERROR);
         }
     }
 
@@ -35,7 +37,7 @@ class LoginController extends DefaultController
     {
         $_SESSION['auth'] = false;
 
-        $this->renderView('login.twig', ['disconnect' => 'Vous avez bien été déconnecté de l\'espace administration'], static::DEFAULT_TEMPLATE);
+        $this->renderView('login.twig', ['alert' => 'danger', 'message' => static::DISCONNECT], static::DEFAULT_TEMPLATE);
     }
 
     public function login()
@@ -46,7 +48,7 @@ class LoginController extends DefaultController
 
         } catch (LoginException $e) {
 
-            $this->renderView('login.twig', ['error' => $e->getMessage()], static::DEFAULT_TEMPLATE);
+            $this->renderView('login.twig', ['alert' => 'danger', 'message' => $e->getMessage()], static::DEFAULT_TEMPLATE);
         }
 
     }

@@ -15,12 +15,6 @@ class CommentController extends DefaultController
     const ADD_COMMENT_SUCCESS = "Votre commentaire a bien été ajouté";
     const FAIL = 'Nous n\'avons pas pu ajouté votre commentaire, veuillez rééssayer ultérieurement';
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        return $this->article = new ArticleController();
-    }
     public function index()
     {
         $this->home();
@@ -31,17 +25,24 @@ class CommentController extends DefaultController
         $chapter = $this->request->getParam('chapter');
         $article = ArticleManager::findByChapterNumber($chapter);
 
-
         $article_id = $article['id'];
         $comment = $this->request->getParam('comment');
         $chapter = $article['chapter_number'];
 
         $add = CommentManager::add($article_id, $comment);
 
-        $addCommentMessage = ($add == true) ? static::ADD_COMMENT_SUCCESS : static::FAIL;
+        if ($add == true) {
 
-        $this->article->article($chapter, $addCommentMessage);
+            $message = static::ADD_COMMENT_SUCCESS;
+            $alert = 'success';
+        } else {
 
+            $message = static::FAIL;
+            $alert = 'danger';
+        }
+
+        $this->article = new ArticleController();
+        $this->article->article($chapter, $alert, $message);
     }
 
     public function reportComment()
@@ -55,7 +56,7 @@ class CommentController extends DefaultController
         $article = ArticleManager::findOneById($article_id);
         $chapter = $article['chapter_number'];
 
-        $this->article->article($chapter);
+        header("Location: /article/article?chapter=$chapter#commentForm");
     }
 
 }
