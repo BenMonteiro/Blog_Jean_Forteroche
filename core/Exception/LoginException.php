@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom exception class for Routeur generated errors
+ * Custom exception class for login errors
  * This class extends Exception class
  */
 

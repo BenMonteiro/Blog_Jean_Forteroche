@@ -3,7 +3,9 @@ require_once ROOT_PATH.'/src/Controllers/AdminController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
-
+/**
+ * Control the administration of articles, extends AdminController
+ */
 class ArticleAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
@@ -12,9 +14,13 @@ class ArticleAdminController extends AdminController
     const DELETE_SUCCESS = 'L\'article a été supprimé avec succès';
     const FAIL = 'Un problème est survenu, veuillez rééssayé ultérieurement';
 
-    public function index($alert = null , $message = null)
+    /**
+     * Display the page to update and delete articles
+     * @param string $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param string $message    [the message to display]
+     */
+    public function index(string $alert = null , string $message = null)
     {
-
         $articleList = ArticleManager::findAll();
 
         $this->renderView('manageArticle.twig', 
@@ -26,6 +32,9 @@ class ArticleAdminController extends AdminController
         );
     }
 
+    /**
+     * Display the form to update an article
+     */
     public function updateForm()
     {
         $id = $this->request->getParam('id');
@@ -40,6 +49,9 @@ class ArticleAdminController extends AdminController
         );
     }
 
+    /**
+     * Function call when the updateForm is submited, return to the index page with the adapted message
+     */
     public function update()
     {
         $id = $this->request->getParam('id');
@@ -50,7 +62,12 @@ class ArticleAdminController extends AdminController
         $this->index('success', static::UPDATE_SUCCESS);
     }
 
-    public function addForm($alert = null, $message = null)
+    /**
+     * Display the form to add a new article to the database
+     * @param string $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param string $message    [the message to display]
+     */
+    public function addForm(string $alert = null, string $message = null)
     {
         $authorList = UserManager::findAll();
         $this->renderView('addArticleForm.twig', 
@@ -58,9 +75,13 @@ class ArticleAdminController extends AdminController
                 'authorList' => $authorList,
                 'alert' => $alert,
                 'message' => $message
-            ], static::DEFAULT_TEMPLATE);
+            ], static::DEFAULT_TEMPLATE
+        );
     }
 
+    /**
+     * Function call when the addForm is submited, return to the addForm page with the adapted message
+     */
     public function add()
     {
         $newArticle = $this->request->getParam('article');
@@ -69,6 +90,9 @@ class ArticleAdminController extends AdminController
         $this->alertMessage('addForm', $add, static::ADD_SUCCESS);
     }
 
+    /**
+     * Function call to delete an article from the database, return to the index page with the adapted message
+     */
     public function delete()
     {
         $id = $this->request->getParam('id');

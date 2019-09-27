@@ -6,14 +6,20 @@ class UserManager extends Manager
 {
     const TABLE_NAME = 'user';
 
-                /**
+    /**
      * Find all the informations of a user where login and password are equal to the given infos
+     * @param string $login     [login to find]
+     * @param string $password      [password to find]
      */
-    public static function findOne($login, $password)
+    public static function findOne(string $login, string $password): array
     {
-        $req = static::$bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE login = ? AND password = ?');
+        $req = static::$bdd->prepare(
+            'SELECT *
+            FROM user
+            WHERE login = ? AND password = ?'
+        );
         $req->execute(array($login, $password));
-        return $req->fetch(PDO::FETCH_ASSOC);
-    }
 
+        return $req->fetch();
+    }
 }

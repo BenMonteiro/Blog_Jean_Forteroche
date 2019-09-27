@@ -2,6 +2,9 @@
 require_once ROOT_PATH.'/src/Controllers/AdminController.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
 
+/**
+ * Control the comments administration page
+ */
 class CommentAdminController extends AdminController
 {
     const DEFAULT_TEMPLATE = 'Backend';
@@ -9,7 +12,12 @@ class CommentAdminController extends AdminController
     const DELETE = 'Le commentaire a été supprimé avec succés';
     const FAIL = 'Une erreur est survenue, le commentaire n\'a pas pu être modéré';
 
-    public function index($alert = null, $message = null)
+    /**
+     * Display all the comments to moderate (reported comments are on the top of the list)
+     * @param string $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param string $message    [the message to display]
+     */
+    public function index(string $alert = null, string $message = null)
     {
         $toModerateList = CommentManager::toModerate();
         $toModerate = count($toModerateList);
@@ -26,6 +34,10 @@ class CommentAdminController extends AdminController
         );
     }
 
+    /**
+     * Set the moderation of the comment to true. 
+     * Return to the index page with the right message
+     */
     public function validate()
     {
         $id = $this->request->getParam('id');
@@ -33,9 +45,12 @@ class CommentAdminController extends AdminController
         $valid = CommentManager::findOneById($id);
 
         $this->alertMessage('index', $valid['moderate'], static::VALID);
-
     }
 
+    /**
+     * Function to delete a not yet moderated comment from the database.
+     * Return to the index page with the right message
+     */
     public function delete()
     {
         $id = $this->request->getParam('id');
@@ -44,5 +59,3 @@ class CommentAdminController extends AdminController
         $this->alertMessage('index', $delete, static::DELETE);
     }
 }
-
-

@@ -10,6 +10,9 @@ class BlogController extends DefaultController
 {
     protected $articleList;
 
+    /**
+     * find all the article to display them in the menu
+     */
     public function __construct()
     {
         parent::__construct();
@@ -17,6 +20,14 @@ class BlogController extends DefaultController
     }
 
     public function index()
+    {
+        $this->home();
+    }
+    
+    /**
+     * HomePage of the website, display the last updated 3 aticles and a list of all articles
+     */
+    public function home()
     {
         $lastUpdates = ArticleManager::findLastUpdates();
 
@@ -35,6 +46,9 @@ class BlogController extends DefaultController
         );
     }
 
+    /**
+     * Display the author page
+     */
     public function author()
     {
         $this->renderView('author.twig',['articleList' => $this->articleList]);

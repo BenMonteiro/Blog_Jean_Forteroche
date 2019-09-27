@@ -1,15 +1,14 @@
 <?php
-require_once ROOT_PATH.'/core/DefaultController.php';
+require_once ROOT_PATH.'/src/Controllers/BlogController.php';
 require_once ROOT_PATH.'/src/Controllers/ArticleController.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 
 /**
-* Controll the page to display 
+* Control comments in client side of the website
 */
-class CommentController extends DefaultController
+class CommentController extends BlogController
 {
-
     protected $article; 
 
     const ADD_COMMENT_SUCCESS = "Votre commentaire a bien été ajouté";
@@ -20,6 +19,10 @@ class CommentController extends DefaultController
         $this->home();
     }
 
+    /**
+     * function to add a comment on the display article 
+     * Display the article page
+     */
     public function add()
     {
         $chapter = $this->request->getParam('chapter');
@@ -45,6 +48,9 @@ class CommentController extends DefaultController
         $this->article->article($chapter, $alert, $message);
     }
 
+    /**
+     * function to report a comment
+     */
     public function reportComment()
     {
         $comment_id = $this->request->getParam('id');
@@ -58,5 +64,4 @@ class CommentController extends DefaultController
 
         header("Location: /article/article?chapter=$chapter#commentForm");
     }
-
 }

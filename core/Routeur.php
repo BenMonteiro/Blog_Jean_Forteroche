@@ -15,7 +15,7 @@ class Routeur
     protected $action;
 
     /** 
-     * Construct call a Request object and set the variable $controllerName and $actionName
+     * Construct call a Request object and set the variables
      */
     public function __construct()
     {
@@ -26,8 +26,23 @@ class Routeur
         $this->controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';
     }
 
+        /**
+     * If the controller file does not exist, call the redirect function
+     * 
+     * @return self        [return the current object]
+     */
+    protected function existController(): self
+    {
+        if (!file_exists($this->controllerPath)) {
+
+            $this->redirect();
+        }
+
+        return $this;
+    }
+
     /**
-     * If Url path is an empty string, the routeur redirect to the homepage of the website
+     * Redirection in the case where controllerName is not found
      */
     protected function redirect()
     {
@@ -41,26 +56,10 @@ class Routeur
     }
 
     /**
-     * If the controller file does not exist and controllerName is not an empty string, the routeur redirect to the error404 page
-     * 
-     * @return $this        [return the current object]
-     */
-    protected function existController(): Routeur
-    {
-        if (!file_exists($this->controllerPath)) {
-
-            $this->redirect();
-        }
-
-        return $this;
-    }
-
-    /**
      * Call a new controller object
-     * 
-     * @return $this        [return the current object]
+     * @return self        [return the current object]
      */
-    protected function setController(): Routeur
+    protected function setController(): self
     {
         require_once $this->controllerPath;
         $this->controller = new $this->controllerName;
@@ -69,11 +68,10 @@ class Routeur
     }
 
     /**
-     * If the method (action) does not exist in the controller object previously called, the routeur redirect to the error404 page
-     * 
-     * @return $this        [return the current object]
+     * If the method (action) does not exist in the controller object previously called, redirect to the index function of the controller
+     * @return self        [return the current object]
      */
-    protected function existAction(): Routeur
+    protected function existAction(): self
     {
         if (!method_exists($this->controller, $this->action)) {
 
@@ -85,7 +83,6 @@ class Routeur
 
     /**
      * Call the method in the previous controller
-     * 
      * @return void
      */
     protected function callControllerAction(): void

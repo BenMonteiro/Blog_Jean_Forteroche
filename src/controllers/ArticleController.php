@@ -5,7 +5,7 @@ require_once ROOT_PATH.'/src/Models/CommentManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
 
 /**
-* Controll the page to display 
+* Control the page to display one article
 */
 class ArticleController extends BlogController
 {
@@ -14,7 +14,13 @@ class ArticleController extends BlogController
         $this->home();
     }
 
-    public function article($chapter = null , $alert = null, $message = null)
+    /**
+     * Display an article found by his chapter number
+     * @param int $chapter      [the number of the article chapter we want to display]
+    * @param string $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param string $message    [the message to display]
+     */
+    public function article(int $chapter = null , string $alert = null, string $message = null)
     {
         $chapter = ($chapter === null) ? $this->request->getParam('chapter') : $chapter;
         $article = ArticleManager::findByChapterNumber($chapter);
@@ -39,6 +45,4 @@ class ArticleController extends BlogController
             ]
         );
     }
-
-
 }

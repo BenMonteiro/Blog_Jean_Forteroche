@@ -20,36 +20,66 @@ class Manager
     }
 
     /**
-     * This function find all the informations contained in the table 
+     * This function find all the informations contained in the table
+     * @return array
      */
-    public static function findAll()
+    public static function findAll(): array
     {
-        $req = static::$bdd->query('SELECT * FROM `' . static::TABLE_NAME . '`ORDER BY id DESC');
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        $req = static::$bdd->query(
+            'SELECT *
+            FROM `' . static::TABLE_NAME . '`
+            ORDER BY id DESC'
+        );
+
+        return $req->fetchAll();
     }
 
     /**
      * Find all the informations of the table where id is equal to the id find by the getParams method
+     * @param int $id       [id of the element]
+     * @return array
      */
-    public static function findOneById(int $id)
+    public static function findOneById(int $id): array
     {
-        $req = static::$bdd->prepare('SELECT * FROM `' . static::TABLE_NAME . '`WHERE id = ?');
+        $req = static::$bdd->prepare(
+            'SELECT *
+            FROM `' . static::TABLE_NAME . '`
+            WHERE id = ?'
+        );
         $req->execute(array($id));
-        return $req->fetch(PDO::FETCH_ASSOC);
+
+        return $req->fetch();
     }
 
-    public static function findLast()
+    /**
+     * Find the last element of the table
+     * @return array
+     */
+    public static function findLast(): array
     {
-        $req = static::$bdd->query('SELECT* FROM`' . static::TABLE_NAME . '` ORDER BY id DESC LIMIT 0, 1');
-        return $req->fetch(PDO::FETCH_ASSOC);
+        $req = static::$bdd->query(
+            'SELECT *
+            FROM`' . static::TABLE_NAME . '`
+            ORDER BY id DESC
+            LIMIT 0, 1'
+        );
+
+        return $req->fetch();
     }
 
     /**
      * Delete the entry with the id find by the getParams method
+     * @param int $id       [id of the element]
+     * @return array 
      */
-    public static function deleteById(int $id)
+    public static function deleteById(int $id): array
     {
-       $req = static::$bdd->prepare('DELETE FROM`' . static::TABLE_NAME . '`WHERE id = ?');
+        $req = static::$bdd->prepare(
+           'DELETE
+           FROM`' . static::TABLE_NAME . '`
+           WHERE id = ?'
+        );
+
        return $req->execute(array($id));
     }
 }

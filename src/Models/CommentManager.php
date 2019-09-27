@@ -1,39 +1,73 @@
 <?php
 require_once ROOT_PATH.'/src/Models/Manager.php';
 
+/**
+ * Make the database requests relative to the comments
+ */
 class CommentManager extends Manager
 {
     const TABLE_NAME = 'comment';
-/**
- * rewriting of the findAll function of the Manager class in order to fit with the table
- */
-    public static function findArticleComments($id)
+    /**
+     * Find the 50 last comments that belongs to the selected article
+     * @param int $id       [the id of the article]
+     * @return array
+     */
+    public static function findArticleComments(int $id): array
     {
-        $req = static::$bdd->prepare('SELECT * FROM comment WHERE article_id = ? AND (reported = false OR moderate = true)  ORDER BY creation_date DESC LIMIT 0,50');
+        $req = static::$bdd->prepare(
+            'SELECT * 
+            FROM comment 
+            WHERE article_id = ? AND (reported = false OR moderate = true)
+            ORDER BY creation_date DESC 
+            LIMIT 0,50'
+        );
         $req->execute(array($id));
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $req->fetchAll();
     }
 
-    public static function toModerate()
+    /**
+     * Find all the unmoderated comments
+     * @return array
+     */
+    public static function toModerate(): array
     {
-        $req = static::$bdd->query('SELECT * FROM comment WHERE moderate = false ORDER BY reported DESC');
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        $req = static::$bdd->query(
+            'SELECT *
+            FROM comment
+            WHERE moderate = false
+            ORDER BY reported DESC'
+        );
+
+        return $req->fetchAll();
     }
-    
-    public static function findReported()
+
+    /**
+     * Find all the reported comments that are not moderated
+     * @return array
+     */
+    public static function findReported(): array
     {
-        $req = static::$bdd->query('SELECT * FROM comment WHERE reported = true AND moderate = false');
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        $req = static::$bdd->query(
+            'SELECT *
+            FROM comment
+            WHERE reported = true AND moderate = false'
+        );
+
+        return $req->fetchAll();
     }
 
     /**
      * Add a comment to the database
+     * @param int $article_id       [the id of the comment article]
+     * @param array $comment        [an array of the params of the new comment]
+     * @return array
      */
-    public static function add($article_id, array $comment = ['name', 'message'])
+    public static function add(int $article_id, array $comment = ['name', 'message']): array
     {
         $req = static::$bdd->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
-             VALUES(?, ?, ?, NOW())'
+            VALUES(?, ?, ?, NOW())'
         );
 
         return $req->execute(array(
@@ -43,18 +77,34 @@ class CommentManager extends Manager
         ));
     }
 
-    public static function report($id)
+    /**
+     * Set the reported field of the selected comment to true
+     * @param int $id       [id of the comment]
+     * @return array
+     */
+    public static function report(int $id): array
     {
         $req = static::$bdd->prepare(
-            'UPDATE comment SET reported = true WHERE id = ?'
+            'UPDATE comment
+            SET reported = true
+            WHERE id = ?'
         );
 
         return $req->execute(array($id));
     }
 
-    public static function validate($id)
+    /**
+     * Set the moderated field of the selected comment to true
+     * @param int $id       [id of the comment]
+     * @return array
+     */
+    public static function validate(int $id): array
     {
-        $req = static::$bdd->prepare('UPDATE comment SET moderate = true WHERE id = ?');
+        $req = static::$bdd->prepare(
+            'UPDATE comment
+            SET moderate = true
+            WHERE id = ?'
+        );
 
         return $req->execute(array($id));
     }

@@ -5,7 +5,7 @@ require_once ROOT_PATH.'/src/Services/Mail.php';
 
 
 /**
-* Controll the page to display 
+* Control the contact feature
 */
 class ContactController extends DefaultController
 {
@@ -14,12 +14,12 @@ class ContactController extends DefaultController
     const MAIL_SUCCESS = 'Merci de nous avoir contacté !';
     const FAIL = 'Un problème est survenu, veuillez rééssayer ultérieurement';
 
-    public function index()
-    {
-        $this->contactForm();
-    }
-
-    public function contactForm($alert = null, $message = null)
+    /**
+     * Display the page of the contact from
+     * @param string $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param string $message    [the message to display]
+     */
+    public function index(string $alert = null, string $message = null)
     {
         $this->articleList = ArticleManager::findAll();
         $this->renderView('contact.twig',
@@ -31,9 +31,8 @@ class ContactController extends DefaultController
     }
 
     /**
-     * Require the ContactFormManager class and the send method with $datas for parameters. 
-     * $datas are the informations obtained via the contact form.
-     * Then load the contactSuccess page
+     * Collect the infos passed in the contact form and send an email to the administrator.
+     * Display index page with adapted message
     */
     public function contact()
     {
@@ -57,6 +56,6 @@ class ContactController extends DefaultController
             $message = static::FAIL;
         }
 
-        $this->contactForm($alert, $message);
+        $this->index($alert, $message);
     }
 }

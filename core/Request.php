@@ -26,13 +26,18 @@ class Request
     /**
      * Request class is handled by singleton pattern. 
      * In this way, if a Request object already exist, the application use the same instance instead of create a new 
+     * @return self     [return an instance of the class]
      */
-    public static function getRequest()
+    public static function getRequest(): self
     {
         return static::$request ?? new Request();
     }
 
-    public function getURLComponents()
+    /**
+     * Break down the url to get the different components of it
+     * @return array    [return an array of the url components]
+     */
+    public function getURLComponents(): array
     {
         $uri = $_SERVER["REQUEST_URI"];
         $path = trim(parse_url($uri, PHP_URL_PATH),"/");
@@ -42,22 +47,27 @@ class Request
     }
 
     /**
-     * @return       [return the name of the controller to call]
+     * @return      [return the name of the controller to call]
      */
-    public function getControllerName()
+    public function getControllerName() 
     {
         return $this->controllerName;
     }
 
     /**
-     * @return       [return the name of the action to call]
+     * @return        [return the name of the action to call]
      */
     public function getActionName()
     {
         return $this->actionName;
     }
 
-    public function getParam( $key, $defaultValue = null)
+       /**
+     * @param mixed $key    [The key of the data we want to return ]
+     * @param $defaultValue     [the defaultValue of the param]
+     * @return mixed     [return the value of the key in parameter]
+     */
+    public function getParam(mixed $key, $defaultValue = null): mixed
     {
         return $this->getGetParam($key) ??
             $this->getPostParam($key) ??
@@ -65,10 +75,11 @@ class Request
     }
 
     /**
-     * @param string $key    [The key of the getdata we want to return ]
-     * @return      [return the value of the key in parameter]
+     * @param mixed $key    [The key of the getdata we want to return ]
+     * @param $defaultValue     [the defaultValue of the param]
+     * @return mixed     [return the value of the key in parameter]
      */
-    public function getGetParam( $key, $defaultValue = null)
+    public function getGetParam(mixed $key, $defaultValue = null): mixed 
     {
         return isset($_GET[$key]) ? 
             ($_GET[$key]) : 
@@ -76,10 +87,11 @@ class Request
     }
 
     /**
-     * @param string $key      [The key of the postData we want to return]
-     * @return       [return the value of the key in parameter]
+     * @param mixed $key      [The key of the postData we want to return]
+     * @param $defaultValue     [the defaultValue of the param]
+     * @return mixed      [return the value of the key in parameter]
      */
-    public function getPostParam( $key, $defaultValue = null)
+    public function getPostParam(mixed $key, $defaultValue = null): mixed
     {
         return isset($_POST[$key]) && '' !== $_POST[$key] ? 
             ($_POST[$key]) :

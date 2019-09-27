@@ -16,8 +16,16 @@ class PDOConnection
     {
         if (null === static::$dbConnection) {
 
-            static::$dbConnection = new PDO('mysql:host='.static::$host.';dbname='.static::$dbName.';charset=utf8', static::$login, static::$password,
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            static::$dbConnection = new PDO('mysql:
+                host='.static::$host.';
+                dbname='.static::$dbName.';
+                charset=utf8', 
+                static::$login, 
+                static::$password,
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                )
+            );
         }
 
         return static::$dbConnection;
