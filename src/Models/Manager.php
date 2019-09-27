@@ -21,9 +21,8 @@ class Manager
 
     /**
      * This function find all the informations contained in the table
-     * @return array
      */
-    public static function findAll(): array
+    public static function findAll()
     {
         $req = static::$bdd->query(
             'SELECT *
@@ -36,10 +35,9 @@ class Manager
 
     /**
      * Find all the informations of the table where id is equal to the id find by the getParams method
-     * @param int $id       [id of the element]
-     * @return array
+     * @param $id       [id of the element]
      */
-    public static function findOneById(int $id): array
+    public static function findOneById($id)
     {
         $req = static::$bdd->prepare(
             'SELECT *
@@ -53,9 +51,8 @@ class Manager
 
     /**
      * Find the last element of the table
-     * @return array
      */
-    public static function findLast(): array
+    public static function findLast()
     {
         $req = static::$bdd->query(
             'SELECT *
@@ -69,10 +66,9 @@ class Manager
 
     /**
      * Delete the entry with the id find by the getParams method
-     * @param int $id       [id of the element]
-     * @return array 
+     * @param $id       [id of the element]
      */
-    public static function deleteById(int $id): array
+    public static function deleteById($id)
     {
         $req = static::$bdd->prepare(
            'DELETE

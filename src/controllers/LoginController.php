@@ -34,6 +34,7 @@ class LoginController extends DefaultController
             header("Location: /admin");
 
         } else {
+
             throw new LoginException(static::ERROR);
         }
     }
@@ -55,6 +56,7 @@ class LoginController extends DefaultController
     {
         try 
         {
+
             $this->loginRedirection();
 
         } catch (LoginException $e) {

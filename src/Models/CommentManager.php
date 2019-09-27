@@ -9,10 +9,9 @@ class CommentManager extends Manager
     const TABLE_NAME = 'comment';
     /**
      * Find the 50 last comments that belongs to the selected article
-     * @param int $id       [the id of the article]
-     * @return array
+     * @param $id       [the id of the article]
      */
-    public static function findArticleComments(int $id): array
+    public static function findArticleComments($id)
     {
         $req = static::$bdd->prepare(
             'SELECT * 
@@ -28,9 +27,8 @@ class CommentManager extends Manager
 
     /**
      * Find all the unmoderated comments
-     * @return array
      */
-    public static function toModerate(): array
+    public static function toModerate()
     {
         $req = static::$bdd->query(
             'SELECT *
@@ -44,9 +42,8 @@ class CommentManager extends Manager
 
     /**
      * Find all the reported comments that are not moderated
-     * @return array
      */
-    public static function findReported(): array
+    public static function findReported()
     {
         $req = static::$bdd->query(
             'SELECT *
@@ -59,11 +56,10 @@ class CommentManager extends Manager
 
     /**
      * Add a comment to the database
-     * @param int $article_id       [the id of the comment article]
-     * @param array $comment        [an array of the params of the new comment]
-     * @return array
+     * @param $article_id       [the id of the comment article]
+     * @param $comment        [an array of the params of the new comment]
      */
-    public static function add(int $article_id, array $comment = ['name', 'message']): array
+    public static function add($article_id, $comment = ['name', 'message'])
     {
         $req = static::$bdd->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
@@ -79,10 +75,9 @@ class CommentManager extends Manager
 
     /**
      * Set the reported field of the selected comment to true
-     * @param int $id       [id of the comment]
-     * @return array
+     * @param $id       [id of the comment]
      */
-    public static function report(int $id): array
+    public static function report($id)
     {
         $req = static::$bdd->prepare(
             'UPDATE comment
@@ -95,10 +90,9 @@ class CommentManager extends Manager
 
     /**
      * Set the moderated field of the selected comment to true
-     * @param int $id       [id of the comment]
-     * @return array
+     * @param $id       [id of the comment]
      */
-    public static function validate(int $id): array
+    public static function validate($id)
     {
         $req = static::$bdd->prepare(
             'UPDATE comment

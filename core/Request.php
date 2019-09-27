@@ -63,11 +63,11 @@ class Request
     }
 
        /**
-     * @param mixed $key    [The key of the data we want to return ]
+     * @param $key    [The key of the data we want to return ]
      * @param $defaultValue     [the defaultValue of the param]
-     * @return mixed     [return the value of the key in parameter]
+     * @return     [return the value of the key in parameter]
      */
-    public function getParam(mixed $key, $defaultValue = null): mixed
+    public function getParam($key, $defaultValue = null)
     {
         return $this->getGetParam($key) ??
             $this->getPostParam($key) ??
@@ -75,11 +75,11 @@ class Request
     }
 
     /**
-     * @param mixed $key    [The key of the getdata we want to return ]
+     * @param $key    [The key of the getdata we want to return ]
      * @param $defaultValue     [the defaultValue of the param]
-     * @return mixed     [return the value of the key in parameter]
+     * @return     [return the value of the key in parameter]
      */
-    public function getGetParam(mixed $key, $defaultValue = null): mixed 
+    public function getGetParam($key, $defaultValue = null)
     {
         return isset($_GET[$key]) ? 
             ($_GET[$key]) : 
@@ -87,11 +87,11 @@ class Request
     }
 
     /**
-     * @param mixed $key      [The key of the postData we want to return]
+     * @param $key      [The key of the postData we want to return]
      * @param $defaultValue     [the defaultValue of the param]
-     * @return mixed      [return the value of the key in parameter]
+     * @return      [return the value of the key in parameter]
      */
-    public function getPostParam(mixed $key, $defaultValue = null): mixed
+    public function getPostParam($key, $defaultValue = null)
     {
         return isset($_POST[$key]) && '' !== $_POST[$key] ? 
             ($_POST[$key]) :

@@ -10,9 +10,8 @@ class ArticleManager extends Manager
 
     /**
      * Find the three last updated articles
-     * @return array
      */
-    public static function findLastUpdates(): array
+    public static function findLastUpdates()
     {
         $req = static::$bdd->query(
             'SELECT * 
@@ -27,10 +26,9 @@ class ArticleManager extends Manager
 
     /**
      * Find an article by his chapter number
-     * @param int $chapter      [the chapter number of the article we want]
-     * @return array
+     * @param  $chapter      [the chapter number of the article we want]
      */
-    public static function findByChapterNumber(int $chapter): array
+    public static function findByChapterNumber($chapter)
     {
         $req = static::$bdd->prepare(
             'SELECT * 
@@ -44,10 +42,9 @@ class ArticleManager extends Manager
     
     /**
      * Add a new article to the database
-     * @param array $newArticle     [an array of the params of the new article]
-     * @return array
+     * @param  $newArticle     [an array of the params of the new article]
      */
-    public static function add(array $newArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText']): array
+    public static function add($newArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
     {
         $req = static::$bdd->prepare(
             'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
@@ -67,11 +64,10 @@ class ArticleManager extends Manager
 
     /**
      * Update an existing article of the database
-     * @param array $updateArticle      [an array of the params of the updated article]
-     * @param int $id    [the id of thearticle to update]
-     * @return array
+     * @param $updateArticle      [an array of the params of the updated article]
+     * @param $id    [the id of thearticle to update]
      */
-    public static function update(array $updateArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'], int $id): array
+    public static function update($updateArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription', 'chapterText'], $id)
     {
         $req = static::$bdd->prepare(
             'UPDATE article 

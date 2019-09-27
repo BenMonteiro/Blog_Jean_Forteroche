@@ -8,10 +8,10 @@ class UserManager extends Manager
 
     /**
      * Find all the informations of a user where login and password are equal to the given infos
-     * @param string $login     [login to find]
-     * @param string $password      [password to find]
+     * @param $login     [login to find]
+     * @param $password      [password to find]
      */
-    public static function findOne(string $login, string $password): array
+    public static function findOne($login, $password)
     {
         $req = static::$bdd->prepare(
             'SELECT *

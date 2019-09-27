@@ -25,9 +25,30 @@
                             </small></p>
                         </div>
                     </div>
+
                     <div class="buttons offset-1 col-md-2 mt-5">
                         <a class="btn btn-primary btn-lg btn-block my-2" href="/ArticleAdmin/updateForm?id={{ article.id }}" role="button">Mettre à jour</a>
-                        <a class="btn btn-danger btn-lg btn-block" href="/ArticleAdmin/delete?id={{ article.id }}" role="button">Supprimer</a>
+                        <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#deleteConfirmation">Supprimer</button>
+
+                        <div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmation">Confirmation de suppression</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-center">Êtes vous certain de vouloir supprimer cet article ?<br /> Toute suppression est définitive !</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                        <a type="button" class="btn btn-danger" href="/ArticleAdmin/delete?id={{ article.id }}">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
