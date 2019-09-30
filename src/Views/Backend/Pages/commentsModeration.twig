@@ -5,28 +5,30 @@
 {% endblock %}
 
 {% block content %}
-    <div id="reportedCommentList">
-        <h1 class="text-center mt-5 pt-5">Commentaires en attente de modération</h1>
+    <div id="toModerateList">
+        <h1 class="text-center mx-3 mt-5 pt-5">Commentaires en attente de modération</h1>
         {{ include('Frontend/Templates/_notification.twig') }}
-        <h4 class="text-center mt-3">
+        <p class="text-center mx-3 mt-3">
             {% if toModerate == 0 and reported == 0 %}Vous n'avez aucun commentaire en attente de modération
             {% else %}Vous avez <span class="text-primary"> {{ toModerate }} </span> commentaires à modérer dont <span class="text-danger">{{ reported }}</span> ont été reportés
             {% endif %}
-        </h4>
+        </p>
 
-        <ul class="list-unstyled mt-2 ml-3">
+        <ul class="list-unstyled mt-2 mx-3">
             {% for toModerate in toModerateList %}
                 <li class="media">
                     <div class="media-body">
                         <h5 class="mt-0 mb-2">{{ toModerate.author }}</h5>
-                        <div 
-                            {% if toModerate.reported == false %} class="d-flex justify-content-between bg-light border border-primary col-11 ml-3 py-3" 
-                            {% else %} class="d-flex justify-content-between bg-light border border-danger col-11 ml-3 py-3" 
+                        <div id="commentContainer"
+                            {% if toModerate.reported == false %} class="d-flex flex-column bg-light border border-primary col-11 ml-3 py-3" 
+                            {% else %} class="d-flex flex-column bg-light border border-danger col-11 ml-3 py-3" 
                             {% endif %}>
-                            <p class="col-8">{{ toModerate.comment|nl2br }}</p>
-                            <div class="buttons offset-1 col-md-2">
-                                <a class="btn btn-primary btn-block my-2" href="/commentAdmin/validate?id={{ toModerate.id }}" role="button">Valider le commentaire</a>
-                                <a class="btn btn-danger btn-block" href="/commentAdmin/delete?id={{ toModerate.id }}" role="button">Supprimer</a>
+                            <p>{{ toModerate.comment|striptags|nl2br }}</p>
+                            <div class="buttons my-1 mx-2 ">
+                                <a class="btn btn-primary btn-inline-block offset-lg-3 col-lg-3 offset-md-2 col-md-4 offset-sm-1 col-sm-5 my-1" 
+                                    href="/commentAdmin/validate?id={{ toModerate.id }}" role="button">Valider le commentaire
+                                </a>
+                                <a class="btn btn-danger btn-inline-block col-lg-3 col-md-4 col-sm-5 my-1" href="/commentAdmin/delete?id={{ toModerate.id }}" role="button">Supprimer</a>
                             </div>
                         </div>
                         <p class="mb-0 mt-0"><small class="text-muted">Le : {{ toModerate.creation_date|date("d-m-Y H:i:s") }}</small></p>

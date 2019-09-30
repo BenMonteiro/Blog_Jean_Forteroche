@@ -1,0 +1,88 @@
+@media all and (max-width: 1100px) {
+
+    .webSiteDescription p {
+        font-size: 1.2em;
+    }
+
+    .feather {
+        width: 30%;
+    }
+}
+
+@media all and (max-width: 900px) {
+
+    .authorDescription p {
+        font-size: 1.1em;
+    }
+    .authorDescription {
+        height: 510px;
+    }
+}
+
+@media all and (max-width:700px) {
+
+    .bookTitle {
+        font-size: 2.2em;
+    }
+
+    .authorDescription {
+        height: 480px;
+    }
+
+    .webSiteDescription p {
+        font-size: 1.1em;
+    }
+
+    .card-img-top {
+        height: 300px;
+    }
+
+    .authorDescription p {
+        font-size: 1.05em;
+    }
+}
+
+@media all and (max-width:550px) {
+
+    .bookTitle {
+        font-size: 1.8em;
+    }
+
+    .webSiteDescription p {
+        font-size: 1em;
+    }
+
+    .authorDescription p {
+        font-size: 0.9em;
+    }
+
+    #contactPage {
+        margin: 0;
+        background-color: grey;
+        background-image: none;
+    }
+}
+
+@media all and (max-width:450px) {
+
+    .webSiteDescription p {
+        font-size: 0.9em;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+
+    .card-description {
+        display: none;
+    }
+
+    .authorDescription p {
+        font-size: 0.85em;
+    }
+
+    .feather {
+        display:none;
+    }
+}
+

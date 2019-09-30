@@ -1,0 +1,41 @@
+@media all and (max-width: 1000px) {
+
+    .card-img {
+        height: 250px;
+    }
+}
+
+@media all and (max-width: 900px) {
+
+}
+
+@media all and (max-width:700px) {
+
+    .adminHome p {
+        font-size: 1.2em;
+    }
+
+}
+
+@media all and (max-width:550px) {
+
+    .card-img {
+        height: 200px;
+    }
+
+    #commentContainer {
+        flex-direction: column;
+    }
+}
+
+@media all and (max-width:450px) {
+
+    .adminHome p {
+        font-size: 1em;
+    }
+
+    .card-img {
+        height: 150px;
+    }
+}
+

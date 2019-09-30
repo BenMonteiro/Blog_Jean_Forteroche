@@ -4,6 +4,10 @@
     height: 600px;
 }
 
+.authorDescription h2 {
+    color: rgb(113, 5, 81)
+}
+
 .feather {
     width: 25%;
 }

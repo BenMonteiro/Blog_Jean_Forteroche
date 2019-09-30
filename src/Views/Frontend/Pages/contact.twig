@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id='contactPage' class='mt-5 py-5'>
+    <div id='contactPage' class="mt-5 py-5">
         <h1 class="text-center text-light">Formulaire de contact</h1>
         {{ include('Frontend/Templates/_notification.twig') }}
         <form action='/contact/contact' method="POST" class="offset-lg-3 col-lg-6 offset-1 col-10">
@@ -21,12 +21,12 @@
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control contactEmail" id="email"name="email" placeholder="jamesbond007@exemple.com" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                <input type="email" class="form-control contactEmail" id="email" name="email" placeholder="jamesbond007@exemple.com" required pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
             </div>
 
             <div class="form-group">
                 <label for="subject">Objet</label>
-                <input type="subject" class="form-control " id="subject" name="subject" placeholder="Top secret">
+                <input type="text" class="form-control " id="subject" name="subject" placeholder="Top secret">
             </div>
 
             <div class="form-group">

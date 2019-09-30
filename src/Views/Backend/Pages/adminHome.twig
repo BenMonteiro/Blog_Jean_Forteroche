@@ -9,22 +9,22 @@
         <h1>Bonjour {{ admin }} !</h1>
 
         <div>
-            <h3 class="ml-3 mt-5 text-info"><u>Un point sur les commentaires</u></h3>
+            <h3 class="mx-3 mt-5 text-info"><u>Un point sur les commentaires</u></h3>
             {% if toModerate != 0 %}
-                <h4 class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerate }}</span> commentaires en attente de modération 
+                <p class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerate }}</span> commentaires en attente de modération 
                     {% if reported >= 1 %} dont <span class="text-danger">{{ reported }}</span> commentaires qui ont été reportés
                     {% endif %}
-                </h4>
+                </p>
             <a href="/commentAdmin/moderation" class="btn btn-primary offset-2 mt-3">Se rendre à l'espace de modération de commentaires</a>
 
             {% else %}
-                <h4 class="ml-5 mt-3">Vous n'avez aucun commentaire en attente de modération</h4>
+                <p class="mx-5 mt-3">Vous n'avez aucun commentaire en attente de modération</p>
             {% endif %}
         </div>
 
         <div>
-            <h3 class="ml-3 mt-5 text-info"><u>Un point sur les articles</u></h3>
-            <h4 class="ml-5 mt-3">Dernier article ajouté le {{ lastArticle.creation_date|date("d-M-Y") }} ( Chapitre {{ lastArticle.chapter_number }} : {{ lastArticle.title }} )</h4>
+            <h3 class="mx-3 mt-5 text-info"><u>Un point sur les articles</u></h3>
+            <p class="mx-5 mt-3">Dernier article ajouté le {{ lastArticle.creation_date|date("d-M-Y") }} ( Chapitre {{ lastArticle.chapter_number }} : {{ lastArticle.title }} )</p>
             <a href="/articleAdmin/addForm" class="btn btn-primary offset-2 mt-3">Ajouter un article</a>
         </div>
     </div>

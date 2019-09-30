@@ -7,10 +7,10 @@
 {% block content %}
     <div class="webSitePresentation container-fluid">
         <div class="row ">
-            <h1 class="col col-lg-12 my-4 mx-auto booktitle">BILLET SIMPLE POUR L'ALASKA</h1>
+            <h1 class="col col-12 my-4 text-center bookTitle">BILLET SIMPLE POUR L'ALASKA</h1>
         </div>
-        <div class="webSiteDescription row ">
-            <p class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 offset-1 col-10 py-4"><span class="subtitle font-weight-bold">Venez rejoindre l'aventure!!</span>
+        <div class="webSiteDescription row">
+            <p class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 py-4"><span class="subtitle font-weight-bold">Venez rejoindre l'aventure!!</span>
             <br>Au sein de ce blog, vous trouverez l'avancé de mon nouveau livre intitulé: <strong>Billet simple pour l'Alaska</strong>
             Un nouveau roman d'aventure et de voyages au coeur de l'Alaska, de ses lacs azurs, de ses forets et ses montagnes enneigées.<br>
             A intervales réguliers, je publierai les chapitres sur ce site afin de procéder sous forme épisodique. Je publierai aussi de temps en temps des articles à propos de mon ressenti sur l'écriture du roman et je vous expliquerai le cheminement de mes idées. 
@@ -22,14 +22,14 @@
     <section id="lastModifications" class=" mt-5 postsContainer container-fluid">
         <h1 class="text-center my-5">Dernières modifications</h1>
         {% for update in lastUpdates %}
-            <div class=" offset-2 col-8 mt-3 pb-3">
+            <div class=" offset-md-2 col-md-8 offset-sm-1 col-sm-10 mt-3 pb-3">
                 <article class="card shadow bg-light mb-3">
                     <img src="{{ update.image_url }}" class="card-img-top" alt="{{ update.alt_image }}">
                     <div class="card-body">
                         <h3 class="card-title text-dark">Chapitre {{update.chapter_number}} : {{ update.title }}</h3>
-                        <p class="card-text ">{{ update.chapter_description }}</p>
+                        <p class="card-text card-description">{{ update.chapter_description }}</p>
                         <p class="card-text"><small class="text-muted">Mis à jour le : {{ update.date_of_update|date("d-m-Y H:i:s")}}</small></p>
-                        <p class="card-text float-right text-muted mb-0">Auteur : {{ author }}</p>
+                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ author }}</p>
                         <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
@@ -40,17 +40,17 @@
     <section id="chapters" class=" mt-5 postsContainer container-fluid">
         <h1 class="text-center my-5">Liste des chapitres parus</h1>
         {% for article in articleList %}
-            <div class=" offset-2 col-8 mt-3 pb-3">
+            <div class=" offset-md-2 col-md-8 offset-sm-1 col-sm-10 mt-3 pb-3">
                 <article class="card shadow bg-light mb-3">
                     <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.alt_image }}">
                     <div class="card-body">
                         <h3 class="card-title text-dark">Chapitre {{article.chapter_number}} : {{ article.title }}</h3>
-                        <p class="card-text ">{{ article.chapter_description }}</p>
+                        <p class="card-text card-description">{{ article.chapter_description }}</p>
                         <p class="card-text"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                             {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
                             {% endif %}
                         </small></p>
-                        <p class="card-text float-right text-muted mb-0">Auteur : {{ author }}</p>
+                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ author }}</p>
                         <a href="/article/article?chapter={{ article.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
