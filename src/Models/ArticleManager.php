@@ -13,7 +13,7 @@ class ArticleManager extends Manager
      */
     public static function findLastUpdates()
     {
-        $req = static::$bdd->query(
+        $req = static::getPDO()->query(
             'SELECT * 
             FROM article 
             WHERE date_of_update IS NOT NULL 
@@ -30,7 +30,7 @@ class ArticleManager extends Manager
      */
     public static function findByChapterNumber($chapter)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'SELECT * 
             FROM article 
             WHERE chapter_number = ?'
@@ -46,7 +46,7 @@ class ArticleManager extends Manager
      */
     public static function add($newArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
             VALUES(?,?,?,?,?,?,?,NOW())'
         );
@@ -69,7 +69,7 @@ class ArticleManager extends Manager
      */
     public static function update($updateArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription', 'chapterText'], $id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'UPDATE article 
             SET
                 chapter_number = ?,

@@ -13,7 +13,7 @@ class CommentManager extends Manager
      */
     public static function findArticleComments($id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'SELECT * 
             FROM comment 
             WHERE article_id = ? AND (reported = false OR moderate = true)
@@ -30,7 +30,7 @@ class CommentManager extends Manager
      */
     public static function toModerate()
     {
-        $req = static::$bdd->query(
+        $req = static::getPDO()->query(
             'SELECT *
             FROM comment
             WHERE moderate = false
@@ -45,7 +45,7 @@ class CommentManager extends Manager
      */
     public static function findReported()
     {
-        $req = static::$bdd->query(
+        $req = static::getPDO()->query(
             'SELECT *
             FROM comment
             WHERE reported = true AND moderate = false'
@@ -61,7 +61,7 @@ class CommentManager extends Manager
      */
     public static function add($article_id, $comment = ['name', 'message'])
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
             VALUES(?, ?, ?, NOW())'
         );
@@ -79,7 +79,7 @@ class CommentManager extends Manager
      */
     public static function report($id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'UPDATE comment
             SET reported = true
             WHERE id = ?'
@@ -94,7 +94,7 @@ class CommentManager extends Manager
      */
     public static function validate($id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'UPDATE comment
             SET moderate = true
             WHERE id = ?'

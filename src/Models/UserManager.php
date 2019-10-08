@@ -13,7 +13,7 @@ class UserManager extends Manager
      */
     public static function findOne($login, $password)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'SELECT *
             FROM user
             WHERE login = ? AND password = ?'

@@ -5,7 +5,7 @@ require_once ROOT_PATH.'/core/PDOConnection.php';
  * This class make the sql request common tot the different Entitymanagers.
  * All of the EntityManagers have to extend this class
  */
-class Manager
+abstract class Manager
 {
     protected static $bdd;
     // default constant of the database table name
@@ -14,9 +14,9 @@ class Manager
     /**
      * The construct method make the connection to the database and load the Request class
      */
-    public function __construct()
+    public static function getPDO()
     {
-        static::$bdd = PDOConnection::getMySqlConnection();
+        return PDOConnection::getMySqlConnection();
     }
 
     /**
@@ -24,7 +24,7 @@ class Manager
      */
     public static function findAll()
     {
-        $req = static::$bdd->query(
+        $req = static::getPDO()->query(
             'SELECT *
             FROM `' . static::TABLE_NAME . '`
             ORDER BY id DESC'
@@ -39,7 +39,7 @@ class Manager
      */
     public static function findOneById($id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
             'SELECT *
             FROM `' . static::TABLE_NAME . '`
             WHERE id = ?'
@@ -54,7 +54,7 @@ class Manager
      */
     public static function findLast()
     {
-        $req = static::$bdd->query(
+        $req = static::getPDO()->query(
             'SELECT *
             FROM`' . static::TABLE_NAME . '`
             ORDER BY id DESC
@@ -70,7 +70,7 @@ class Manager
      */
     public static function deleteById($id)
     {
-        $req = static::$bdd->prepare(
+        $req = static::getPDO()->prepare(
            'DELETE
            FROM`' . static::TABLE_NAME . '`
            WHERE id = ?'

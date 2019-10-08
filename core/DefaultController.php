@@ -18,7 +18,6 @@ class DefaultController
         global $twig;
         $this->twig = $twig;
         $this->request = Request::getRequest();
-        new Manager();
     }
 
     /**
