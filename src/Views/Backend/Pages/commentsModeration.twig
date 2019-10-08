@@ -18,7 +18,7 @@
             {% for toModerate in toModerateList %}
                 <li class="media">
                     <div class="media-body">
-                        <h5 class="mt-0 mb-2">{{ toModerate.author }}</h5>
+                        <h5 class="mt-0 mb-2">{{ toModerate.author|striptags }}</h5>
                         <div id="commentContainer"
                             {% if toModerate.reported == false %} class="d-flex flex-column bg-light border border-primary col-11 ml-3 py-3" 
                             {% else %} class="d-flex flex-column bg-light border border-danger col-11 ml-3 py-3" 

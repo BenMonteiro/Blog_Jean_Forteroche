@@ -21,7 +21,7 @@ class CommentAdminController extends AdminController
     {
         $toModerateList = CommentManager::toModerate();
         $toModerate = count($toModerateList);
-        $reported = count(CommentManager::findReported());
+        $reported = CommentManager::findReported();
 
         $this->renderView('commentsModeration.twig', 
             [

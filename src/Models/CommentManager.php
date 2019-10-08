@@ -46,12 +46,13 @@ class CommentManager extends Manager
     public static function findReported()
     {
         $req = static::getPDO()->query(
-            'SELECT *
+            'SELECT COUNT(*) AS nb_reported
             FROM comment
             WHERE reported = true AND moderate = false'
         );
 
-        return $req->fetchAll();
+        $reported = $req->fetch();
+        return $reported['nb_reported'];
     }
 
     /**

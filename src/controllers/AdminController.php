@@ -38,7 +38,7 @@ class AdminController extends DefaultController
     {
         $toModerateList = CommentManager::toModerate();
         $toModerate = count($toModerateList);
-        $reported = count(CommentManager::findReported());
+        $reported = CommentManager::findReported();
 
         $lastArticle = ArticleManager::findLast();
 
