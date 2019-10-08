@@ -7,8 +7,7 @@ require_once ROOT_PATH.'/core/PDOConnection.php';
  */
 abstract class Manager
 {
-    protected static $bdd;
-    // default constant of the database table name
+        // default constant of the database table name
     const TABLE_NAME ='';
 
     /**

@@ -85,7 +85,7 @@ class ArticleAdminController extends AdminController
     public function add()
     {
         $newArticle = $this->request->getParam('article');
-        $add = ArticleManager::add( $newArticle);
+        $add = ArticleManager::add($newArticle);
 
         $this->alertMessage('addForm', $add, static::ADD_SUCCESS);
     }

@@ -9,7 +9,7 @@ require_once ROOT_PATH.'/src/Models/CommentManager.php';
 class AdminController extends DefaultController
 {
     const DEFAULT_TEMPLATE = 'Backend';
-    const NOT_AUTHENTIFIED = 'Veuillez vous identifier pour accéder à l\'espace administrateur';
+
 
     /**
      * Verify if an administrator is authentified
@@ -22,18 +22,12 @@ class AdminController extends DefaultController
 
     /**
      * If thre is no authentified administrator, redirect to the login page
-     * @return void
      */
-    public function isAuthentified(): void
+    public function isAuthentified()
     {
         if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
 
-            $this->renderView('login.twig', 
-                [
-                    'alert' =>'danger', 
-                    'message' => static::NOT_AUTHENTIFIED
-                ], static::DEFAULT_TEMPLATE
-            );
+            header("Location: /login/not_Authentified");
         }
     }
 
@@ -58,7 +52,7 @@ class AdminController extends DefaultController
         );
     }
 
-    /**
+     /**
      * Set the message to call in the views
      * @param string $method    [the method to call]
      * @param $condition    [the condition to apply]

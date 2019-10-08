@@ -44,7 +44,7 @@ class ArticleManager extends Manager
      * Add a new article to the database
      * @param  $newArticle     [an array of the params of the new article]
      */
-    public static function add($newArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription','chapterText'])
+    public static function add($newArticle)
     {
         $req = static::getPDO()->prepare(
             'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 

@@ -10,6 +10,7 @@ class LoginController extends DefaultController
 {
     const DEFAULT_TEMPLATE = 'Backend';
     const DISCONNECT = 'Vous avez bien été déconnecté de l\'espace administration';
+    const NOT_AUTHENTIFIED = 'Veuillez vous identifier pour accéder à l\'espace administrateur';
     const ERROR = 'L\'identifiant et/ou le mot de passe sont incorrect !';
 
     public function index()
@@ -26,17 +27,16 @@ class LoginController extends DefaultController
         $password = md5($this->request->getParam('password'));
         $user = UserManager::findOne($login, $password);
 
-        if ($user) {
-
-            $_SESSION['auth'] = true;
-            $_SESSION['admin'] = $user['name'];
-
-            header("Location: /admin");
-
-        } else {
+        if (empty($user)) {
 
             throw new LoginException(static::ERROR);
-        }
+
+
+        } 
+        $_SESSION['auth'] = true;
+        $_SESSION['admin'] = $user['name'];
+
+        header("Location: /admin");
     }
 
     /**
@@ -49,6 +49,15 @@ class LoginController extends DefaultController
         $this->renderView('login.twig', ['alert' => 'danger', 'message' => static::DISCONNECT], static::DEFAULT_TEMPLATE);
     }
 
+    public function not_Authentified()
+    {
+        $this->renderView('login.twig', 
+            [
+                'alert' =>'danger', 
+                'message' => static::NOT_AUTHENTIFIED
+            ], static::DEFAULT_TEMPLATE
+        );
+    }
     /**
      * login function
      */
