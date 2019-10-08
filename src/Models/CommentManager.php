@@ -59,7 +59,7 @@ class CommentManager extends Manager
      * @param $article_id       [the id of the comment article]
      * @param $comment        [an array of the params of the new comment]
      */
-    public static function add($article_id, $comment = ['name', 'message'])
+    public static function add($article_id, $comment)
     {
         $req = static::getPDO()->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)

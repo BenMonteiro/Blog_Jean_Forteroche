@@ -44,7 +44,7 @@ class ArticleManager extends Manager
      * Add a new article to the database
      * @param  $newArticle     [an array of the params of the new article]
      */
-    public static function add($newArticle)
+    public static function add($newArticleData)
     {
         $req = static::getPDO()->prepare(
             'INSERT INTO article(chapter_number, title, image_url, alt_image, user_id, chapter_description, content, creation_date) 
@@ -52,13 +52,13 @@ class ArticleManager extends Manager
         );
 
         return $req->execute(array(
-            $newArticle['chapter_number'],
-            $newArticle['title'],
-            $newArticle['imageURL'],
-            $newArticle['imageDescription'],
-            $newArticle['author'],
-            $newArticle['chapterDescription'],
-            $newArticle['chapterText'],
+            $newArticleData['chapter_number'],
+            $newArticleData['title'],
+            $newArticleData['imageURL'],
+            $newArticleData['imageDescription'],
+            $newArticleData['author'],
+            $newArticleData['chapterDescription'],
+            $newArticleData['chapterText'],
         ));
     }
 
@@ -67,7 +67,7 @@ class ArticleManager extends Manager
      * @param $updateArticle      [an array of the params of the updated article]
      * @param $id    [the id of thearticle to update]
      */
-    public static function update($updateArticle = ['chapter_number', 'title', 'imageURL', 'imageDescription', 'author', 'chapterDescription', 'chapterText'], $id)
+    public static function update($updateArticleData, $id)
     {
         $req = static::getPDO()->prepare(
             'UPDATE article 
@@ -84,13 +84,13 @@ class ArticleManager extends Manager
         );
 
         return $req->execute(array(
-            $updateArticle['chapter_number'],
-            $updateArticle['title'],
-            $updateArticle['imageURL'],
-            $updateArticle['imageDescription'],
-            $updateArticle['author'],
-            $updateArticle['chapterDescription'],
-            $updateArticle['chapterText'],
+            $updateArticleData['chapter_number'],
+            $updateArticleData['title'],
+            $updateArticleData['imageURL'],
+            $updateArticleData['imageDescription'],
+            $updateArticleData['author'],
+            $updateArticleData['chapterDescription'],
+            $updateArticleData['chapterText'],
             $id
         ));
     }

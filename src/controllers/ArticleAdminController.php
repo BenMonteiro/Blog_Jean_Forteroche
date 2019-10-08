@@ -2,6 +2,7 @@
 require_once ROOT_PATH.'/src/Controllers/AdminController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
+require_once ROOT_PATH.'/src/Entity/Article.php';
 
 /**
  * Control the administration of articles, extends AdminController
@@ -55,9 +56,9 @@ class ArticleAdminController extends AdminController
     public function update()
     {
         $id = $this->request->getParam('id');
-        $updateArticle = $this->request->getParam('article');
+        $updateArticleData = $this->request->getParam('article');
 
-        ArticleManager::update($updateArticle, $id);
+        ArticleManager::update($updateArticleData, $id);
 
         $this->index('success', static::UPDATE_SUCCESS);
     }
@@ -84,8 +85,8 @@ class ArticleAdminController extends AdminController
      */
     public function add()
     {
-        $newArticle = $this->request->getParam('article');
-        $add = ArticleManager::add($newArticle);
+        $newArticleData = $this->request->getParam('article');
+        $add = ArticleManager::add($newArticleData);
 
         $this->alertMessage('addForm', $add, static::ADD_SUCCESS);
     }
