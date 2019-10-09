@@ -55,9 +55,9 @@ class ArticleAdminController extends AdminController
     public function update()
     {
         $id = $this->request->getParam('id');
-        $updateArticleData = $this->request->getParam('article');
+        $updateData = $this->request->getParam('article');
 
-        ArticleManager::update($updateArticleData, $id);
+        ArticleManager::update($updateData, $id);
 
         $this->index('success', static::UPDATE_SUCCESS);
     }

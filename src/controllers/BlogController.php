@@ -1,7 +1,6 @@
 <?php
 require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
-require_once ROOT_PATH.'/src/Models/UserManager.php';
 
 /**
 * Controll the page to display 

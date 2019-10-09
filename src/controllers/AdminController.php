@@ -10,7 +10,6 @@ class AdminController extends DefaultController
 {
     const DEFAULT_TEMPLATE = 'Backend';
 
-
     /**
      * Verify if an administrator is authentified
      */
@@ -38,7 +37,7 @@ class AdminController extends DefaultController
     {
         $toModerateList = CommentManager::toModerate();
         $toModerateNumber = count($toModerateList);
-        $reported = CommentManager::countReported();
+        $reportedComment = CommentManager::countReported();
 
         $lastArticle = ArticleManager::findLast();
 
@@ -46,7 +45,7 @@ class AdminController extends DefaultController
             [
                 'admin' => $_SESSION['admin'], 
                 'toModerateNumber' => $toModerateNumber,
-                'reported' => $reported,
+                'reported' => $reportedComment,
                 'lastArticle' => $lastArticle
             ], static::DEFAULT_TEMPLATE
         );

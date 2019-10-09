@@ -7,7 +7,7 @@ require_once ROOT_PATH.'/core/PDOConnection.php';
  */
 abstract class Manager
 {
-        // default constant of the database table name
+    // default constant of the database table name
     const TABLE_NAME ='';
 
     /**
@@ -25,7 +25,7 @@ abstract class Manager
     {
         $req = static::getPDO()->query(
             'SELECT *
-            FROM `' . static::TABLE_NAME . '`
+            FROM ' . static::TABLE_NAME . '
             ORDER BY id DESC'
         );
 
@@ -40,9 +40,10 @@ abstract class Manager
     {
         $req = static::getPDO()->prepare(
             'SELECT *
-            FROM `' . static::TABLE_NAME . '`
+            FROM ' . static::TABLE_NAME . '
             WHERE id = ?'
         );
+
         $req->execute(array($id));
 
         return $req->fetch();
@@ -55,7 +56,7 @@ abstract class Manager
     {
         $req = static::getPDO()->query(
             'SELECT *
-            FROM`' . static::TABLE_NAME . '`
+            FROM '. static::TABLE_NAME .'
             ORDER BY id DESC
             LIMIT 0, 1'
         );
@@ -71,7 +72,7 @@ abstract class Manager
     {
         $req = static::getPDO()->prepare(
            'DELETE
-           FROM`' . static::TABLE_NAME . '`
+           FROM ' . static::TABLE_NAME . '
            WHERE id = ?'
         );
 

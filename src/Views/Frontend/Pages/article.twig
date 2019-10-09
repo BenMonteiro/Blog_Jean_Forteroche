@@ -64,7 +64,7 @@
                         <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
                             <p class="col-8">{{ comment.comment|striptags|nl2br}}</p>
                             {% if comment.reported == false and comment.moderate == false %}
-                            <a href="/comment/reportComment?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
+                            <a href="/comment/report?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
                                 <i class="fas fa-3x fa-exclamation-circle"></i>
                             </a>
                             {% endif %}

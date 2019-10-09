@@ -13,7 +13,6 @@ class ArticleManager extends Manager
      */
     public static function findLastUpdates()
     {
-
         $req = static::getPDO()->query(
             'SELECT article.*, user.name 
             FROM article
@@ -27,6 +26,9 @@ class ArticleManager extends Manager
         return $req->fetchAll();
     }
 
+    /**
+     * Find all articles
+     */
     public static function findAll()
     {
         $req = static::getPDO()->query(
@@ -42,9 +44,9 @@ class ArticleManager extends Manager
 
     /**
      * Find an article by his chapter number
-     * @param  $chapter      [the chapter number of the article we want]
+     * @param  $chapter_number      [the chapter number of the article we want]
      */
-    public static function findByChapterNumber($chapter)
+    public static function findByChapterNumber($chapter_number)
     {
         $req = static::getPDO()->prepare(
             'SELECT article.*, user.name
@@ -53,7 +55,8 @@ class ArticleManager extends Manager
             ON user.id = article.user_id
             WHERE chapter_number = ?'
         );
-        $req->execute(array($chapter));
+
+        $req->execute(array($chapter_number));
 
         return $req->fetch();
     }
@@ -85,7 +88,7 @@ class ArticleManager extends Manager
      * @param $updateArticle      [an array of the params of the updated article]
      * @param $id    [the id of thearticle to update]
      */
-    public static function update($updateArticleData, $id)
+    public static function update($updateData, $id)
     {
         $req = static::getPDO()->prepare(
             'UPDATE article 
@@ -102,13 +105,13 @@ class ArticleManager extends Manager
         );
 
         return $req->execute(array(
-            $updateArticleData['chapter_number'],
-            $updateArticleData['title'],
-            $updateArticleData['imageURL'],
-            $updateArticleData['imageDescription'],
-            $updateArticleData['author'],
-            $updateArticleData['chapterDescription'],
-            $updateArticleData['chapterText'],
+            $updateData['chapter_number'],
+            $updateData['title'],
+            $updateData['imageURL'],
+            $updateData['imageDescription'],
+            $updateData['author'],
+            $updateData['chapterDescription'],
+            $updateData['chapterText'],
             $id
         ));
     }

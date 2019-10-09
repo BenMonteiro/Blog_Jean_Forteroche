@@ -41,7 +41,7 @@ class CommentManager extends Manager
     }
 
     /**
-     * Find all the reported comments that are not moderated
+     * Count all the reported comments that are not moderated
      */
     public static function countReported()
     {
@@ -52,6 +52,7 @@ class CommentManager extends Manager
         );
 
         $reported = $req->fetch();
+
         return $reported['nb_reported'];
     }
 

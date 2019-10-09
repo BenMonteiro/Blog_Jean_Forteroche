@@ -2,7 +2,6 @@
 require_once ROOT_PATH.'/src/Controllers/BlogController.php';
 require_once ROOT_PATH.'/src/Controllers/ArticleController.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
-require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 
 /**
 * Control comments in client side of the website
@@ -32,22 +31,23 @@ class CommentController extends BlogController
 
             $message = static::ADD_COMMENT_SUCCESS;
             $alert = 'success';
+
         } else {
 
             $message = static::FAIL;
             $alert = 'danger';
         }
 
-        $chapter = $this->request->getParam('chapter');
+        $chapter_number = $this->request->getParam('chapter');
 
         $articleController = new ArticleController();
-        $articleController->article($chapter, $alert, $message);
+        $articleController->article($chapter_number, $alert, $message);
     }
 
     /**
      * function to report a comment
      */
-    public function reportComment()
+    public function report()
     {
         $comment_id = $this->request->getParam('id');
         $chapter_number = $this->request->getParam('chapter');

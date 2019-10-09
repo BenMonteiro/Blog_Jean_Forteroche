@@ -3,7 +3,6 @@ require_once ROOT_PATH.'/core/DefaultController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Services/Mail.php';
 
-
 /**
 * Control the contact feature
 */
@@ -27,14 +26,15 @@ class ContactController extends DefaultController
                 'articleList' => $this->articleList,
                 'alert' => $alert,
                 'message' => $message
-            ]);
+            ]
+        );
     }
 
     /**
      * Collect the infos passed in the contact form and send an email to the administrator.
      * Display index page with adapted message
     */
-    public function contact()
+    public function sendMail()
     {
         $subject = $this->request->getParam('subject');
         $mailMessage = $this->request->getParam('message');
@@ -50,6 +50,7 @@ class ContactController extends DefaultController
 
             $alert = 'success';
             $message = static::MAIL_SUCCESS;
+
         } else {
 
             $alert = 'danger';

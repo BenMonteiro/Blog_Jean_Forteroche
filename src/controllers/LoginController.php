@@ -48,6 +48,9 @@ class LoginController extends DefaultController
         $this->renderView('login.twig', ['alert' => 'danger', 'message' => static::DISCONNECT], static::DEFAULT_TEMPLATE);
     }
 
+    /**
+     * Redirection if there is no authentified user
+     */
     public function not_Authentified()
     {
         $this->renderView('login.twig', 

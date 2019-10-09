@@ -2,7 +2,6 @@
 require_once ROOT_PATH.'/src/Controllers/BlogController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/CommentManager.php';
-require_once ROOT_PATH.'/src/Models/UserManager.php';
 
 /**
 * Control the page to display one article
@@ -20,10 +19,10 @@ class ArticleController extends BlogController
     * @param $alert    [success or danger, the param to enter in the alert class in html file]
      * @param $message    [the message to display]
      */
-    public function article($chapter = null , $alert = null, $message = null)
+    public function article($chapter_number = null , $alert = null, $message = null)
     {
-        $chapter = ($chapter === null) ? $this->request->getParam('chapter') : $chapter;
-        $article = ArticleManager::findByChapterNumber($chapter);
+        $chapter_number = ($chapter_number === null) ? $this->request->getParam('chapter') : $chapter_number;
+        $article = ArticleManager::findByChapterNumber($chapter_number);
 
         $nbArticles = count($this->articleList);
         $commentList = CommentManager::findArticleComments($article['id']);
@@ -33,7 +32,7 @@ class ArticleController extends BlogController
             [
                 'articleList' => $this->articleList,
                 'article' => $article,
-                'chapter' => $chapter,
+                'chapter' => $chapter_number,
                 'nbArticles' => $nbArticles,
                 'commentList' => $commentList,
                 'alert' => $alert,

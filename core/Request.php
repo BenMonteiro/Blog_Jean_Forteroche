@@ -4,8 +4,6 @@
  */
 class Request 
 {
-    protected $path;
-    protected $urlComponent;
     protected $controllerName;
     protected $actionName;
 
@@ -20,7 +18,6 @@ class Request
     {
         $this->controllerName = !empty($this->getURLComponents()[0]) ? ucfirst($this->getURLComponents()[0].'Controller') : null;
         $this->actionName = $this->getURLComponents()[1] ?? null;
-
     }
 
     /**

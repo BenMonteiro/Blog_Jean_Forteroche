@@ -8,7 +8,7 @@
     <div id='contactPage' class="mt-5 py-5">
         <h1 class="text-center text-light">Formulaire de contact</h1>
         {{ include('Frontend/Templates/_notification.twig') }}
-        <form action='/contact/contact' method="POST" class="offset-lg-3 col-lg-6 offset-1 col-10">
+        <form action='/contact/sendMail' method="POST" class="offset-lg-3 col-lg-6 offset-1 col-10">
             <div class="form-group contactName">
                 <label for="name">Nom*</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Bond" required>
