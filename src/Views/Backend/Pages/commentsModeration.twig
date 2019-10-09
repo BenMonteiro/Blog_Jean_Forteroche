@@ -9,8 +9,8 @@
         <h1 class="text-center mx-3 mt-5 pt-5">Commentaires en attente de modération</h1>
         {{ include('Frontend/Templates/_notification.twig') }}
         <p class="text-center mx-3 mt-3">
-            {% if toModerate == 0 and reported == 0 %}Vous n'avez aucun commentaire en attente de modération
-            {% else %}Vous avez <span class="text-primary"> {{ toModerate }} </span> commentaires à modérer dont <span class="text-danger">{{ reported }}</span> ont été reportés
+            {% if toModerateNumber == 0 and reported == 0 %}Vous n'avez aucun commentaire en attente de modération
+            {% else %}Vous avez <span class="text-primary"> {{ toModerateNumber }} </span> commentaires à modérer dont <span class="text-danger">{{ reported }}</span> ont été reportés
             {% endif %}
         </p>
 

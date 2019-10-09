@@ -20,13 +20,13 @@ class CommentAdminController extends AdminController
     public function index(string $alert = null, string $message = null)
     {
         $toModerateList = CommentManager::toModerate();
-        $toModerate = count($toModerateList);
-        $reported = CommentManager::findReported();
+        $toModerateNumber = count($toModerateList);
+        $reported = CommentManager::countReported();
 
         $this->renderView('commentsModeration.twig', 
             [
                 'toModerateList' => $toModerateList,
-                'toModerate' => $toModerate,
+                'toModerateNumber' => $toModerateNumber,
                 'reported' => $reported,
                 'alert' => $alert,
                 'message' => $message

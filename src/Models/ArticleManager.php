@@ -13,12 +13,28 @@ class ArticleManager extends Manager
      */
     public static function findLastUpdates()
     {
+
         $req = static::getPDO()->query(
-            'SELECT * 
-            FROM article 
+            'SELECT article.*, user.name 
+            FROM article
+            INNER JOIN user
+            ON user.id = article.user_id
             WHERE date_of_update IS NOT NULL 
             ORDER BY date_of_update DESC 
             LIMIT 0, 3'
+        );
+
+        return $req->fetchAll();
+    }
+
+    public static function findAll()
+    {
+        $req = static::getPDO()->query(
+            'SELECT article.*, user.name 
+            FROM article
+            INNER JOIN user
+            ON user.id = article.user_id
+            ORDER BY id DESC'
         );
 
         return $req->fetchAll();
@@ -31,15 +47,17 @@ class ArticleManager extends Manager
     public static function findByChapterNumber($chapter)
     {
         $req = static::getPDO()->prepare(
-            'SELECT * 
-            FROM article 
+            'SELECT article.*, user.name
+            FROM article
+            INNER JOIN user
+            ON user.id = article.user_id
             WHERE chapter_number = ?'
         );
         $req->execute(array($chapter));
 
         return $req->fetch();
     }
-    
+
     /**
      * Add a new article to the database
      * @param  $newArticle     [an array of the params of the new article]

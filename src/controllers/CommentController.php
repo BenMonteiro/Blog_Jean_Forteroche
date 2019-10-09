@@ -9,8 +9,6 @@ require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 */
 class CommentController extends BlogController
 {
-    protected $article; 
-
     const ADD_COMMENT_SUCCESS = "Votre commentaire a bien été ajouté";
     const FAIL = 'Nous n\'avons pas pu ajouté votre commentaire, veuillez rééssayer ultérieurement';
 
@@ -25,12 +23,8 @@ class CommentController extends BlogController
      */
     public function add()
     {
-        $chapter = $this->request->getParam('chapter');
-        $article = ArticleManager::findByChapterNumber($chapter);
-
-        $article_id = $article['id'];
+        $article_id = $this->request->getParam('id');
         $comment = $this->request->getParam('comment');
-        $chapter = $article['chapter_number'];
 
         $add = CommentManager::add($article_id, $comment);
 
@@ -44,8 +38,10 @@ class CommentController extends BlogController
             $alert = 'danger';
         }
 
-        $this->article = new ArticleController();
-        $this->article->article($chapter, $alert, $message);
+        $chapter = $this->request->getParam('chapter');
+
+        $articleController = new ArticleController();
+        $articleController->article($chapter, $alert, $message);
     }
 
     /**
@@ -54,14 +50,10 @@ class CommentController extends BlogController
     public function reportComment()
     {
         $comment_id = $this->request->getParam('id');
+        $chapter_number = $this->request->getParam('chapter');
+
         CommentManager::report($comment_id);
 
-        $reportedComment = CommentManager::findOneById($comment_id);
-        $article_id = $reportedComment['article_id'];
-
-        $article = ArticleManager::findOneById($article_id);
-        $chapter = $article['chapter_number'];
-
-        header("Location: /article/article?chapter=$chapter#commentForm");
+        header("Location: /article/article?chapter=$chapter_number#commentForm");
     }
 }

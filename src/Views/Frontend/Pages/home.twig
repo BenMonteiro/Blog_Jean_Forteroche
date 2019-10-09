@@ -29,7 +29,7 @@
                         <h3 class="card-title text-dark">Chapitre {{update.chapter_number}} : {{ update.title|striptags }}</h3>
                         <p class="card-text card-description">{{ update.chapter_description|striptags }}</p>
                         <p class="card-text"><small class="text-muted">Mis à jour le : {{ update.date_of_update|date("d-m-Y H:i:s")}}</small></p>
-                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ author|striptags }}</p>
+                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ update.name|striptags }}</p>
                         <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>
@@ -50,7 +50,7 @@
                             {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
                             {% endif %}
                         </small></p>
-                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ author|striptags }}</p>
+                        <p class="card-text float-sm-right text-muted mb-2">Auteur : {{ article.name|striptags }}</p>
                         <a href="/article/article?chapter={{ article.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>

@@ -43,7 +43,7 @@ class CommentManager extends Manager
     /**
      * Find all the reported comments that are not moderated
      */
-    public static function findReported()
+    public static function countReported()
     {
         $req = static::getPDO()->query(
             'SELECT COUNT(*) AS nb_reported

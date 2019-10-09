@@ -9,8 +9,8 @@
         <h1>Bonjour {{ admin }} !</h1>
         <div>
             <h3 class="mx-3 mt-5 text-info"><u>Un point sur les commentaires</u></h3>
-            {% if toModerate != 0 %}
-                <p class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerate }}</span> commentaires en attente de modération 
+            {% if toModerateNumber != 0 %}
+                <p class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerateNumber }}</span> commentaires en attente de modération 
                     {% if reported >= 1 %} dont <span class="text-danger">{{ reported }}</span> commentaires qui ont été reportés
                     {% endif %}
                 </p>

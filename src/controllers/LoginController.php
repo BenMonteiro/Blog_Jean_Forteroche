@@ -30,9 +30,8 @@ class LoginController extends DefaultController
         if (empty($user)) {
 
             throw new LoginException(static::ERROR);
+        }
 
-
-        } 
         $_SESSION['auth'] = true;
         $_SESSION['admin'] = $user['name'];
 
@@ -58,6 +57,7 @@ class LoginController extends DefaultController
             ], static::DEFAULT_TEMPLATE
         );
     }
+
     /**
      * login function
      */

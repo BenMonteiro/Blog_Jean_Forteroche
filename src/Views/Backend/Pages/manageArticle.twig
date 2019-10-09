@@ -10,7 +10,7 @@
    {{ include('Frontend/Templates/_notification.twig') }}
     <div class="offset-2 col-8 mt-3">
         {% for article in articleList %}
-            <div class="card my-5">
+            <div class="card my-5 pr-lg-2">
                 <div class="row no-gutters">
                     <div class="col-lg-4">
                         <img src="{{ article.image_url|striptags }}" class="card-img" alt="{{ article.alt_image|striptags }}">
@@ -18,7 +18,8 @@
                     <div class="col-lg-5">
                         <div class="card-body">
                             <h5 class="card-title">Chapitre {{ article.chapter_number }} : {{ article.title|striptags }}</h5>
-                            <p class="card-text">{{ article.chapter_description|striptags }}</p>
+                            <p class="card-text pr-lg-2">{{ article.chapter_description|striptags }}</p>
+                            <p class="card-text text-muted mb-2">Auteur : {{ article.name|striptags }}</p>
                             <p><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                                     {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
                                     {% endif %}
@@ -26,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="buttons col-lg-3 mt-lg-5 offset-sm-3 col-sm-6 offset-2 col-8">
+                    <div class="buttons offset-lg-0 col-lg-3 mt-lg-5 offset-sm-3 col-sm-6 offset-2 col-8">
                         <a class="btn btn-primary btn btn-block my-2" href="/ArticleAdmin/updateForm?id={{ article.id }}" role="button">Mettre à jour</a>
                         <button type="button" class="btn btn-danger btn btn-block mt-2 mb-4" data-toggle="modal" data-target="#deleteConfirmation">Supprimer</button>
 

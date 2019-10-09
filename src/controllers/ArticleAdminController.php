@@ -2,7 +2,6 @@
 require_once ROOT_PATH.'/src/Controllers/AdminController.php';
 require_once ROOT_PATH.'/src/Models/ArticleManager.php';
 require_once ROOT_PATH.'/src/Models/UserManager.php';
-require_once ROOT_PATH.'/src/Entity/Article.php';
 
 /**
  * Control the administration of articles, extends AdminController

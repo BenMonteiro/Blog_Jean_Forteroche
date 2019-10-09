@@ -16,17 +16,14 @@ class ArticleController extends BlogController
 
     /**
      * Display an article found by his chapter number
-     * @param int $chapter      [the number of the article chapter we want to display]
-    * @param string $alert    [success or danger, the param to enter in the alert class in html file]
-     * @param string $message    [the message to display]
+     * @param $chapter      [the number of the article chapter we want to display]
+    * @param $alert    [success or danger, the param to enter in the alert class in html file]
+     * @param $message    [the message to display]
      */
-    public function article(int $chapter = null , string $alert = null, string $message = null)
+    public function article($chapter = null , $alert = null, $message = null)
     {
         $chapter = ($chapter === null) ? $this->request->getParam('chapter') : $chapter;
         $article = ArticleManager::findByChapterNumber($chapter);
-
-        $author_id = $article['user_id'];
-        $author = UserManager::findOneById($author_id);
 
         $nbArticles = count($this->articleList);
         $commentList = CommentManager::findArticleComments($article['id']);
@@ -39,7 +36,6 @@ class ArticleController extends BlogController
                 'chapter' => $chapter,
                 'nbArticles' => $nbArticles,
                 'commentList' => $commentList,
-                'author' => $author['name'],
                 'alert' => $alert,
                 'message' => $message
             ]
