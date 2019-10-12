@@ -21,7 +21,7 @@ class LoginController extends DefaultController
     /**
      * If the login and password are found in the database, redirect to the admin page, else, throw an error
      */
-    public function loginRedirection()
+    protected function loginRedirection()
     {
         $login = $this->request->getParam('pseudo');
         $password = md5($this->request->getParam('password'));

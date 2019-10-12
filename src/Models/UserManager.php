@@ -1,6 +1,5 @@
 <?php
-
-require_once ROOT_PATH.'/src/Models/Manager.php';
+require_once ROOT_PATH.'/core/Manager.php';
 
 class UserManager extends Manager
 {

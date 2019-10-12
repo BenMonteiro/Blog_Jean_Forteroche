@@ -1,5 +1,5 @@
 <?php
-require_once ROOT_PATH.'/src/Models/Manager.php';
+require_once ROOT_PATH.'/core/Manager.php';
 
 /**
  * Make the database requests relative to the articles

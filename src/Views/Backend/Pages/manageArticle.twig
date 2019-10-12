@@ -13,17 +13,20 @@
                 <div class="card my-5 pr-lg-2">
                     <div class="row no-gutters">
                         <div class="col-lg-4">
-                            <img src="{{ article.image_url|striptags }}" class="card-img" alt="{{ article.alt_image|striptags }}">
+                            <img src="{{ article.image_url|striptags }}" class="card-img" alt="{{ article.alt_image|striptags }}b-0">
                         </div>
                         <div class="col-lg-5">
-                            <div class="card-body">
+                            <div class="card-body py-0 mt-3">
                                 <h5 class="card-title">Chapitre {{ article.chapter_number }} : {{ article.title|striptags }}</h5>
                                 <p class="card-text pr-lg-2">{{ article.chapter_description|striptags }}</p>
-                                <p class="card-text text-muted mb-2">Auteur : {{ article.name|striptags }}</p>
-                                <p><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
-                                        {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
-                                        {% endif %}
-                                    </small></p>
+                                <div class="mb-0">
+                                    <p class="card-text text-muted mb-0">Auteur : {{ article.name|striptags }}</p>
+                                    <p class="mb-0"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+                                            {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
+                                            {% endif %}
+                                        </small>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 

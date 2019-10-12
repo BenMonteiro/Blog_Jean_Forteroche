@@ -1,9 +1,8 @@
 <?php
-require_once ROOT_PATH.'/src/Models/Manager.php';
 /**
  * All controllers have to extend this class
  */
-class DefaultController
+abstract class DefaultController
 {
     protected $request;
 
@@ -15,9 +14,16 @@ class DefaultController
          * Request class is also loaded in the construct to allow all controllers to use it.
          * *Manager class is loaded to allow access to all managers in the controllers.
          */
-        global $twig;
-        $this->twig = $twig;
+        $this->twig = static::twig();
         $this->request = Request::getRequest();
+    }
+
+    public static function twig()
+    {
+        //Twig configuration
+        require_once ROOT_PATH.'/vendor/autoload.php';
+        $loader = new Twig_Loader_Filesystem(ROOT_PATH.'/src/Views');
+        return new Twig_Environment($loader);
     }
 
     /**
