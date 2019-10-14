@@ -5,25 +5,28 @@
 abstract class DefaultController
 {
     protected $request;
+    public static $twig = null;
 
     public function __construct()
     {
         /**
-         * Twig is loaded in the index.php file.
-         * So we use it in global.
          * Request class is also loaded in the construct to allow all controllers to use it.
          * *Manager class is loaded to allow access to all managers in the controllers.
          */
-        $this->twig = static::twig();
         $this->request = Request::getRequest();
     }
 
-    public static function twig()
+    protected function twig()
     {
         //Twig configuration
-        require_once ROOT_PATH.'/vendor/autoload.php';
-        $loader = new Twig_Loader_Filesystem(ROOT_PATH.'/src/Views');
-        return new Twig_Environment($loader);
+        if (null === static::$twig) {
+
+            require_once ROOT_PATH.'/vendor/autoload.php';
+            $loader = new Twig_Loader_Filesystem(ROOT_PATH.'/src/Views');
+            static::$twig = new Twig_Environment($loader);
+        }
+
+        return static::$twig;
     }
 
     /**
@@ -42,7 +45,7 @@ abstract class DefaultController
 
         if (file_exists($defaultPath.$view)) {
 
-            $output = $this->twig->render($viewFolder.'/Pages/'.$view, $data);
+            $output = $this->twig()->render($viewFolder.'/Pages/'.$view, $data);
 
             echo $output;
         }

@@ -33,6 +33,11 @@
         font-size: 1.1em;
     }
 
+    .update_info {
+        flex-direction: column;
+        justify-content: center;
+    }
+
     .card-img-top {
         height: 300px;
     }
@@ -73,7 +78,7 @@
         height: 200px;
     }
 
-    .card-description {
+    #chapters .card-description {
         display: none;
     }
 

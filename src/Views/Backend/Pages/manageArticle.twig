@@ -21,8 +21,8 @@
                                 <p class="card-text pr-lg-2">{{ article.chapter_description|striptags }}</p>
                                 <div class="mb-0">
                                     <p class="card-text text-muted mb-0">Auteur : {{ article.name|striptags }}</p>
-                                    <p class="mb-0"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
-                                            {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s")}}
+                                    <p class="mb-0"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y à H:i:s") }}
+                                            {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y à H:i:s")}}
                                             {% endif %}
                                         </small>
                                     </p>

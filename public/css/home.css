@@ -1,0 +1,89 @@
+footer a {
+    color: black;
+}
+
+.webSitePresentation {
+    background-image: url('/public/images/paysage_accueil.jpg'); 
+    background-size: 100% 100%;
+    height: 500px;
+    margin-top: 55px;
+}
+.booktitle {
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(43, 5, 61);
+}
+.webSiteDescription p {
+    background-color: rgba(15, 15, 15, 0.5);
+    text-align: center;
+    color: white;
+    font-size: 1.3em;
+}
+
+.webSiteDescription span {
+    color: rgb(13, 241, 245)
+}
+
+.card-img-top {
+    height: 400px;
+}
+
+.card_update {
+    background-color: rgba(13, 241, 245, 0.05)
+}
+
+.previous, .next {
+    width: 150px;
+}
+
+#add_comment label {
+    color: black;
+}
+
+.fa-exclamation-circle {
+    color:red;
+}
+
+.authorDescription {
+    background-image: url('/public/images/book.jpg');
+    background-size: 100% 100%;
+    height: 600px;
+}
+
+.authorDescription h2 {
+    color: rgb(113, 5, 81)
+}
+
+.feather {
+    width: 25%;
+}
+
+.authorDescription p {
+    font-size: 1.3em;
+}
+
+#contactPage {
+    margin: 0;
+    background-image: url('/public/images/paysage.jpg');
+    background-size: 100% 100%;
+}
+
+form label {
+    color: white;
+    font-weight: 700;
+}
+
+.adminHome p {
+    font-size: 1.5em
+}
+
+#addArticleForm label, #updateArticleForm label {
+    color: black;
+}
+.card-img {
+    height: 200px;
+}
+
+#toModerateList p {
+    font-size: 1.5em
+}
