@@ -21,7 +21,8 @@ footer a {
 }
 
 .webSiteDescription span {
-    color: rgb(13, 241, 245)
+    color: rgba(13, 241, 245, 0.8)
+
 }
 
 .card-img-top {
