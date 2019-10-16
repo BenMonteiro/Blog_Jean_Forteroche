@@ -67,14 +67,17 @@ class ArticleAdminController extends AdminController
      * @param string $alert    [success or danger, the param to enter in the alert class in html file]
      * @param string $message    [the message to display]
      */
-    public function addForm(string $alert = null, string $message = null)
+    public function addForm(string $alert = null, string $message = null, $chapter_number = null)
     {
+        
         $authorList = UserManager::findAll();
+
         $this->renderView('addArticleForm.twig', 
             [
                 'authorList' => $authorList,
                 'alert' => $alert,
-                'message' => $message
+                'message' => $message,
+                'chapter_number' => $chapter_number
             ], static::DEFAULT_TEMPLATE
         );
     }
@@ -86,8 +89,9 @@ class ArticleAdminController extends AdminController
     {
         $newArticleData = $this->request->getParam('article');
         $add = ArticleManager::add($newArticleData);
+        $chapter_number = $newArticleData['chapter_number'];
 
-        $this->alertMessage('addForm', $add, static::ADD_SUCCESS);
+        $this->alertMessage('addForm', $add, static::ADD_SUCCESS, $chapter_number);
     }
 
     /**
@@ -98,6 +102,6 @@ class ArticleAdminController extends AdminController
         $id = $this->request->getParam('id');
         $delete = ArticleManager::deleteById($id);
 
-        $this->alertMessage('index', $delete, static::DELETE_SUCCESS);
+        $this->alertMessage('index', $delete, static::DELETE_SUCCESS, null);
     }
 }

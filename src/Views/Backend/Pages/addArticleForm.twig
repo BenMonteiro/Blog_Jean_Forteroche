@@ -9,46 +9,89 @@
         <h1 class="text-center">Ajouter un article</h1>
         {{ include('Frontend/Templates/_notification.twig') }}
 
-        <form action='/articleAdmin/add' method="POST" class="offset-lg-2 col-lg-8 offset-1 col-10 my-5 pb-5">
-            <div class="form-group">
-                <label for="chapter_number">Numéro du chapitre*</label>
-                <input type="number" min="0" class="form-control" id="chapter_number" name="article[chapter_number]" required>
-            </div>
-            <div class="form-group">
-                <label for="title">Titre du chapitre*</label>
-                <input type="text" class="form-control" id="title" name="article[title]" required>
+        <form action='/articleAdmin/add' method="POST" class="needs-validation offset-lg-1 col-lg-10 offset-1 col-10 my-5 pb-5 px-0" novalidate>
+            <div class="form-row">
+                <div class="form-group col-lg-3 col-6">
+                    <label for="author">Auteur <span class="text-danger">*</span></label>
+                    <select class="form-control" id="author" name="article[author]">
+                        {% for author in authorList %}
+                            <option value="{{ author.id }}" {% if author.name == 'Jean Forteroche' %} selected {% endif %}>{{ author.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-3 col-sm-6 col-8">
+                    <label for="chapter_number">Numéro du chapitre <span class="text-danger">*</span></label>
+                    <input type="number" min="0" class="form-control" id="chapter_number" name="article[chapter_number]" required>
+                    <div class="invalid-feedback font-weight-bold text-center">
+                        Veuillez renseigner un numéro de chapitre
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-8">
+                    <label for="title">Titre du chapitre <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="title" name="article[title]" required>
+                    <div class="invalid-feedback font-weight-bold text-center">
+                        Veuillez indiquer le titre du chapitre
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="imageURL">URL de l'image d'illustration*</label>
-                <input type="url" class="form-control" id="imageURL" name="article[imageURL]" required>
+            <div class="form-group col-lg-6 col-md-8 px-0">
+                <label for="imageURL">URL de l'image d'illustration <span class="text-danger">*</span></label>
+                <input type="url" class="form-control" id="imageURL" name="article[imageURL]" value="https://via.placeholder.com/250/200" required>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez saisir une Url valide
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="imageDescription">Description de l'image d'illustration*</label>
+            <div class="form-group col-lg-6 col-md-8 px-0">
+                <label for="imageDescription">Description de l'image d'illustration <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="imageDescription" name="article[imageDescription]" required>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez ajouter une description de l'image (utile pour les personnes malvoyantes)
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="author">Auteur*</label>
-                <select class="form-control" id="author" name="article[author]">
-                    {% for author in authorList %}
-                        <option value="{{ author.id }}" {% if author.name == 'Jean Forteroche' %} selected {% endif %}>{{ author.name }}</option>
-                    {% endfor %}
-                </select>
+            <div class="form-group col-lg-6 col-md-8 px-0">
+                <label for="chapterDescription">Description du chapitre <span class="text-danger">*</span></label>
+                <textarea type="text" class="form-control" id="addChapterDescription" name="article[chapterDescription]" required></textarea>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez ajouter une description du chapitre
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="chapterDescription">Description du chapitre*</label>
-                <input type="text" class="form-control" id="chapterDescription" name="article[chapterDescription]" required>
+            <div class="form-group px-0">
+                <label for="chapterText">Corps du texte <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="addChapterText" name="article[chapterText]" rows="15" ></textarea>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez saisir le texte de l'article
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="chapterText">Corps du texte*</label>
-                <textarea class="form-control" id="chapterText" name="article[chapterText]" rows="15" ></textarea>
-            </div>
+            <p class="font-weight-bold"><span class="text-danger">*</span> Champs obligatoires</p>
 
             <button type="submit" class="btn btn-primary float-right">Ajouter l'article</button>
         </form>
     </div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                }, false);
+            });
+            }, false);
+        })();
+    </script>
 {% endblock %}

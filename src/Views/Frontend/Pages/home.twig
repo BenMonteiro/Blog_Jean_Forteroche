@@ -21,17 +21,16 @@
     {% if lastUpdates != null %}
         <section id="lastModifications" class=" mt-5 postsContainer container-fluid">
             <h1 class="text-center mt-5 mb-3">Dernières modifications</h1>
-            <p class="text-center text-info pb-3">Des mise à jours ont été apportées sur les articles suivants</p>
-            <div class=" update_info d-flex justify-content-around">
+            <p class="text-center text-info pb-3">Voici les 3 dernières mises à jour apportées sur les articles</p>
+            <div class=" update_info d-flex justify-content-around flex-wrap">
                 {% for update in lastUpdates %}
-                    <div class="col-md-4 text-center">
+                    <div class="offset-md-0 col-xl-4 px-xl-1 col-md-6 offset-1 col-10 text-center">
                         <article class="card card_update shadow mb-3">
                             <div class="card-body">
-                                <h3 class="card-title text-dark">Chapitre {{update.chapter_number}}: {{ update.title|striptags }}</h3>
-                                <p class="card-text card-description">{{ update.chapter_description|striptags }}</p>
+                                <h4 class="card-title text-dark">Chapitre {{update.chapter_number}}: {{ update.title|striptags }}</h4>
+                                <p class="card-text card-description mb-1">{{ update.chapter_description|striptags }}</p>
                                 <p class="card-text"><small class="text-muted">Mis à jour le: {{ update.date_of_update|date("d-m-Y à H:i:s")}}</small></p>
-                                <p class="card-text text-muted mb-2">Auteur: {{ update.name|striptags }}</p>
-                                <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
+                                <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info btn-sm">Lire le chapitre</a>
                             </div>
                         </article>
                     </div>

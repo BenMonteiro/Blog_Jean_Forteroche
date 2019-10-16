@@ -7,6 +7,7 @@
 {% block content %}
     <div class="bg-light pb-5 container-fluid">
         <h1 class="text-center mt-5 pt-5">Gestionnaire d'articles</h1>
+        <a class="btn btn-info shadow mb-3 offset-md-8 col-md-3 offset-sm-3 col-sm-6 offset-2 col-8" href="/ArticleAdmin/addForm" role="button">Ajouter un article</a>
         {{ include('Frontend/Templates/_notification.twig') }}
         <div class="offset-2 col-8 mt-3">
             {% for article in articleList %}
@@ -26,6 +27,7 @@
                                             {% endif %}
                                         </small>
                                     </p>
+                                    <a href="/article/article?chapter={{ article.chapter_number }}" target="_blank">Voir l'article</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +46,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="text-center">Êtes vous certain de vouloir supprimer cet article ?<br /> Toute suppression est définitive !</p>
+                                            <p class="text-center">Êtes vous certain de vouloir supprimer cet article ?<br /> <span class="text-danger">Toute suppression est définitive !</span></p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
