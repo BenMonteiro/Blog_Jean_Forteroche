@@ -13,7 +13,7 @@ class Mail
      * @param  $headers        [headers of the mail]
      * @return bool
      */
-    public function send( $subject,  $message, $headers): bool
+    public function send($subject,  $message, $headers): bool
     {
         return mail(
             'benjamin.monteirodasilva@gmail.com', 

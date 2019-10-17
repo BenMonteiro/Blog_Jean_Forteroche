@@ -58,7 +58,7 @@
 
             <div class="form-group">
                 <label for="chapterText">Corps du texte <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="updateChapterText" name="article[chapterText]" rows="15" >{{ article['content'] }}</textarea>
+                <textarea type="text" class="form-control" id="updateChapterText" name="article[chapterText]" rows="15" >{{ article['content'] }}</textarea>
                 <div class="invalid-feedback font-weight-bold text-center">
                     Veuillez ajouter une description du chapitre
                 </div>
@@ -74,18 +74,18 @@
         (function() {
             'use strict';
             window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-                }, false);
-            });
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
             }, false);
         })();
     </script>

@@ -6,7 +6,7 @@ require_once ROOT_PATH.'/core/Manager.php';
  */
 class ArticleManager extends Manager
 {
-    const TABLE_NAME = 'article';
+    protected static $tableName = 'article';
 
     /**
      * Find the three last updated articles
@@ -58,7 +58,7 @@ class ArticleManager extends Manager
      * Find an article by his chapter number
      * @param  $chapter_number      [the chapter number of the article we want]
      */
-    public static function findByChapterNumber($chapter_number)
+    public static function findByChapterNumber($chapterNumber)
     {
         $req = static::getPDO()->prepare(
             'SELECT article.*, user.name
@@ -68,7 +68,7 @@ class ArticleManager extends Manager
             WHERE chapter_number = ?'
         );
 
-        $req->execute(array($chapter_number));
+        $req->execute(array($chapterNumber));
 
         return $req->fetch();
     }

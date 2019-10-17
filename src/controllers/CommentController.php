@@ -22,10 +22,10 @@ class CommentController extends BlogController
      */
     public function add()
     {
-        $article_id = $this->request->getParam('id');
+        $articleId = $this->request->getParam('id');
         $comment = $this->request->getParam('comment');
 
-        $add = CommentManager::add($article_id, $comment);
+        $add = CommentManager::add($articleId, $comment);
 
         if ($add == true) {
 
@@ -38,10 +38,10 @@ class CommentController extends BlogController
             $alert = 'danger';
         }
 
-        $chapter_number = $this->request->getParam('chapter');
+        $chapterNumber = $this->request->getParam('chapter');
 
         $articleController = new ArticleController();
-        $articleController->article($chapter_number, $alert, $message);
+        $articleController->article($chapterNumber, $alert, $message);
     }
 
     /**
@@ -49,11 +49,11 @@ class CommentController extends BlogController
      */
     public function report()
     {
-        $comment_id = $this->request->getParam('id');
-        $chapter_number = $this->request->getParam('chapter');
+        $commentId = $this->request->getParam('id');
+        $chapterNumber = $this->request->getParam('chapter');
 
-        CommentManager::report($comment_id);
+        CommentManager::report($commentId);
 
-        header("Location: /article/article?chapter=$chapter_number#commentForm");
+        header("Location: /article/article?chapter=$chapterNumber#commentForm");
     }
 }

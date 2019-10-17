@@ -4,7 +4,7 @@
  * This class extends Exception class
  */
 
-class RouteurException extends Exception
+class Exception404 extends Exception
 {
 
 }

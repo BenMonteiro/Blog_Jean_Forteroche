@@ -22,7 +22,7 @@
                                 <p class="card-text pr-lg-2">{{ article.chapter_description|striptags }}</p>
                                 <div class="mb-0">
                                     <p class="card-text text-muted mb-0">Auteur : {{ article.name|striptags }}</p>
-                                    <p class="mb-0"><small class="text-muted">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y à H:i:s") }}
+                                    <p class="mb-0"><small class="text-muted">{% if not article.date_of_update %}Publié le : {{ article.creation_date|date("d-m-Y à H:i:s") }}
                                             {% else %} Mis à jour le : {{ article.date_of_update|date("d-m-Y à H:i:s")}}
                                             {% endif %}
                                         </small>
@@ -46,7 +46,8 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="text-center">Êtes vous certain de vouloir supprimer cet article ?<br /> <span class="text-danger">Toute suppression est définitive !</span></p>
+                                            <p class="text-center">Êtes vous certain de vouloir supprimer cet article ?<br /> 
+                                                <span class="badge bg-danger text-white p-2 mt-2">Attention ! Toute suppression est définitive !</span></p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

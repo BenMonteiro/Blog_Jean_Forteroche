@@ -12,7 +12,7 @@
         <h5 class="text-center text-info mb-3">Ecrit par {{ article.name|striptags|nl2br }}</h5>
         <img src="{{ article.image_url|striptags|nl2br }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image|striptags|nl2br }}"/>
         <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ article.content|striptags|nl2br }}</div>
-        <p><small class="text-muted float-right mr-5">{% if article.date_of_update == null %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
+        <p><small class="text-muted float-right mr-5">{% if not article.date_of_update %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                 {% else %}Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s") }}
                 {% endif %}
         </small></p>
@@ -63,7 +63,7 @@
                         <h5 class="mt-0 mb-2">{{ comment.author|striptags|nl2br }}</h5>
                         <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
                             <p class="col-8">{{ comment.comment|striptags|nl2br}}</p>
-                            {% if comment.reported == false and comment.moderate == false %}
+                            {% if not comment.reported and not comment.moderate %}
                             <a href="/comment/report?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
                                 <i class="fas fa-3x fa-exclamation-circle"></i>
                             </a>

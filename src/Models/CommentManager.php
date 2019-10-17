@@ -5,7 +5,7 @@ require_once ROOT_PATH.'/core/Manager.php';
  */
 class CommentManager extends Manager
 {
-    const TABLE_NAME = 'comment';
+    protected static $tableName = 'comment';
     /**
      * Find the 50 last comments that belongs to the selected article
      * @param $id       [the id of the article]
@@ -73,7 +73,7 @@ class CommentManager extends Manager
      * @param $article_id       [the id of the comment article]
      * @param $comment        [an array of the params of the new comment]
      */
-    public static function add($article_id, $comment)
+    public static function add($articleId, $comment)
     {
         $req = static::getPDO()->prepare(
             'INSERT INTO comment(article_id, author, comment, creation_date)
@@ -81,7 +81,7 @@ class CommentManager extends Manager
         );
 
         return $req->execute(array(
-            $article_id,
+            $articleId,
             $comment['name'],
             $comment['message']
         ));

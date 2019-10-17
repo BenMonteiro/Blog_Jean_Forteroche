@@ -51,7 +51,7 @@ class LoginController extends DefaultController
     /**
      * Redirection if there is no authentified user
      */
-    public function not_Authentified()
+    public function notAuthentified()
     {
         $this->renderView('login.twig', 
             [

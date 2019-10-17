@@ -4,16 +4,17 @@
         font-size: 1.2em;
     }
 
-    .feather {
-        width: 30%;
+    .authorDescription p {
+        font-size: 1.1em;
     }
 }
 
 @media all and (max-width: 900px) {
 
     .authorDescription p {
-        font-size: 1.1em;
+        font-size: 0.9em;
     }
+
     .authorDescription {
         height: 510px;
     }
@@ -23,10 +24,6 @@
 
     .bookTitle {
         font-size: 2.2em;
-    }
-
-    .authorDescription {
-        height: 480px;
     }
 
     .webSiteDescription p {
@@ -43,7 +40,11 @@
     }
 
     .authorDescription p {
-        font-size: 1.05em;
+        font-size: 0.8em;
+    }
+
+    .feather {
+        display:none;
     }
 }
 
@@ -55,10 +56,6 @@
 
     .webSiteDescription p {
         font-size: 1em;
-    }
-
-    .authorDescription p {
-        font-size: 0.9em;
     }
 
     #contactPage {
@@ -83,11 +80,8 @@
     }
 
     .authorDescription p {
-        font-size: 0.85em;
+        font-size: 0.7em;
     }
 
-    .feather {
-        display:none;
-    }
 }
 

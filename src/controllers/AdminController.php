@@ -26,7 +26,7 @@ class AdminController extends DefaultController
     {
         if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
 
-            header("Location: /login/not_Authentified");
+            header("Location: /login/notAuthentified");
         }
     }
 
@@ -58,11 +58,11 @@ class AdminController extends DefaultController
      * @param $condition    [the condition to apply]
      * @param string $success    [the success messege to display]
      */
-    public function alertMessage(string $method, $condition, string $success, $chapter_number)
+    public function alertMessage(string $method, $condition, string $success, $chapterNumber)
     {
         $alert = ($condition == true) ? 'success' : 'danger';
         $message = ($condition == true) ? $success : static::FAIL;
 
-        $this->$method($alert , $message, $chapter_number);
+        $this->$method($alert , $message, $chapterNumber);
     }
 }

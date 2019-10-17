@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-dark">Chapitre {{article.chapter_number}}: {{ article.title|striptags }}</h3>
                         <p class="card-text card-description">{{ article.chapter_description|striptags }}</p>
-                        <p class="card-text"><small class="text-muted">{% if article.date_of_update == null %}Publié le: {{ article.creation_date|date("d-m-Y à H:i:s") }}
+                        <p class="card-text"><small class="text-muted">{% if not article.date_of_update %}Publié le: {{ article.creation_date|date("d-m-Y à H:i:s") }}
                             {% else %} Mis à jour le: {{ article.date_of_update|date("d-m-Y à H:i:s")}}
                             {% endif %}
                         </small></p>

@@ -16,7 +16,7 @@ abstract class DefaultController
         $this->request = Request::getRequest();
     }
 
-    protected function twig()
+    protected function getTwig()
     {
         //Twig configuration
         if (null === static::$twig) {
@@ -45,7 +45,7 @@ abstract class DefaultController
 
         if (file_exists($defaultPath.$view)) {
 
-            $output = $this->twig()->render($viewFolder.'/Pages/'.$view, $data);
+            $output = $this->getTwig()->render($viewFolder.'/Pages/'.$view, $data);
 
             echo $output;
         }

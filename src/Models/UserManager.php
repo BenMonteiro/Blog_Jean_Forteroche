@@ -3,7 +3,7 @@ require_once ROOT_PATH.'/core/Manager.php';
 
 class UserManager extends Manager
 {
-    const TABLE_NAME = 'user';
+    protected static $tableName = 'user';
 
     /**
      * Find all the informations of a user where login and password are equal to the given infos

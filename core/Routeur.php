@@ -1,6 +1,6 @@
 <?php
 
-require_once ROOT_PATH.'/core/Exception/RouteurException.php';
+require_once ROOT_PATH.'/core/Exception/Exception404.php';
 require_once ROOT_PATH.'/core/Request.php';
 /**
  * Routeur class call the good controller and the good function to execute 
@@ -48,10 +48,13 @@ class Routeur
     {
         if (empty($this->controllerName)) {
 
-            header('Location: /blog');
+            require_once ROOT_PATH.'/src/Controllers/BlogController.php';
+            $homePage = new BlogController;
+
+            return $homePage->index();
         }
 
-        throw new RouteurException('La page que vous recherchez n\'existe pas');
+        throw new Exception404('La page que vous recherchez n\'existe pas');
     }
 
     /**
@@ -68,13 +71,12 @@ class Routeur
 
     /**
      * If the method (action) does not exist in the controller object previously called, redirect to the index function of the controller
-     * @return self        [return the current object]
      */
-    protected function existAction(): self
+    protected function existAction()
     {
         if (!method_exists($this->controller, $this->action)) {
 
-           header("Location: /".$this->controllerURLName."/index");
+            $this->action = 'index';
         }
 
         return $this;
@@ -101,7 +103,7 @@ class Routeur
                 ->existAction()
                 ->callControllerAction();
 
-        } catch (RouteurException $e) {
+        } catch (Exception404 $e) {
 
             require_once ROOT_PATH.'/core/Error404Controller.php';
             $error404 = new Error404Controller();

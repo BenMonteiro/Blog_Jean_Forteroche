@@ -67,7 +67,7 @@ class ArticleAdminController extends AdminController
      * @param string $alert    [success or danger, the param to enter in the alert class in html file]
      * @param string $message    [the message to display]
      */
-    public function addForm(string $alert = null, string $message = null, $chapter_number = null)
+    public function addForm(string $alert = null, string $message = null, $chapterNumber = null)
     {
         
         $authorList = UserManager::findAll();
@@ -77,7 +77,7 @@ class ArticleAdminController extends AdminController
                 'authorList' => $authorList,
                 'alert' => $alert,
                 'message' => $message,
-                'chapter_number' => $chapter_number
+                'chapter_number' => $chapterNumber
             ], static::DEFAULT_TEMPLATE
         );
     }
@@ -89,9 +89,9 @@ class ArticleAdminController extends AdminController
     {
         $newArticleData = $this->request->getParam('article');
         $add = ArticleManager::add($newArticleData);
-        $chapter_number = $newArticleData['chapter_number'];
+        $chapterNumber = $newArticleData['chapter_number'];
 
-        $this->alertMessage('addForm', $add, static::ADD_SUCCESS, $chapter_number);
+        $this->alertMessage('addForm', $add, static::ADD_SUCCESS, $chapterNumber);
     }
 
     /**

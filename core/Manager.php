@@ -8,7 +8,7 @@ require_once ROOT_PATH.'/core/PDOConnection.php';
 abstract class Manager
 {
     // default constant of the database table name
-    const TABLE_NAME ='';
+    protected static $tableName;
 
     /**
      * The construct method make the connection to the database and load the Request class
@@ -25,7 +25,7 @@ abstract class Manager
     {
         $req = static::getPDO()->query(
             'SELECT *
-            FROM ' . static::TABLE_NAME . '
+            FROM ' . static::$tableName . '
             ORDER BY id DESC'
         );
 
@@ -40,7 +40,7 @@ abstract class Manager
     {
         $req = static::getPDO()->prepare(
             'SELECT *
-            FROM ' . static::TABLE_NAME . '
+            FROM ' . static::$tableName . '
             WHERE id = ?'
         );
 
@@ -56,7 +56,7 @@ abstract class Manager
     {
         $req = static::getPDO()->query(
             'SELECT *
-            FROM '. static::TABLE_NAME .'
+            FROM '. static::$tableName .'
             ORDER BY id DESC
             LIMIT 0, 1'
         );
@@ -72,7 +72,7 @@ abstract class Manager
     {
         $req = static::getPDO()->prepare(
            'DELETE
-           FROM ' . static::TABLE_NAME . '
+           FROM ' . static::$tableName . '
            WHERE id = ?'
         );
 

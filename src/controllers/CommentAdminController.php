@@ -44,7 +44,7 @@ class CommentAdminController extends AdminController
         CommentManager::validate($id);
         $valid = CommentManager::findOneById($id);
 
-        $this->alertMessage('index', $valid['moderate'], static::VALID);
+        $this->alertMessage('index', $valid['moderate'], static::VALID, null);
     }
 
     /**
@@ -56,6 +56,6 @@ class CommentAdminController extends AdminController
         $id = $this->request->getParam('id');
         $delete = CommentManager::deleteById($id);
 
-        $this->alertMessage('index', $delete, static::DELETE);
+        $this->alertMessage('index', $delete, static::DELETE, null);
     }
 }
