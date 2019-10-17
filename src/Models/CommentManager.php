@@ -39,6 +39,19 @@ class CommentManager extends Manager
         return $req->fetchAll();
     }
 
+    public static function countToModerate()
+    {
+        $req = static::getPDO()->query(
+            'SELECT COUNT(*) AS nb_toModerate
+            FROM comment
+            Where moderate = false'
+        );
+
+        $toModerate = $req->fetch();
+
+        return $toModerate['nb_toModerate'];
+    }
+
     /**
      * Count all the reported comments that are not moderated
      */

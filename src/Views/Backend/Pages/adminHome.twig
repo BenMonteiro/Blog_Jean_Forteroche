@@ -7,24 +7,78 @@
 {% block content %}
     <div class="adminHome pt-5 mt-5 ml-2">
         <h1>Bonjour {{ admin }} !</h1>
-        <div>
-            <h3 class="mx-3 mt-5 text-info"><u>Un point sur les commentaires</u></h3>
-            {% if toModerateNumber != 0 %}
-                <p class="ml-5 mt-3">Vous avez <span class="text-primary">{{ toModerateNumber }}</span> commentaires en attente de modération 
-                    {% if reported >= 1 %} dont <span class="text-danger">{{ reported }}</span> commentaires qui ont été reportés
-                    {% endif %}
-                </p>
-            <a href="/commentAdmin/moderation" class="btn btn-primary offset-2 mt-3">Se rendre à l'espace de modération de commentaires</a>
 
-            {% else %}
-                <p class="mx-5 mt-3">Vous n'avez aucun commentaire en attente de modération</p>
-            {% endif %}
+    <div class="row  d-flex mx-3 mt-5">
+        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-danger o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fas fa-fw fa-comments"></i>
+                    </div>
+                    <div class="secondary-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="mr-5">
+                        <p class="mt-3"><span class="badge bg-warning">{{ reported }}</span> commentaires signalés</p>
+                    </div>
+                </div>
+                <a class="card-footer text-white" href="/commentAdmin/moderation">
+                    <span class="float-left">Details</span>
+                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                </a>
+            </div>
         </div>
 
-        <div>
-            <h3 class="mx-3 mt-5 text-info"><u>Un point sur les articles</u></h3>
-            <p class="mx-5 mt-3">Dernier article ajouté le {{ lastArticle.creation_date|date("d-m-Y") }} ( Chapitre {{ lastArticle.chapter_number }} : {{ lastArticle.title|striptags }} )</p>
-            <a href="/articleAdmin/addForm" class="btn btn-primary offset-2 mt-3">Ajouter un article</a>
+        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-warning o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fas fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5">
+                        <p class="mt-3"><span class="badge bg-primary">{{ toModerateNumber }}</span> commentaires en attente de modération</p>
+                    </div>
+                </div>
+                <a class="card-footer text-white" href="/commentAdmin/moderation">
+                    <span class="float-left">Details</span>
+                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                            <i class="far fa-newspaper"></i>
+                    </div>
+                    <div class="mr-5">
+                        <p class="mt-3"><span class="badge bg-danger">{{ articleNb }}</span> articles publiés</p>
+                    </div>
+                </div>
+                <a class="card-footer text-white" href="/articleAdmin/index">
+                    <span class="float-left">Modifier/Supprimer un article</span>
+                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-info o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <div class="">
+                        <p class="mt-2 mb-1 mb-0">Dernier article ajouté: </br> Chapitre {{ lastArticle.chapter_number }}: {{ lastArticle.title|striptags }}
+                        </br>le {{ lastArticle.creation_date|date("d-m-Y") }}</p>
+                    </div>
+                </div>
+                <a class="card-footer text-white" href="/articleAdmin/addForm">
+                    <span class="float-left">Ajouter un article</span>
+                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

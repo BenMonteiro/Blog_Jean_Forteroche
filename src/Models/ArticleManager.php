@@ -42,6 +42,18 @@ class ArticleManager extends Manager
         return $req->fetchAll();
     }
 
+    public static function count()
+    {
+        $req = static::getPDO()->query(
+            'SELECT COUNT(*) AS nb_articles
+            FROM article'
+        );
+
+        $articles = $req->fetch();
+
+        return $articles['nb_articles'];
+    }
+
     /**
      * Find an article by his chapter number
      * @param  $chapter_number      [the chapter number of the article we want]
