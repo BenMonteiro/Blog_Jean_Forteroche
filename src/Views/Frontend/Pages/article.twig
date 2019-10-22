@@ -8,9 +8,9 @@
     <article class="bg-light my-5 py-5">
         <a class="btn btn-outline-dark offset-md-8 col-md-3 offset-sm-3 col-sm-6 offset-2 col-8" href="#buttons" role="button">Se rendre à l'espace commentaire</a>
         {{ include('Frontend/Templates/_notification.twig') }}
-        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.chapter_number }} : {{ article.title|striptags|nl2br }}</h1>
-        <h5 class="text-center text-info mb-3">Ecrit par {{ article.name|striptags|nl2br }}</h5>
-        <img src="{{ article.image_url|striptags|nl2br }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image|striptags|nl2br }}"/>
+        <h1 class="ml-3 mb-4 text-center text-dark">Chapitre {{ article.chapter_number }} : {{ article.title|striptags }}</h1>
+        <h5 class="text-center text-info mb-3">Ecrit par {{ article.name|striptags }}</h5>
+        <img src="{{ article.image_url|striptags }}" class="offset-1 col-4 float-left mr-3 mt-5 mb-3" alt="{{ article.alt_image|striptags }}"/>
         <div id="text" class="offset-1 col-10 text-justify my-5 pt-2">{{ article.content|striptags|nl2br }}</div>
         <p><small class="text-muted float-right mr-5">{% if not article.date_of_update %}Publié le : {{ article.creation_date|date("d-m-Y H:i:s") }}
                 {% else %}Mis à jour le : {{ article.date_of_update|date("d-m-Y H:i:s") }}
@@ -25,7 +25,7 @@
             role="button">
                 Précédent
         </a>
-        <a class="next btn btn-info btn-lg ml-3" 
+        <a class="next btn btn-info btn-lg ml-3"
             href="/article/article?chapter={% if chapter == nbArticles %}{{ 1 }} 
             {% else %}{{ chapter + 1 }}
             {% endif %}" 
@@ -39,12 +39,12 @@
 
         <form id="add_comment" action="/comment/add?id={{ article.id }}&chapter={{ article.chapter_number }}" method="POST" class="offset-sm-1 col-sm-7 offset-1 col-10">
             <div class="form-group contactName">
-                <label for="name">Nom*</label>
+                <label for="name">Nom <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" name="comment[name]" required>
             </div>
 
             <div class="form-group">
-                <label for="message">Commentaire*</label>
+                <label for="message">Commentaire <span class="text-danger">*</span></label>
                 <textarea class="form-control contactMessage" id="message" name="comment[message]" rows="5" required></textarea>
             </div>
 
@@ -60,9 +60,9 @@
             {% for comment in commentList %}
                 <li class="media">
                     <div class="media-body">
-                        <h5 class="mt-0 mb-2">{{ comment.author|striptags|nl2br }}</h5>
+                        <h5 class="mt-0 mb-2">{{ comment.author|striptags }}</h5>
                         <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
-                            <p class="col-8">{{ comment.comment|striptags|nl2br}}</p>
+                            <p class="col-8">{{ comment.comment|striptags }}</p>
                             {% if not comment.reported and not comment.moderate %}
                             <a href="/comment/report?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
                                 <i class="fas fa-3x fa-exclamation-circle"></i>

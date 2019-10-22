@@ -8,7 +8,6 @@ require_once ROOT_PATH.'/core/Request.php';
 class Routeur
 {
     protected $request;
-    protected $controllerURLName;
     protected $controllerName;
     protected $controllerPath;
     protected $controller;
@@ -20,7 +19,6 @@ class Routeur
     public function __construct()
     {
         $this->request = Request::getRequest();
-        $this->controllerURLName = $this->request->getURLComponents()[0];
         $this->controllerName = $this->request->getControllerName();
         $this->action = $this->request->getActionName();
         $this->controllerPath = ROOT_PATH.'/src/Controllers/' . $this->controllerName . '.php';

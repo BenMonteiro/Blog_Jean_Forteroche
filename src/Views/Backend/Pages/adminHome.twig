@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="adminHome pt-5 mt-5 ml-2">
-        <h1>Bonjour {{ admin }} !</h1>
+        <h1>Bonjour {{ admin|striptags }} !</h1>
     <div class="row  d-flex mx-3 mt-5">
         <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-danger o-hidden h-100">

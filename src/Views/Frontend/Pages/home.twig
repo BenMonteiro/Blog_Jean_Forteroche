@@ -27,8 +27,8 @@
                     <div class="offset-md-0 col-xl-4 px-xl-1 col-md-6 offset-1 col-10 text-center">
                         <article class="card card_update shadow mb-3">
                             <div class="card-body">
-                                <h4 class="card-title text-dark">Chapitre {{update.chapter_number}}: {{ update.title|striptags }}</h4>
-                                <p class="card-text card-description mb-1">{{ update.chapter_description|striptags }}</p>
+                                <h4 class="card-title text-dark">Chapitre {{update.chapter_number}}: {{ update.title }}</h4>
+                                <p class="card-text card-description mb-1">{{ update.chapter_description }}</p>
                                 <p class="card-text"><small class="text-muted">Mis à jour le: {{ update.date_of_update|date("d-m-Y à H:i:s")}}</small></p>
                                 <a href="/article/article?chapter={{ update.chapter_number }}" class="btn btn-info btn-sm">Lire le chapitre</a>
                             </div>
@@ -44,15 +44,15 @@
         {% for article in articleList %}
             <div class=" offset-md-2 col-md-8 offset-sm-1 col-sm-10 mt-3 pb-3">
                 <article class="card shadow bg-light mb-3">
-                    <img src="{{ article.image_url|striptags }}" class="card-img-top" alt="{{ article.alt_image|striptags }}">
+                    <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.alt_image }}">
                     <div class="card-body">
-                        <h3 class="card-title text-dark">Chapitre {{article.chapter_number}}: {{ article.title|striptags }}</h3>
-                        <p class="card-text card-description">{{ article.chapter_description|striptags }}</p>
+                        <h3 class="card-title text-dark">Chapitre {{article.chapter_number}}: {{ article.title }}</h3>
+                        <p class="card-text card-description">{{ article.chapter_description }}</p>
                         <p class="card-text"><small class="text-muted">{% if not article.date_of_update %}Publié le: {{ article.creation_date|date("d-m-Y à H:i:s") }}
                             {% else %} Mis à jour le: {{ article.date_of_update|date("d-m-Y à H:i:s")}}
                             {% endif %}
                         </small></p>
-                        <p class="card-text float-sm-right text-muted mb-2">Auteur: {{ article.name|striptags }}</p>
+                        <p class="card-text float-sm-right text-muted mb-2">Auteur: {{ article.name }}</p>
                         <a href="/article/article?chapter={{ article.chapter_number }}" class="btn btn-info">Lire le chapitre</a>
                     </div>
                 </article>

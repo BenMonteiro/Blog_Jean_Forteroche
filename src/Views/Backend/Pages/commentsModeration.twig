@@ -23,7 +23,7 @@
                             {% if not toModerate.reported %} class="d-flex flex-column bg-light border border-primary col-11 ml-3 py-3" 
                             {% else %} class="d-flex flex-column bg-light border border-danger col-11 ml-3 py-3" 
                             {% endif %}>
-                            <p>{{ toModerate.comment|striptags|nl2br }}</p>
+                            <p>{{ toModerate.comment|striptags }}</p>
                             <div class="buttons my-1 mx-2 ">
                                 <a class="btn btn-primary btn-inline-block offset-lg-3 col-lg-3 offset-md-2 col-md-4 offset-sm-1 col-sm-5 my-1" 
                                     href="/commentAdmin/validate?id={{ toModerate.id }}" role="button">Valider le commentaire

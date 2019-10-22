@@ -1,5 +1,5 @@
 <div>
-    <p class="alert alert-{{ alert }} offset-3 col-6 text-center mt-2">{{ message }}.
+    <p class="alert alert-{{ alert }} offset-3 col-6 text-center mt-2">{{ message|striptags }}.
         {% if chapter_number != null %} 
             Vous pouvez le consulter <a href="/Article/article?chapter={{ chapter_number }}" target="_blank">ici</a>
         {% endif %}
