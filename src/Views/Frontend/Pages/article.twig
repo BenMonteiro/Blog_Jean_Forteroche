@@ -19,15 +19,15 @@
     </article>
 
     <div id="buttons" class="text-center mb-5">
-        <a class="previous btn btn-info btn-lg mr-3" href="/article/article?chapter={% if chapter == 1 %}{{ nbArticles }}
-            {% else %}{{ chapter - 1 }}
+        <a class="previous btn btn-info btn-lg mr-3" href="/article/article?chapter={% if chapterNumber == 1 %}{{ nbArticles }}
+            {% else %}{{ chapterNumber - 1 }}
             {% endif %}"
             role="button">
                 Précédent
         </a>
         <a class="next btn btn-info btn-lg ml-3"
-            href="/article/article?chapter={% if chapter == nbArticles %}{{ 1 }} 
-            {% else %}{{ chapter + 1 }}
+            href="/article/article?chapter={% if chapterNumber == nbArticles %}{{ 1 }} 
+            {% else %}{{ chapterNumber + 1 }}
             {% endif %}" 
             role="button">
                 Suivant
@@ -37,15 +37,21 @@
     <div id="commentForm" class="pt-5 mt-5">
         <h3 class="offset-1 col-10 pl-3 mb-4">Laisser un commentaire</h3>
 
-        <form id="add_comment" action="/comment/add?id={{ article.id }}&chapter={{ article.chapter_number }}" method="POST" class="offset-sm-1 col-sm-7 offset-1 col-10">
-            <div class="form-group contactName">
+        <form id="addComment" action="/comment/add?id={{ article.id }}&chapter={{ article.chapter_number }}" method="POST" class="needs-validation offset-sm-1 col-sm-7 offset-1 col-10" novalidate>
+            <div class="form-group">
                 <label for="name">Nom <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" name="comment[name]" required>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez renseigner un nom ou un pseudo
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="message">Commentaire <span class="text-danger">*</span></label>
-                <textarea class="form-control contactMessage" id="message" name="comment[message]" rows="5" required></textarea>
+                <textarea class="form-control" id="message" name="comment[message]" rows="5" required></textarea>
+                <div class="invalid-feedback font-weight-bold text-center">
+                    Veuillez saisir votre commentaire
+                </div>
             </div>
 
             <button type="submit" class="btn btn-info mb-5">Laisser un commentaire</button>
@@ -54,8 +60,8 @@
 
     <div id="commentList">
         <h2 class="my-2 text-center">Derniers commentaires</h2>
-        <p class="text-success text-center">{{ reportSuccess }}</p>
-        <p class="text-center">{{ addCommentMessage }}</p>
+        <p class="text-success text-center">{{ reportSuccess|striptags }}</p>
+        <p class="text-center">{{ addCommentMessage|striptags }}</p>
         <ul class="list-unstyled mt-2 ml-3">
             {% for comment in commentList %}
                 <li class="media">

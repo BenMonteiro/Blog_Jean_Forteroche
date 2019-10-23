@@ -2,25 +2,25 @@ footer a {
     color: black;
 }
 
-.webSitePresentation {
+.webSite-presentation {
     background-image: url('/public/images/paysage_accueil.jpg'); 
     background-size: 100% 100%;
     height: 500px;
     margin-top: 55px;
 }
-.booktitle {
+.book-title {
     text-align: center;
     font-weight: bolder;
     color: rgb(43, 5, 61);
 }
-.webSiteDescription p {
+.webSite-description p {
     background-color: rgba(15, 15, 15, 0.5);
     text-align: center;
     color: white;
     font-size: 1.3em;
 }
 
-.webSiteDescription span {
+.subtitle {
     color: rgba(13, 241, 245, 0.8)
 
 }
@@ -37,7 +37,7 @@ footer a {
     width: 150px;
 }
 
-#add_comment label {
+#addCcomment label {
     color: black;
 }
 
@@ -45,13 +45,13 @@ footer a {
     color:red;
 }
 
-.authorDescription {
+.author-description {
     background-image: url('/public/images/book.jpg');
     background-size: 100% 100%;
     height: 600px;
 }
 
-.authorDescription h2 {
+.author-description h2 {
     color: rgb(11, 147, 142)
 }
  .authorDescription .media-body {
@@ -63,7 +63,7 @@ footer a {
     width: 15%;
 }
 
-.authorDescription p {
+.author-description p {
     font-size: 1.2em;
     color: white;
 }
@@ -83,16 +83,16 @@ form label {
     font-size: 1em;
 }
 
-.adminDashboard p {
+.admin-dashboard p {
     font-size:1.2em;
     text-align: left;
 }
 
-.adminDashboard .badge {
+.admin-dashboard .badge {
     font-size: 1.1em;
 }
 
-.adminDashboard .card-body {
+.admin-dashboard .card-body {
     padding-bottom: 0;
 }
 

@@ -23,7 +23,7 @@ class ArticleController extends BlogController
     public function display($chapterNumber = null , $alert = null, $message = null)
     {
         $chapterNumber = ($chapterNumber === null) ? $this->request->getParam('chapter') : $chapterNumber;
-        $article = ArticleManager::findByChapterNumber($chapterNumber);
+        $article = ArticleManager::findOneByChapterNumber($chapterNumber);
 
         if ($chapterNumber === null || empty($article['chapter_number'])) {
             throw new Exception404('La page que vous recherchez n\'existe pas');
@@ -37,7 +37,7 @@ class ArticleController extends BlogController
             [
                 'articleList' => $this->articleList,
                 'article' => $article,
-                'chapter' => $chapterNumber,
+                'chapterNumber' => $chapterNumber,
                 'nbArticles' => $nbArticles,
                 'commentList' => $commentList,
                 'alert' => $alert,

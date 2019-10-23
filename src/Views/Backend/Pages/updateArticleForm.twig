@@ -53,7 +53,7 @@
 
             <div class="form-group col-lg-6 col-md-8 px-0">
                 <label for="chapterDescription">Description du chapitre <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="updateChapterDescription" name="article[chapterDescription]" value="{{ article['chapter_description']|striptags }}" required>
+                <input type="text" class="form-control init-tinymce" id="updateChapterDescription" name="article[chapterDescription]" value="{{ article['chapter_description']|striptags }}" required>
                 <div class="invalid-feedback font-weight-bold text-center">
                     Veuillez ajouter une description du chapitre
                 </div>
@@ -61,7 +61,7 @@
             
             <div class="form-group">
                 <label for="chapterText">Corps du texte <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control" id="updateChapterText" name="article[chapterText]" rows="15" required>{{ article['content'] }}</textarea>
+                <textarea type="text" class="form-control init-tinymce" id="updateChapterText" name="article[chapterText]" rows="15" required>{{ article['content'] }}</textarea>
                 <div class="invalid-feedback font-weight-bold text-center">
                     Veuillez ajouter le texte du chapitre
                 </div>

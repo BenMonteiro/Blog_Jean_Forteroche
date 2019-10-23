@@ -10,7 +10,7 @@
         {{ include('Frontend/Templates/_notification.twig') }}
         <form action='/contact/sendMail' method="POST" class="offset-1 col-10 needs-validation" novalidate>
             <div class="form-row">
-                <div class="form-group contactName col-md-4 col-sm-6 col-xs-8">
+                <div class="form-group col-md-4 col-sm-6 col-xs-8">
                     <label for="name">Nom <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Forteroche" required>
                     <div class="invalid-feedback font-weight-bold text-center">
@@ -20,7 +20,7 @@
 
                 <div class="form-group col-md-4 col-sm-6 col-xs-8">
                     <label for="firstname">Prénom <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control contactFirstname" id="firstname" name="firstname" placeholder="Jean" required>
+                    <input type="text" class="form-control " id="firstname" name="firstname" placeholder="Jean" required>
                     <div class="invalid-feedback font-weight-bold text-center">
                         Veuillez saisir votre prénom
                     </div>
@@ -28,17 +28,17 @@
 
                 <div class="form-group col-md-4 col-sm-6 col-xs-8">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control contactEmail" id="email" name="email" placeholder="jean-forteroche@gmail.com" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="jean-forteroche@gmail.com" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
                 </div>
             </div>
             <div class="form-group col-md-6 px-0">
                 <label for="subject">Objet</label>
-                <input type="text" class="form-control " id="subject" name="subject">
+                <input type="text" class="form-control" id="subject" name="subject">
             </div>
 
             <div class="form-group col-md-8 col-12 px-0">
                 <label for="message">Message <span class="text-danger">*</span></label>
-                <textarea type="text" class="form-control contactMessage" id="message" name="message" rows="7" placeholder="Saisissez votre message" required></textarea>
+                <textarea type="text" class="form-control" id="message" name="message" rows="7" placeholder="Saisissez votre message" required></textarea>
                 <div class="invalid-feedback font-weight-bold text-center">
                     Veuillez saisir votre message
                 </div>

@@ -58,7 +58,7 @@ class ArticleManager extends Manager
      * Find an article by his chapter number
      * @param  $chapter_number      [the chapter number of the article we want]
      */
-    public static function findByChapterNumber($chapterNumber)
+    public static function findOneByChapterNumber($chapterNumber)
     {
         $req = static::getPDO()->prepare(
             'SELECT article.*, user.name

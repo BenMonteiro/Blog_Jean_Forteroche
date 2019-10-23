@@ -102,6 +102,6 @@ class ArticleAdminController extends AdminController
         $id = $this->request->getParam('id');
         $delete = ArticleManager::deleteById($id);
 
-        $this->alertMessage('index', $delete, static::DELETE_SUCCESS, null);
+        $this->alertMessage('index', $delete, static::DELETE_SUCCESS);
     }
 }

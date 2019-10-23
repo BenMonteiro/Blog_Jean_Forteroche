@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="adminHome pt-5 mt-5 ml-2">
+    <div class="admin-home pt-5 mt-5 ml-2">
         <h1>Bonjour {{ admin|striptags }} !</h1>
-    <div class="row  d-flex mx-3 mt-5">
-        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+    <div class="row d-flex mx-3 mt-5">
+        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
@@ -62,13 +62,13 @@
             </div>
         </div>
 
-        <div class="adminDashboard col-xl-3 col-sm-6 mb-3">
+        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-info o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
                         <i class="fas fa-pen-nib"></i>
                     </div>
-                    <div class="">
+                    <div>
                         <p class="mt-2 mb-1 mb-0">Dernier article ajouté: </br> Chapitre {{ lastArticle.chapter_number }}: {{ lastArticle.title|striptags }}
                         </br>le {{ lastArticle.creation_date|date("d-m-Y") }}</p>
                     </div>

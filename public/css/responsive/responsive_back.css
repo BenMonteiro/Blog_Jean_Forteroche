@@ -11,7 +11,7 @@
 
 @media all and (max-width:700px) {
 
-    .adminHome p {
+    .admin-home p {
         font-size: 1.2em;
     }
 
@@ -30,7 +30,7 @@
 
 @media all and (max-width:450px) {
 
-    .adminHome p {
+    .admin-home p {
         font-size: 1em;
     }
 

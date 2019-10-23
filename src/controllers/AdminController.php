@@ -58,7 +58,7 @@ class AdminController extends DefaultController
      * @param $condition    [the condition to apply]
      * @param string $success    [the success messege to display]
      */
-    public function alertMessage(string $method, $condition, string $success, $chapterNumber)
+    public function alertMessage(string $method, $condition, string $success, $chapterNumber = null)
     {
         $alert = ($condition == true) ? 'success' : 'danger';
         $message = ($condition == true) ? $success : static::FAIL;

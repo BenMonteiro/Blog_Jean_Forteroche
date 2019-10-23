@@ -17,13 +17,14 @@
         <ul class="list-unstyled mt-2 mx-3">
             {% for toModerate in toModerateList %}
                 <li class="media">
-                    <div class="media-body">
+                    <div class="media-body"> 
                         <h5 class="mt-0 mb-2">{{ toModerate.author|striptags }}</h5>
-                        <div id="commentContainer"
-                            {% if not toModerate.reported %} class="d-flex flex-column bg-light border border-primary col-11 ml-3 py-3" 
-                            {% else %} class="d-flex flex-column bg-light border border-danger col-11 ml-3 py-3" 
-                            {% endif %}>
-                            <p>{{ toModerate.comment|striptags }}</p>
+                        <div id="commentContainer" 
+                            {% if not toModerate.reported %} {% set border  = 'primary' %}
+                            {% else %} {% set border  = 'danger' %}
+                            {% endif %} 
+                            class="d-flex flex-column bg-light border border-{{ border }} col-11 ml-3 py-3">
+                            <p>{{ toModerate.comment|striptags|nl2br }}</p>
                             <div class="buttons my-1 mx-2 ">
                                 <a class="btn btn-primary btn-inline-block offset-lg-3 col-lg-3 offset-md-2 col-md-4 offset-sm-1 col-sm-5 my-1" 
                                     href="/commentAdmin/validate?id={{ toModerate.id }}" role="button">Valider le commentaire
