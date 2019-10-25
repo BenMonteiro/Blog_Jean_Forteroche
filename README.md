@@ -18,6 +18,13 @@ La partie administration quant à elle est constitué:
 Le site integre l'affichage de message en fonction des action de l'utilisateur (suppression, ajout... d'articles ou de commentaires).
 Le site est totalement responsive.
 
+## Installation
+Afin de faire fonctionner le projet, il faut au préalable:
+1) Installer composer afin de faire fonctionner twig
+2)Avoir un vhost avec blog comme nom d'hôte
+3)Renseigner les données de connexions de votre bdd dans le fichier PDOConnection.php
+4)Créer un nouvel utilisateur en bdd afin de se connecter à l'espace administration ou utiliser les logs JFadmin pour l'identifiant et JFpass pour le mot de passe
+
 ## Fonctionnement 
 Le projet a été dévoloppé en PHP et MySQL. Une architecture MVC a été mise en place et le site a été réalisé en programmation orienté objet.
 
@@ -32,7 +39,7 @@ Le fonctionnement du site est le suivant :
 5) Une fois toutes les données récupérées, la méthode va charger,via twig, un template enfant qui va étendre un template parent. Le tout forme la vue que l'on retrouvera à l'écran
 
 ### Connexion à l'espace administrateur
-L'accès à la page de connexion de l'espace administrateur se fait via l'url (en remplacant le premier composant de l'url par login).
+L'accès à la page de connexion de l'espace administrateur se fait via l'url (en remplacant le premier composant de l'url par login, ainsi si vous avez un vhost "blog" il suffit de taper blog/login).
 Il est nécéssaire de créer son compte administrateur dans la base de donnée et de crypter le mot de passe en md5. 
 
 ### Ajout/Mise à jour d'un article
