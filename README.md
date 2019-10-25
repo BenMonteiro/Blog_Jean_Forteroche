@@ -19,11 +19,12 @@ Le site integre l'affichage de message en fonction des action de l'utilisateur (
 Le site est totalement responsive.
 
 ## Installation
-Afin de faire fonctionner le projet, il faut au préalable:
+
+Afin de faire fonctionner le projet, il faut au préalable :
 1) Installer composer afin de faire fonctionner twig
-2)Avoir un vhost avec blog comme nom d'hôte
-3)Renseigner les données de connexions de votre bdd dans le fichier PDOConnection.php
-4)Créer un nouvel utilisateur en bdd afin de se connecter à l'espace administration ou utiliser les logs JFadmin pour l'identifiant et JFpass pour le mot de passe
+2) Avoir un vhost avec blog comme nom d'hôte
+3) Renseigner les données de connexions de votre bdd dans le fichier PDOConnection.php
+4) Créer un nouvel utilisateur en bdd afin de se connecter à l'espace administration ou utiliser les logs JFadmin pour l'identifiant et JFpass pour le mot de passe
 
 ## Fonctionnement 
 Le projet a été dévoloppé en PHP et MySQL. Une architecture MVC a été mise en place et le site a été réalisé en programmation orienté objet.
