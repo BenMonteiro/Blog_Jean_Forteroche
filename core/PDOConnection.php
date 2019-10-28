@@ -10,15 +10,14 @@ class PDOConnection
     private static $dbName = 'blog_p4';
     private static $login = 'root';
     private static $password = '';
-    public static $dbConnection = null;
+    private static $dbConnection = null;
 
     public static function getMySqlConnection()
     {
         if (null === static::$dbConnection) {
-
             static::$dbConnection = new PDO('mysql:
-                host='.static::$host.';
-                dbname='.static::$dbName.';
+                host=' . static::$host . ';
+                dbname=' . static::$dbName . ';
                 charset=utf8', 
                 static::$login, 
                 static::$password,

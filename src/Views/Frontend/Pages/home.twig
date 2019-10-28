@@ -9,7 +9,7 @@
         <div class="row ">
             <h1 class="col col-12 my-4 text-center book-title">BILLET SIMPLE POUR L'ALASKA</h1>
         </div>
-        <div class="webSite-description row">
+        <div class="webSite-description">
             <p class="offset-lg-2 col-lg-8 offset-md-1 col-md-10 py-4"><span class="subtitle font-weight-bold">Venez rejoindre l'aventure!!</span>
             <br>Au sein de ce blog, vous trouverez l'avancé de mon nouveau livre intitulé: <strong>Billet simple pour l'Alaska</strong>
             Un nouveau roman d'aventure et de voyages au coeur de l'Alaska, de ses lacs azurs, de ses forets et ses montagnes enneigées.<br>
@@ -20,7 +20,7 @@
     </div>
     {% if lastUpdates != null %}
         <section id="lastModifications" class="mt-5 container-fluid">
-            <h1 class="text-center mt-5 mb-3">Dernières modifications</h1>
+            <h2 class="text-center mt-5 mb-3">Dernières modifications</h2>
             <p class="text-center text-info pb-3">Voici les 3 dernières mises à jour apportées sur les articles</p>
             <div class=" update_info d-flex justify-content-around flex-wrap">
                 {% for update in lastUpdates %}
@@ -40,7 +40,7 @@
     {% endif %}
 
     <section id="chapters" class=" mt-5 container-fluid">
-        <h1 class="text-center my-5">Liste des chapitres parus</h1>
+        <h2 class="text-center my-5">Liste des chapitres parus</h2>
         {% for article in articleList %}
             <div class=" offset-md-2 col-md-8 offset-sm-1 col-sm-10 mt-3 pb-3">
                 <article class="card shadow bg-light mb-3">

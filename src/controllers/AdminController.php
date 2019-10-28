@@ -25,7 +25,6 @@ class AdminController extends DefaultController
     public function isAuthentified()
     {
         if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
-
             header("Location: /login/notAuthentified");
         }
     }
@@ -38,7 +37,6 @@ class AdminController extends DefaultController
         $articleNumber = ArticleManager::count();
         $toModerateNumber = CommentManager::countToModerate();
         $reportedComment = CommentManager::countReported();
-
         $lastArticle = ArticleManager::findLast();
 
         $this->renderView('adminHome.twig', 

@@ -47,12 +47,9 @@ class ContactController extends DefaultController
         $contact = $contactForm->send($subject, $mailMessage, $headers);
 
         if ($contact === true){
-
             $alert = 'success';
             $message = static::MAIL_SUCCESS;
-
         } else {
-
             $alert = 'danger';
             $message = static::FAIL;
         }

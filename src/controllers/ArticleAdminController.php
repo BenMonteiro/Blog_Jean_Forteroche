@@ -69,7 +69,6 @@ class ArticleAdminController extends AdminController
      */
     public function addForm(string $alert = null, string $message = null, $chapterNumber = null)
     {
-        
         $authorList = UserManager::findAll();
 
         $this->renderView('addArticleForm.twig', 

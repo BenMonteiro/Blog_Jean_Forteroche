@@ -5,16 +5,11 @@
     }
 }
 
-@media all and (max-width: 900px) {
-
-}
-
 @media all and (max-width:700px) {
 
     .admin-home p {
         font-size: 1.2em;
     }
-
 }
 
 @media all and (max-width:550px) {
@@ -38,4 +33,3 @@
         height: 150px;
     }
 }
-

@@ -7,76 +7,77 @@
 {% block content %}
     <div class="admin-home pt-5 mt-5 ml-2">
         <h1>Bonjour {{ admin|striptags }} !</h1>
-    <div class="row d-flex mx-3 mt-5">
-        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-danger o-hidden h-100">
-                <div class="card-body">
-                    <div class="card-body-icon">
-                        <i class="fas fa-fw fa-comments"></i>
+        <div class="row d-flex mx-3 mt-5">
+            <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-danger o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-fw fa-comments"></i>
+                        </div>
+                        <div class="secondary-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="mr-5">
+                            <p class="mt-3"><span class="badge bg-warning">{{ reported }}</span> commentaires signalés</p>
+                        </div>
                     </div>
-                    <div class="secondary-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="mr-5">
-                        <p class="mt-3"><span class="badge bg-warning">{{ reported }}</span> commentaires signalés</p>
-                    </div>
+                    <a class="card-footer text-white" href="/commentAdmin/moderation">
+                        <span class="float-left">Details</span>
+                        <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                    </a>
                 </div>
-                <a class="card-footer text-white" href="/commentAdmin/moderation">
-                    <span class="float-left">Details</span>
-                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
-                </a>
             </div>
-        </div>
 
-        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-warning o-hidden h-100">
-                <div class="card-body">
-                    <div class="card-body-icon">
-                        <i class="fas fa-fw fa-comments"></i>
+            <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-fw fa-comments"></i>
+                        </div>
+                        <div class="mr-5">
+                            <p class="mt-3"><span class="badge bg-primary">{{ toModerateNumber }}</span> commentaires en attente de modération</p>
+                        </div>
                     </div>
-                    <div class="mr-5">
-                        <p class="mt-3"><span class="badge bg-primary">{{ toModerateNumber }}</span> commentaires en attente de modération</p>
-                    </div>
+                    <a class="card-footer text-white" href="/commentAdmin/moderation">
+                        <span class="float-left">Details</span>
+                        <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                    </a>
                 </div>
-                <a class="card-footer text-white" href="/commentAdmin/moderation">
-                    <span class="float-left">Details</span>
-                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
-                </a>
             </div>
-        </div>
 
-        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                    <div class="card-body-icon">
-                            <i class="far fa-newspaper"></i>
+            <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                                <i class="far fa-newspaper"></i>
+                        </div>
+                        <div class="mr-5">
+                            <p class="mt-3"><span class="badge bg-danger">{{ articleNb }}</span> articles publiés</p>
+                        </div>
                     </div>
-                    <div class="mr-5">
-                        <p class="mt-3"><span class="badge bg-danger">{{ articleNb }}</span> articles publiés</p>
-                    </div>
+                    <a class="card-footer text-white" href="/articleAdmin/index">
+                        <span class="float-left">Modifier/Supprimer un article</span>
+                        <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                    </a>
                 </div>
-                <a class="card-footer text-white" href="/articleAdmin/index">
-                    <span class="float-left">Modifier/Supprimer un article</span>
-                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
-                </a>
             </div>
-        </div>
 
-        <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-info o-hidden h-100">
-                <div class="card-body">
-                    <div class="card-body-icon">
-                        <i class="fas fa-pen-nib"></i>
+            <div class="admin-dashboard col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-info o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <p class="mt-2 mb-1 mb-0">Dernier article ajouté: <br/> Chapitre {{ lastArticle.chapter_number }}: {{ lastArticle.title|striptags }}
+                            <br/>le {{ lastArticle.creation_date|date("d-m-Y") }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="mt-2 mb-1 mb-0">Dernier article ajouté: </br> Chapitre {{ lastArticle.chapter_number }}: {{ lastArticle.title|striptags }}
-                        </br>le {{ lastArticle.creation_date|date("d-m-Y") }}</p>
-                    </div>
+                    <a class="card-footer text-white" href="/articleAdmin/addForm">
+                        <span class="float-left">Ajouter un article</span>
+                        <span class="float-right"><i class="fas fa-angle-right"></i></span>
+                    </a>
                 </div>
-                <a class="card-footer text-white" href="/articleAdmin/addForm">
-                    <span class="float-left">Ajouter un article</span>
-                    <span class="float-right"><i class="fas fa-angle-right"></i></span>
-                </a>
             </div>
         </div>
     </div>

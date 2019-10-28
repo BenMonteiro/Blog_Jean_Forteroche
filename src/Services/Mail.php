@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Manage the way to get the informations send via the contact form
  */

@@ -1,7 +1,8 @@
- export default class FormValidation {
+
+// Custom form validation script
+export default class FormValidation {
 
     constructor() {
-
         this.validation();
     }
 

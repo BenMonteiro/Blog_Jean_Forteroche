@@ -35,7 +35,7 @@
     </div>
 
     <div id="commentForm" class="pt-5 mt-5">
-        <h3 class="offset-1 col-10 pl-3 mb-4">Laisser un commentaire</h3>
+        <h3 class="text-info font-weight-bold offset-1 col-10 pl-3 mb-4">Laisser un commentaire</h3>
 
         <form id="addComment" action="/comment/add?id={{ article.id }}&chapter={{ article.chapter_number }}" method="POST" class="needs-validation offset-sm-1 col-sm-7 offset-1 col-10" novalidate>
             <div class="form-group">
@@ -59,12 +59,11 @@
     </div>
 
     <div id="commentList">
-        <h2 class="my-2 text-center">Derniers commentaires</h2>
+        <h2 class="my-2 text-center text-info font-weight-bold">Derniers commentaires</h2>
         <p class="text-success text-center">{{ reportSuccess|striptags }}</p>
         <p class="text-center">{{ addCommentMessage|striptags }}</p>
-        <ul class="list-unstyled mt-2 ml-3">
             {% for comment in commentList %}
-                <li class="media">
+                <div class="media mt-2 ml-3">
                     <div class="media-body">
                         <h5 class="mt-0 mb-2">{{ comment.author|striptags }}</h5>
                         <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
@@ -77,10 +76,9 @@
                         </div>
                         <p class="mb-0 mt-0"><small class="text-muted">Le : {{ comment.creation_date|date("d-m-Y à H:i:s") }}</small></p>
                     </div>
-                </li>
+                </div>
                 <hr class="mb-3 col-10">
             {% endfor %}
-        </ul>
     </div>
 {% endblock %}
 

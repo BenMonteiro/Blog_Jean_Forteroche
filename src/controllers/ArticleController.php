@@ -51,9 +51,7 @@ class ArticleController extends BlogController
         try 
         {
             $this->display();
-
         } catch (Exception404 $e) {
-
             require_once ROOT_PATH.'/core/Error404Controller.php';
             $error404 = new Error404Controller();
             $error404->error($e);

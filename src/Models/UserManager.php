@@ -17,7 +17,6 @@ class UserManager extends Manager
             FROM user
             WHERE login = ? AND password = ?'
         );
-
         $req->execute(array($login, $password));
 
         return $req->fetch();

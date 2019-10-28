@@ -28,12 +28,9 @@ class CommentController extends BlogController
         $add = CommentManager::add($articleId, $comment);
 
         if ($add == true) {
-
             $message = static::ADD_COMMENT_SUCCESS;
             $alert = 'success';
-
         } else {
-
             $message = static::FAIL;
             $alert = 'danger';
         }

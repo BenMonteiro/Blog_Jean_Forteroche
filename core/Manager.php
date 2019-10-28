@@ -43,7 +43,6 @@ abstract class Manager
             FROM ' . static::$tableName . '
             WHERE id = ?'
         );
-
         $req->execute(array($id));
 
         return $req->fetch();

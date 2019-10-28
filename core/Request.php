@@ -23,18 +23,18 @@ class Request
     /**
      * Request class is handled by singleton pattern. 
      * In this way, if a Request object already exist, the application use the same instance instead of create a new 
-     * @return self     [return an instance of the class]
+     * @return      [return an instance of the class]
      */
-    public static function getRequest(): self
+    public static function getRequest()
     {
         return static::$request ?? new Request();
     }
 
     /**
      * Break down the url to get the different components of it
-     * @return array    [return an array of the url components]
+     * @return     [return an array of the url components]
      */
-    public function getURLComponents(): array
+    public function getURLComponents()
     {
         $uri = $_SERVER["REQUEST_URI"];
         $path = trim(parse_url($uri, PHP_URL_PATH),"/");

@@ -42,16 +42,17 @@ class ArticleManager extends Manager
         return $req->fetchAll();
     }
 
+    /**
+     * Count the number of articles
+     */
     public static function count()
     {
         $req = static::getPDO()->query(
-            'SELECT COUNT(*) AS nb_articles
+            'SELECT COUNT(id) AS nb_articles
             FROM article'
         );
 
-        $articles = $req->fetch();
-
-        return $articles['nb_articles'];
+        return $req->fetchColumn();
     }
 
     /**
@@ -67,7 +68,6 @@ class ArticleManager extends Manager
             ON user.id = article.user_id
             WHERE chapter_number = ?'
         );
-
         $req->execute(array($chapterNumber));
 
         return $req->fetch();

@@ -1,11 +1,13 @@
 <?php
 require_once ROOT_PATH.'/core/Manager.php';
+
 /**
  * Make the database requests relative to the comments
  */
 class CommentManager extends Manager
 {
     protected static $tableName = 'comment';
+
     /**
      * Find the 50 last comments that belongs to the selected article
      * @param $id       [the id of the article]
@@ -39,6 +41,9 @@ class CommentManager extends Manager
         return $req->fetchAll();
     }
 
+    /**
+     * Count all the comments that are not moderated
+     */
     public static function countToModerate()
     {
         $req = static::getPDO()->query(
@@ -48,7 +53,6 @@ class CommentManager extends Manager
         );
 
         return $req->fetchColumn();
-;
     }
 
     /**
@@ -61,7 +65,6 @@ class CommentManager extends Manager
             FROM comment
             WHERE reported = true AND moderate = false'
         );
-
         $reported = $req->fetch();
 
         return $reported['nb_reported'];

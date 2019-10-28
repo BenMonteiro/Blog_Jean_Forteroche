@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="card-body py-0 mt-3">
-                                <h5 class="card-title">Chapitre {{ article.chapter_number }} : {{ article.title|striptags }}</h5>
+                                <h5 class="card-title text-info">Chapitre {{ article.chapter_number }} : {{ article.title|striptags }}</h5>
                                 <p class="card-text pr-lg-2">{{ article.chapter_description|striptags|nl2br }}</p>
                                 <div class="mb-0">
                                     <p class="card-text text-muted mb-0">Auteur : {{ article.name|striptags }}</p>
@@ -33,10 +33,10 @@
                         </div>
 
                         <div class="buttons offset-lg-0 col-lg-3 mt-lg-5 offset-sm-3 col-sm-6 offset-2 col-8">
-                            <a class="btn btn-primary btn btn-block my-2" href="/ArticleAdmin/updateForm?id={{ article.id }}" role="button">Mettre à jour</a>
-                            <button type="button" class="btn btn-danger btn btn-block mt-2 mb-4" data-toggle="modal" data-target="#deleteConfirmation">Supprimer</button>
+                            <a class="btn btn-primary btn-block my-2" href="/ArticleAdmin/updateForm?id={{ article.id }}" role="button">Mettre à jour</a>
+                            <button type="button" class="btn btn-danger btn btn-block mt-2 mb-4" data-toggle="modal" data-target=".deleteConfirmation">Supprimer</button>
 
-                            <div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
+                            <div class="modal fade deleteConfirmation" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                            <a type="button" class="btn btn-danger" href="/ArticleAdmin/delete?id={{ article.id }}">Supprimer</a>
+                                            <a class="btn btn-danger" href="/ArticleAdmin/delete?id={{ article.id }}">Supprimer</a>
                                         </div>
                                     </div>
                                 </div>

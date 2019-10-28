@@ -5,7 +5,7 @@
 abstract class DefaultController
 {
     protected $request;
-    public static $twig = null;
+    protected static $twig = null;
 
     public function __construct()
     {
@@ -20,7 +20,6 @@ abstract class DefaultController
     {
         //Twig configuration
         if (null === static::$twig) {
-
             require_once ROOT_PATH.'/vendor/autoload.php';
             $loader = new Twig_Loader_Filesystem(ROOT_PATH.'/src/Views');
             static::$twig = new Twig_Environment($loader);
@@ -44,7 +43,6 @@ abstract class DefaultController
         $defaultPath = ROOT_PATH.'/src/Views/'.$viewFolder.'/Pages/';
 
         if (file_exists($defaultPath.$view)) {
-
             $output = $this->getTwig()->render($viewFolder.'/Pages/'.$view, $data);
 
             echo $output;

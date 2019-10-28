@@ -28,7 +28,6 @@ class LoginController extends DefaultController
         $user = UserManager::findOne($login, $password);
 
         if (empty($user)) {
-
             throw new LoginException(static::ERROR);
         }
 
@@ -69,9 +68,7 @@ class LoginController extends DefaultController
         try 
         {
             $this->authentification();
-
         } catch (LoginException $e) {
-
             $this->renderView('login.twig', ['alert' => 'danger', 'message' => $e->getMessage()], static::DEFAULT_TEMPLATE);
         }
     }
