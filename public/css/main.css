@@ -46,6 +46,12 @@ footer a {
 .fa-exclamation-circle {
     color:red;
 }
+ .article-comment .report-badge{
+    visibility: hidden;
+ }
+ .article-comment:hover .report-badge{
+     visibility:visible
+ }
 
 /*-----------------------------------------------------------------------------Front author page style------------------------------------------------------------------------------------------------*/
 .author-description {
@@ -102,7 +108,16 @@ footer a {
     padding-bottom: 0;
 }
 
-/*-----------------------------------------------------------------------------Admin homePage style------------------------------------------------------------------------------------------------*/
+.admin-dashboard .card-text {
+    color: rgb(238, 236, 236)
+}
+
+.admin-dashboard .stat {
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+}
+
 .card-body-icon {
     position: absolute;
     right: 0.2em;

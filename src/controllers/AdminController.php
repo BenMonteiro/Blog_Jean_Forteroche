@@ -16,13 +16,13 @@ class AdminController extends DefaultController
     public function __construct()
     {
         parent::__construct();
-        return $this->isAuthentified();
+        $this->checkAuthentified();
     }
 
     /**
      * If thre is no authentified administrator, redirect to the login page
      */
-    public function isAuthentified()
+    public function checkAuthentified()
     {
         if (false === $_SESSION['auth'] || !isset($_SESSION['auth'])) {
             header("Location: /login/notAuthentified");

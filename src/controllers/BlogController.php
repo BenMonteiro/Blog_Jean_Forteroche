@@ -15,7 +15,7 @@ class BlogController extends DefaultController
     public function __construct()
     {
         parent::__construct();
-        return $this->articleList = ArticleManager::findAll();
+        $this->articleList = ArticleManager::findAll();
     }
 
     public function index()

@@ -63,21 +63,23 @@
         <p class="text-success text-center">{{ reportSuccess|striptags }}</p>
         <p class="text-center">{{ addCommentMessage|striptags }}</p>
             {% for comment in commentList %}
-                <div class="media mt-2 ml-3">
+                <div class="media offset-md-1 col-md-10">
                     <div class="media-body">
                         <h5 class="mt-0 mb-2">{{ comment.author|striptags }}</h5>
-                        <div class="d-flex justify-content-between bg-light col-11 ml-3 py-3">
+                        <div class="article-comment d-flex justify-content-between bg-light ml-3 py-3">
                             <p class="col-8">{{ comment.comment|striptags }}</p>
-                            {% if not comment.reported and not comment.moderate %}
-                            <a href="/comment/report?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
-                                <i class="fas fa-3x fa-exclamation-circle"></i>
-                            </a>
-                            {% endif %}
+                            <div class="report-badge">
+                                {% if not comment.reported and not comment.moderate %}
+                                <a href="/comment/report?id={{ comment.id }}&chapter={{ article.chapter_number }}" class="badge badge-light" data-toggle="tooltip" title="Signaler ce commentaire">
+                                    <i class="fas fa-3x fa-exclamation-circle"></i>
+                                </a>
+                                {% endif %}
+                            </div>
                         </div>
                         <p class="mb-0 mt-0"><small class="text-muted">Le : {{ comment.creation_date|date("d-m-Y à H:i:s") }}</small></p>
                     </div>
                 </div>
-                <hr class="mb-3 col-10">
+                <hr class="col-10">
             {% endfor %}
     </div>
 {% endblock %}
