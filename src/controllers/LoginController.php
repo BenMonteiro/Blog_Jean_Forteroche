@@ -24,8 +24,15 @@ class LoginController extends DefaultController
     protected function authentification()
     {
         $login = $this->request->getParam('pseudo');
-        $password = md5($this->request->getParam('password'));
-        $user = UserManager::findOne($login, $password);
+        $passwords = UserManager::findPasswords();
+
+        foreach ($passwords as $hash) {
+            $hash = $hash['password'];
+            $password = password_verify($this->request->getParam('password'), $hash);
+            if ($password === true) {
+                $user = UserManager::findOne($login, $hash);
+            }
+        }
 
         if (empty($user)) {
             throw new LoginException(static::ERROR);

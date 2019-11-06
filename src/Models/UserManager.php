@@ -21,4 +21,14 @@ class UserManager extends Manager
 
         return $req->fetch();
     }
+
+    public static function findPasswords()
+    {
+        $req = static::getPDO()->query(
+            'SELECT password
+            FROM user'
+        );
+
+        return $req->fetchAll();
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 30 oct. 2019 à 08:45
+-- Généré le :  mer. 06 nov. 2019 à 09:11
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `moderate` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `relatedPost` (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -95,10 +95,13 @@ INSERT INTO `comment` (`id`, `article_id`, `author`, `comment`, `creation_date`,
 (13, 4, 'Vincent', 'Pas convaincu...', '2019-09-20 14:15:52', 1, 1),
 (15, 3, 'Vincent', 'Perfect ! ', '2019-10-17 14:51:12', 0, 1),
 (22, 2, 'Jerome ', 'Super! ', '2019-10-25 14:40:17', 1, 1),
-(23, 3, 'Jerome ', 'Super!', '2019-10-28 14:03:24', 1, 1),
-(27, 3, 'Jerome ', 'Super', '2019-10-28 18:49:58', 1, 1),
-(30, 4, 'likujfhg', 'poyt;i,utny', '2019-10-30 09:28:04', 1, 0),
-(31, 4, 'pôpùèçày_', '-çàt_çpç', '2019-10-30 09:33:05', 1, 0);
+(35, 1, 'Marc', 'Génial!', '2019-10-30 11:30:13', 1, 1),
+(36, 3, 'Pablo', 'Génial', '2019-11-01 11:06:17', 1, 1),
+(37, 1, 'Pierre', 'Top!', '2019-11-02 14:20:25', 1, 1),
+(38, 1, 'Julien', 'Très bien', '2019-11-03 10:31:19', 1, 1),
+(40, 4, 'Marc', 'Bien', '2019-11-04 16:17:43', 1, 1),
+(42, 3, 'Lucie', 'Pas super!!', '2019-11-05 11:52:29', 1, 1),
+(44, 4, 'Pierre', 'Très bien!', '2019-11-05 16:15:12', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -120,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `login`, `password`) VALUES
-(2, 'Jean Forteroche', 'JFadmin', '5a41ad79c70d1de68a058f6169df6f34'),
-(3, 'Benjamin Monteiro Da Silva', 'Ben021', '02d93dbfb240a427bf055bbf69c58082');
+(2, 'Jean Forteroche', 'JFadmin', '$argon2id$v=19$m=1024,t=2,p=2$SUdCZy93NG1MUDlZQVNyYw$R5NVt9AoDK+3Brkn+JLp0OMmTx0U3knE0v1wfiHeCO0'),
+(3, 'Benjamin Monteiro Da Silva', 'Ben021', '$argon2id$v=19$m=1024,t=2,p=2$Q1FWd3hvN0lDOExNTXF4Yw$Sn+aa0d/Zs2gfwW7jT/YKexVSl1ZwomFqvqWPnMPDsw');
 
 --
 -- Contraintes pour les tables déchargées
